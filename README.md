@@ -1,5 +1,4 @@
 ## ShareHobby(シェアホビ)
-t
 
 ## サイト概要
 このサイトは新たな趣味を見つけたい人・趣味をもっと楽しみたい人の手助けをしている「趣味特化型」のマッチングサイトです。<br>
@@ -24,7 +23,7 @@ t
 
 ### 主な利用シーン
 ①新しい趣味を作りたい時　<br>
-②苦手なことを得意な人にお願いしたい時<br> 
+②苦手なことを得意な人にお願いしたい時<br>
 ③趣味をする時間・場所をもっと増やしたい時<br>
 ④自分の趣味を仕事にしたい時<br>
 
@@ -33,7 +32,7 @@ t
 - [テーブル定義書](https://docs.google.com/spreadsheets/d/12qoCJQ4bJvIMHtSue3A_H7HhguWX87mM/edit?usp=sharing&ouid=113105595537176275196&rtpof=true&sd=true)
 - [ER図](https://drive.google.com/file/d/10p_nwfbnUfe_tUv9iG1Nf_YmbReDmv0v/view?usp=sharing)
 - [UI　Flows](https://app.diagrams.net/index.html#G1k6xYbRYVCKDtMjxyG2cMeQkfHxI_Rjcs)
-- [アプリケーション設計書](https://docs.google.com/spreadsheets/d/1PJ669ULsWb6i9LGDADsAWxQzxxjnFXjgyg-3iDgSciI/edit?usp=sharing)  
+- [アプリケーション設計書](https://docs.google.com/spreadsheets/d/1PJ669ULsWb6i9LGDADsAWxQzxxjnFXjgyg-3iDgSciI/edit?usp=sharing)
 
 ## チャレンジ要素一覧
 - [機能一覧](https://docs.google.com/spreadsheets/d/1oGHsYUMvpiwiXMgiPOC4JkhVvn-rgsMJXCsyAM_NbDU/edit?usp=sharing)
