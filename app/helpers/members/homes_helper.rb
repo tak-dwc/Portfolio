@@ -1,0 +1,2 @@
+module Members::HomesHelper
+end

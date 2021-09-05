@@ -1,27 +1,41 @@
 Rails.application.routes.draw do
-  devise_for :admins
-  devise_for :members
-  namespace :admin do
-    get 'members/index'
-    get 'members/show'
-    get 'members/edit'
+  devise_for :admins, controllers: {
+    sessions:      'admins/sessions',
+    passwords:     'admins/passwords',
+    registrations: 'admins/registrations'
+  }
+
+  namespace :admins do
+    resources :members, only:[:index,:show,:edit,:update]
   end
-  namespace :public do
-    get 'requests/new'
-    get 'requests/index'
-    get 'requests/show'
-    get 'requests/edit'
+
+  devise_for :members, controllers: {
+    sessions:      'members/sessions',
+    passwords:     'members/passwords',
+    registrations: 'members/registrations'
+  }
+
+  scope module: :members do
+
+    root to: 'homes#top'
+    get '/about',to: 'homes#about'
+    get '/guide',to: 'homes#guide'
+    get '/search', to: 'searches#search'
+
+    resources :members, only: [:show, :edit, :update] do
+      resource :relationships, only: [:create,:destroy]
+      get 'followings' => 'relationships#followings',as: 'followings'
+      get 'followers' => 'relationships#followers' ,as: 'followers'
+    end
+    get 'members/main', to: 'members#main'
+    get 'members/unsubscribe', to: 'members#unsubscribe'
+    patch 'members/withdraw', to: 'members#withdraw'
+
+    resources :requests do
+      resource :like, only:[:create,:destroy]
+      resources :comments, only:[:create,:destroy]
+    end
+    get 'requests/main', to: 'requests#main'
   end
-  namespace :public do
-    get 'members/main'
-    get 'members/show'
-    get 'members/edit'
-    get 'members/unsubscribe'
-  end
-  namespace :public do
-    get 'homes/top'
-    get 'homes/about'
-    get 'homes/guide'
-  end
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
 end
