@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  devise_for :admins
+  devise_for :members
   namespace :admin do
     get 'members/index'
     get 'members/show'

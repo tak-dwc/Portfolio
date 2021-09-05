@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  member_id: 1
+  schedule: 2021-09-05
+  content: MyText
+  location: MyString
+  is_active: 1
+
+two:
+  member_id: 1
+  schedule: 2021-09-05
+  content: MyText
+  location: MyString
+  is_active: 1
