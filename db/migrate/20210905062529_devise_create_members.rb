@@ -38,11 +38,12 @@ class DeviseCreateMembers < ActiveRecord::Migration[5.2]
       t.string :first_name_kana, :null =>false
       t.string :nickname, :null =>false
       t.integer :sex, :null =>false, :default => 0
-      t.string :image_id, :null =>false
-      t.string :hobby, :null =>false
-      t.string :job, :null =>false
-      t.text :introduction, :null =>false
+      t.string :image_id
+      t.string :hobby
+      t.string :job
+      t.text :introduction
       t.boolean :is_deleted, :null =>false, default: false
+      t.date :birthday, :null =>false
       
       t.timestamps null: false
     end

@@ -51,11 +51,12 @@ ActiveRecord::Schema.define(version: 2021_09_05_062543) do
     t.string "first_name_kana", null: false
     t.string "nickname", null: false
     t.integer "sex", default: 0, null: false
-    t.string "image_id", null: false
-    t.string "hobby", null: false
-    t.string "job", null: false
-    t.text "introduction", null: false
+    t.string "image_id"
+    t.string "hobby"
+    t.string "job"
+    t.text "introduction"
     t.boolean "is_deleted", default: false, null: false
+    t.date "birthday", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_members_on_email", unique: true

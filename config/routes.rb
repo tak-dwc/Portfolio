@@ -24,12 +24,11 @@ Rails.application.routes.draw do
 
     resources :members, only: [:show, :edit, :update] do
       resource :relationships, only: [:create,:destroy]
-      get 'followings' => 'relationships#followings',as: 'followings'
-      get 'followers' => 'relationships#followers' ,as: 'followers'
+      get 'followings', to: 'relationships#followings',as: 'followings'
+      get 'followers', to: 'relationships#followers' ,as: 'followers'
     end
-    get 'members/main', to: 'members#main'
-    get 'members/unsubscribe', to: 'members#unsubscribe'
-    patch 'members/withdraw', to: 'members#withdraw'
+      get 'members/:id/unsubscribe', to: 'members#unsubscribe',as: 'unsubscribe'
+      patch 'members/:id/withdraw', to: 'members#withdraw',as: 'withdraw'
 
     resources :requests do
       resource :like, only:[:create,:destroy]
