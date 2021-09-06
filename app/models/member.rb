@@ -17,4 +17,25 @@ class Member < ApplicationRecord
     woman: 1,    #女性
     other: 2,    #その他
   }
+  
+  #フォロー機能
+  #フォローしている人
+  has_many :relationships, class_name: "Relationship", foreign_key: "follower_id",dependent: :destroy
+  has_many :followings,through: :relationships, source: :followed
+  
+  #フォローされている人
+  has_many :re_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
+  has_many :followers, through: :re_relationships, source: :follower
+  
+  def follow(member_id)
+    relationships.create(followed_id: member_id)
+  end
+  
+  def unfollow(member_id)
+    relationships.find_by(followed_id: member_id).destroy
+  end
+  
+  def following?(member)
+    followings.include?(member)
+  end  
 end
