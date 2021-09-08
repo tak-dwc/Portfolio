@@ -10,20 +10,25 @@
   </head>
 
   <body>
-    <%= flash[:error] %>
-    <% if member_signed_in? %>
-      <%= link_to "ログアウト",destroy_member_session_path,method: :delete %>
-      <%= link_to "マイページ", member_path(current_member) %>
-    <% else %>
-      <%= link_to "新規登録", new_member_registration_path %>
-      <%= link_to "ログイン", new_member_session_path %>
-    <% end %>
-    <%= yield %>
-  </body>
-  
-  <footer>
-    <%= link_to "トップ",root_path %>
-    <%= link_to "アバウト",about_path %>
-    <%= link_to "ガイド",guide_path %>
-  </footer>
+    <header>
+      <% if member_signed_in? %>
+        <%= link_to "ログアウト",destroy_member_session_path,method: :delete %>
+        <%= link_to "マイページ", member_path(current_member) %>
+        <%= link_to "リクエスト作成",new_request_path(current_member) %>
+      <% else %>
+        <%= link_to "新規登録", new_member_registration_path %>
+        <%= link_to "ログイン", new_member_session_path %>
+      <% end %>
+    </header>
+    <main>
+      <%= flash[:error] %>
+      <%= yield %>
+    </main>
+
+    <footer>
+      <%= link_to "トップ",root_path %>
+      <%= link_to "アバウト",about_path %>
+      <%= link_to "ガイド",guide_path %>
+    </footer>
+  </boby>
 </html>

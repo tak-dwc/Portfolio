@@ -1,0 +1,4 @@
+<%= form_with model: [request, comment] do |f| %>
+  <%= f.text_area :comment ,placeholder:"comment" ,rows:"5" ,cols:"90"%>
+  <%= f.submit "sent" %>
+<% end %>

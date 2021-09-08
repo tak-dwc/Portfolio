@@ -1,0 +1,72 @@
+<!--<h2>プロフィール編集</h2>-->
+<!--<%= form_with model:@member, local:true do |f| %>-->
+<!--  <label for="inputName">Name</label>-->
+<!--  <%= f.text_field :nickname, autofocus: true, id:"inputName", placeholder:"ニックネーム"%>-->
+  
+<!--  <%= f.submit "変更を保存" %>-->
+<!--<% end %>-->
+
+<div class="container">
+ <div class="row mt-5">
+  <h3 class="under">会員情報編集</h3>
+ </div>
+
+<div class="container">
+ <%= form_with model:@member, local:true do |f| %>
+
+<div class="form-group">  
+  <div class="col-sm-2"><%= f.label :プロフィール写真 %></div>
+  <%= f.attachment_field :image,class:"form-control-file image"%>
+</div>  
+
+ <div class="form-group row mt-5">
+  <div class="col-sm-2"><%= f.label :氏名 %></div>
+  <div class="col-sm-3"><%= f.text_field :last_name, placeholder:"令和",class:"form-control border-dark" %></div>
+  <div class="col-sm-3"><%= f.text_field :first_name, placeholder:"道子",class:"form-control border-dark" %></div>
+ </div>
+
+ <div class="form-group row mt-2">
+  <div class="col-sm-2"><%= f.label :フリガナ %></div>
+  <div class="col-sm-3"><%= f.text_field :last_name_kana, placeholder:"レイワ",class:"form-control border-dark" %></div>
+  <div class="col-sm-3"><%= f.text_field :first_name_kana, placeholder:"ミチコ",class:"form-control border-dark" %></div>
+ </div>
+
+ <div class="form-group row mt-2">
+  <div class="col-sm-2"><%= f.label :ニックネーム %></div>
+  <div class="col-sm-3"><%= f.text_field :nickname,placeholder:"0000000",class:"form-control border-dark" %></div>
+ </div>
+
+ <div class="form-group row mt-2">
+  <div class="col-sm-2"><%= f.label :性別 %></div>
+  <div class="col-sm-8"><%= f.text_field :sex,placeholder:"東京都渋谷区代々木神園待ち0-0",class:"form-control border-dark" %></div>
+ </div>
+
+ <div class="form-group row mt-2">
+  <div class="col-sm-2"><%= f.label :趣味 %></div>
+  <div class="col-sm-3"><%= f.text_field :hobby,placeholder:"0000000000",class:"form-control border-dark" %></div>
+ </div>
+
+ <div class="form-group row mt-2">
+  <div class="col-sm-2"><%= f.label :メールアドレス %></div>
+  <div class="col-sm-3"><%= f.email_field :email, autofocus: true,placeholder:"sample@example.com" ,class:"form-control border-dark"%></div>
+ </div>
+ 
+ <div class="form-group row mt-2">
+  <div class="col-sm-2"><%= f.label :仕事 %></div>
+  <div class="col-sm-3"><%= f.text_field :job,placeholder:"0000000000",class:"form-control border-dark" %></div>
+ </div>
+ 
+ <div class="form-group row mt-2">
+  <div class="col-sm-2"><%= f.label :自己紹介 %></div>
+  <div class="col-sm-3"><%= f.text_field :introduction,placeholder:"0000000000",class:"form-control border-dark" %></div>
+ </div>
+
+ <div class="row mt-5 mb-5">
+
+  <div class="offset-sm-2 col-sm-6"><%= f.submit "編集内容を保存",class:"btn btn-outline-dark font-weight-bold "%></div>
+  <% end %>
+  <% if member_signed_in?  %> 
+  <div class="col-sm-2"><%= link_to "退会する", unsubscribe_path, class:"btn btn-outline-danger font-weight-bold px-3"%></div>
+  <% end %>
+ </div>
+</div>

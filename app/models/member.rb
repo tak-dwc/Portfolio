@@ -38,4 +38,9 @@ class Member < ApplicationRecord
   def following?(member)
     followings.include?(member)
   end  
+  
+  has_many :requests, dependent: :destroy
+  has_many :likes, dependent: :destroy
+  has_many :comments, dependent: :destroy
+  
 end

@@ -1,0 +1,14 @@
+    <table>
+      <% comments.each do |comment| %>
+   
+      <tr>
+      <td><%= attachment_image_tag comment.member, :image, fallback: "noimage.jpg",size:"40x40"%></td>
+      <td><%= comment.comment %></td>
+      <% if comment.member == current_member %>
+      <td><%= link_to "コメントを消す",request_comment_path(comment.request, comment),method: :delete,remote: true,class:"btn btn-sm btn-danger" %></td>
+      <% else %>
+      <rd></rd>
+      <% end %>
+      </tr>
+      <% end %>
+    </table>

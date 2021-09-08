@@ -1,0 +1,26 @@
+
+<%= form_with model:@request,local:true do |f| %>
+ <div class="form-group">
+  <lavel>予定日</lavel>
+  <%=f.date_field :schedule ,class:"form-control book_title" %>
+  </div>
+
+  <div class="form-group">
+  <lavel class=book_opinion>場所</lavel>
+  <%=f.text_field :location ,class:"form-control book_body"%>
+  </div><br>
+
+  <div class="form-group">
+  <lavel class=book_opinion>内容</lavel>
+  <%=f.text_area :content ,class:"form-control book_body"%>
+  </div><br>
+
+  <div class="form-group">
+  <lavel class=book_opinion>状態</lavel>
+  <%=f.select :is_active ,Request.is_actives.keys.to_a, class:"form-control book_body"%>
+  </div><br>
+
+  <div class="form-group">
+  <%=f.submit'編集保存',class:"btn btn-success" %>
+  </div>
+<% end %>

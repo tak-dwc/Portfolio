@@ -1,0 +1,25 @@
+
+<%= @request.schedule %>
+<%= @request.location %>
+<%= @request.content %>
+<%= @request.is_active %>
+
+
+<div id="like-btn_<%= @request.id %>">
+  <%= render 'members/likes/like-btn', request: @request %>
+</div>
+
+
+<div id="comments_index">
+  <%= render 'members/comments/index',comments: @comments  %>
+</div>
+
+<div>
+  <%= render 'members/comments/form', request: @request, comment: @comment %>
+</div>
+
+
+<% if @request.member == current_member %>
+<%= link_to "リクエスト編集",edit_request_path(@request) %>
+<%= link_to "リクエスト削除",request_path(@request), method: :delete,"data-confirm" => "本当に削除しますか？" %>
+<% end %>
