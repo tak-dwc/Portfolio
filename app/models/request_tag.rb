@@ -1,0 +1,2 @@
+class RequestTag < ApplicationRecord
+end
