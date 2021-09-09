@@ -15,6 +15,7 @@
         <%= link_to "ログアウト",destroy_member_session_path,method: :delete %>
         <%= link_to "マイページ", member_path(current_member) %>
         <%= link_to "リクエスト作成",new_request_path(current_member) %>
+        <%= link_to "リクエスト一覧",requests_path %>
       <% else %>
         <%= link_to "新規登録", new_member_registration_path %>
         <%= link_to "ログイン", new_member_session_path %>

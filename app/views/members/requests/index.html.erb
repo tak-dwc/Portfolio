@@ -1,5 +1,5 @@
 <% @requests.each do |req| %>
-<%= req.schedule %>
+<%= link_to req.schedule,request_path(req) %>
 <%= req.location %>
 <%= req.content %>
 <%= req.is_active %>

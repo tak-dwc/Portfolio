@@ -19,6 +19,10 @@
   <lavel class=book_opinion>状態</lavel>
   <%=f.select :is_active ,Request.is_actives.keys.to_a, class:"form-control book_body"%>
   </div><br>
+  
+  <div>
+   <%= f.text_field :tag_name ,value: @tag_list, placeholder: "タグをつける。複数つけるには','で区切ってください。" %>
+  </div>
 
   <div class="form-group">
   <%=f.submit'編集保存',class:"btn btn-success" %>

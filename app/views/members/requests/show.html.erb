@@ -3,6 +3,9 @@
 <%= @request.location %>
 <%= @request.content %>
 <%= @request.is_active %>
+<% @request_tags.each  do |tag| %>
+  <%=  tag.name %>
+<% end %>
 
 
 <div id="like-btn_<%= @request.id %>">
