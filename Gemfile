@@ -73,3 +73,9 @@ gem 'kaminari','~> 1.2.1'
 
 
 gem 'enum_help'
+
+# デフロイ・環境変数
+gem 'dotenv-rails'
+group :production do
+  gem 'mysql2'
+end
