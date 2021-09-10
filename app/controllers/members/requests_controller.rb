@@ -17,7 +17,7 @@ class Members::RequestsController < ApplicationController
   end
 
   def index
-    @requests = Request.all
+    @requests = Request.page(params[:page]).reverse_order
     @tag_list = Tag.all
   end
 
@@ -52,6 +52,6 @@ class Members::RequestsController < ApplicationController
 
   private
   def request_params
-    params.require(:request).permit(:schedule, :content, :location, :is_active,:member_id)
+    params.require(:request).permit(:title,:schedule, :content, :location, :is_active,:member_id)
   end
 end

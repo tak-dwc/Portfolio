@@ -6,7 +6,7 @@ class CreateRequests < ActiveRecord::Migration[5.2]
       t.text :content ,:null =>false
       t.string :location ,:null =>false
       t.integer :is_active ,:null =>false ,:default => 0
-      
+      t.string :title,:null =>false
 
       t.timestamps
     end

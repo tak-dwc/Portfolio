@@ -48,10 +48,17 @@
  <%= link_to @member.followers.count, member_followers_path(@member) %>
 </div>
 
+<% @requests.each do |req| %>
+<div><%= link_to req.title,request_path(req) %></div>
+<div><%= req.schedule %></div>
+<div><%= req.location %></div>
+<div><%= req.is_active %></div>
+<% end %>
+
 <% unless @member == current_member %>
   <%= render 'members/relationships/follow_button',member: @member %>
 <% else %>
   <%= link_to "プロフィール編集", edit_member_path(@member) %>
 <% end %>
 
-
+<%= paginate @requests %>

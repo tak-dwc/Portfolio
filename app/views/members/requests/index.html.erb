@@ -1,6 +1,7 @@
 <% @requests.each do |req| %>
-<%= link_to req.schedule,request_path(req) %>
-<%= req.location %>
-<%= req.content %>
-<%= req.is_active %>
+<div><%= link_to req.title,request_path(req) %></div>
+<div><%= req.schedule %></div>
+<div><%= req.location %></div>
+<div><%= req.content %></div>
 <% end %>
+<%= paginate @requests %>

@@ -1,12 +1,24 @@
+<div>
+  <%= @request.title %>
+</div>
 
-<%= @request.schedule %>
-<%= @request.location %>
-<%= @request.content %>
-<%= @request.is_active %>
-<% @request_tags.each  do |tag| %>
-  <%=  tag.name %>
-<% end %>
-
+<div>
+  <%= @request.schedule %>
+</div>
+<div>
+  <%= @request.location %>
+</div>
+<div>
+  <%= @request.content %>
+</div>
+<div>
+  <%= @request.is_active %>
+</div>
+<div>
+  <% @request_tags.each  do |tag| %>
+    <%=  tag.name %>
+  <% end %>
+</div>
 
 <div id="like-btn_<%= @request.id %>">
   <%= render 'members/likes/like-btn', request: @request %>
@@ -21,6 +33,10 @@
   <%= render 'members/comments/form', request: @request, comment: @comment %>
 </div>
 
+<div>
+  <%= link_to "リクエスト受諾",requests_path %>
+</div>
+ 
 
 <% if @request.member == current_member %>
 <%= link_to "リクエスト編集",edit_request_path(@request) %>

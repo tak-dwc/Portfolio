@@ -1,0 +1,2 @@
+module Members::SearchesHelper
+end
