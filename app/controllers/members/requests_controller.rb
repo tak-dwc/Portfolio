@@ -45,6 +45,16 @@ module Members
         render :edit
       end
     end
+    
+    # def  チャッとるkーむ作成用
+    #   form submit アクション名のフォーム　パッチのurlを
+    #   javascript どちらか
+      
+    #   redirect_to先にチャットルーム
+    #   ステータスを更新
+    #   チャットルームを作成
+    　
+    # end  
 
     def destroy
       @request = Request.find(params[:id])

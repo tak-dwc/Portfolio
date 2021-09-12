@@ -33,3 +33,5 @@
 .DS_store
 
 /.env
+
+ec2-user@35.74.172.8
