@@ -1,2 +1,6 @@
-module Members::RequestsHelper
+# frozen_string_literal: true
+
+module Members
+  module RequestsHelper
+  end
 end

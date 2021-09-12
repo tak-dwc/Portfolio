@@ -16,3 +16,22 @@
  @import "bootstrap";
  @import 'font-awesome-sprockets';
  @import 'font-awesome';
+
+// header
+.header {
+
+ 
+}
+// main
+.main {
+ min-height: 600px;
+}
+// footer
+.footer {
+ height: 100px;
+ background-color: #FFFF66;
+}
+
+.sign_up_back {
+ background-image: image-url(".jpg");
+}

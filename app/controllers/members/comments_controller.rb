@@ -1,19 +1,23 @@
-class Members::CommentsController < ApplicationController
-  def create
-    @request = Request.find(params[:request_id])
-    @comment = @request.comments.build(comment_params) #build→request.idを持った状態でコメントnewをする
-    @comment.member_id = current_member.id
-    @comment.save
-  end
+# frozen_string_literal: true
 
-  def destroy
-    @comment = Comment.find(params[:id])
-    @comment.destroy
-  end
+module Members
+  class CommentsController < ApplicationController
+    def create
+      @request = Request.find(params[:request_id])
+      @comment = @request.comments.build(comment_params) # build→request.idを持った状態でコメントnewをする
+      @comment.member_id = current_member.id
+      @comment.save
+    end
 
-  private
+    def destroy
+      @comment = Comment.find(params[:id])
+      @comment.destroy
+    end
 
-  def comment_params
-    params.require(:comment).permit(:comment,:member_id,:request_id)
+    private
+
+    def comment_params
+      params.require(:comment).permit(:comment, :member_id, :request_id)
+    end
   end
 end
