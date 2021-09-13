@@ -44,4 +44,8 @@ class Member < ApplicationRecord
   has_many :requests, dependent: :destroy
   has_many :likes, dependent: :destroy
   has_many :comments, dependent: :destroy
+  
+  #チャット
+  has_many :chats,dependent: :destroy
+  has_many :entries,dependent: :destroy
 end
