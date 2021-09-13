@@ -1,3 +1,7 @@
+<div class="container">
+  <div class="row mt-3">
+    
+
 <div>
   <%= @request.title %>
 </div>
@@ -24,7 +28,12 @@
   <%= render 'members/likes/like-btn', request: @request %>
 </div>
 
+<div>
+  <%= link_to "リクエスト受諾",requests_path %>
+</div>
+</div>
 
+<div class="row">
 <div id="comments_index">
   <%= render 'members/comments/index',comments: @comments  %>
 </div>
@@ -32,13 +41,11 @@
 <div>
   <%= render 'members/comments/form', request: @request, comment: @comment %>
 </div>
-
-<div>
-  <%= link_to "リクエスト受諾",requests_path %>
 </div>
- 
 
 <% if @request.member == current_member %>
 <%= link_to "リクエスト編集",edit_request_path(@request) %>
 <%= link_to "リクエスト削除",request_path(@request), method: :delete,"data-confirm" => "本当に削除しますか？" %>
 <% end %>
+ </div>
+</div>

@@ -30,6 +30,7 @@ Rails.application.routes.draw do
     end
     get 'members/:id/unsubscribe', to: 'members#unsubscribe', as: 'unsubscribe'
     patch 'members/:id/withdraw', to: 'members#withdraw', as: 'withdraw'
+    get 'members/:id/main', to: 'members#main', as: 'main'
 
     resources :requests do
       resource :like, only: %i[create destroy]

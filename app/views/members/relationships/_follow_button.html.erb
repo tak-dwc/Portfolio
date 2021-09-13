@@ -1,5 +1,5 @@
 <% if current_member.following?(member) %>
-  <%= link_to "フォロー中", member_relationships_path(member), method: :delete, "data-confirm" => "フォローをやめますか？" %>
+  <%= link_to "フォロー中", member_relationships_path(member), method: :delete, "data-confirm" => "フォローをやめますか？" ,class:"btn btn-outline-dark btn-block" %>
 <% else %>
-  <%= link_to "フォローする", member_relationships_path(member), method: :post %>
+  <%= link_to "フォローする", member_relationships_path(member), method: :post, class:"btn btn-outline-dark btn-block" %>
 <% end %>

@@ -1,9 +1,10 @@
+<!--current_memberの投稿のみ-->
 <div class="container">
   <div class="row mt-3">
     <% @requests.each do |req| %>
     <div class="col-4 mt-3">
       <div class="card " style="min-width: 15rem;">
-        <div class="card-header"><%= req.title %></div>
+        <div class="card-header h3"><%= req.title %></div>
         <div class="card-body">
           <div><%= req.schedule %></div>
           <div><%= req.location %></div>
@@ -12,9 +13,9 @@
         </div>
         <div class="card-footer">
           <div>
-            <%= link_to member_path(req.member.id) do %>
-            <%= attachment_image_tag req.member, :image, fallback: "noimage.jpg",size:"35x35" ,class:"rounded-circle border border-dark"%>
-            <%= req.member.nickname %>
+            <%= link_to member_path(@member) do %>
+            <%= attachment_image_tag @member, :image,fallback: "noimage.jpg",size:"35x35" ,class:"rounded-circle border border-dark"%>
+            <%= @member.nickname %>
             <% end %>
           </div>
         </div>

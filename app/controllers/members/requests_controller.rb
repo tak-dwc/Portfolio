@@ -21,6 +21,7 @@ module Members
     def index
       @requests = Request.page(params[:page]).reverse_order
       @tag_list = Tag.all
+
     end
 
     def show

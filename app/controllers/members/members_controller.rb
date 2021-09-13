@@ -4,7 +4,6 @@ module Members
   class MembersController < ApplicationController
     def show
       @member = Member.find(params[:id])
-      @requests = @member.requests.page(params[:page]).reverse_order
     end
 
     def edit
@@ -25,7 +24,12 @@ module Members
       reset_session
       redirect_to root_path
     end
-
+   
+   def main
+      @member = Member.find(params[:id])
+      @requests = @member.requests.page(params[:page]).reverse_order
+   end 
+   
     private
 
     def member_params

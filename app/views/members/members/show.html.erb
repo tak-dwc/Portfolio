@@ -1,68 +1,40 @@
 <div class="container">
- <div class="row">
-   <div>
- <%= "プロフィール写真" %>
- <%= attachment_image_tag @member, :image,fallback: "noimage.jpg",size:"150x150" %>
-
+    <div class="card mt-5">
+      <div class="row text-center">
+        <div class ="col-4 mt-3"><%= attachment_image_tag @member, :image,fallback: "noimage.jpg",size:"200x200" ,class:"rounded-circle border border-dark"%></div>
+        <div class="col-2 mt-5"><%= link_to @member.followings.count, member_followings_path(@member),class:"text-dark" %><br>フォロー</div>
+        <div class="col-2 mt-5"><%= link_to @member.followers.count, member_followers_path(@member) ,class:"text-dark" %><br>フォロワー</div>
+        <div class="col-2 mt-5"><%= link_to @member.requests.count,main_path(@member),class:"text-dark"  %><br>投稿</div>
+        <div class="offset-4"></div>
+        <div class ="col-5" >
+          <% unless @member == current_member %>
+            <%= render 'members/relationships/follow_button',member: @member %>
+          <% else %>
+            <%= link_to "プロフィール編集", edit_member_path(@member) ,class:"btn btn-outline-dark btn-block" %>
+          <% end %>
+        </div>
+      </div>
+    <div class="card-body">
+      <h4><%= @member.nickname %> : <%= @member.sex %></h4>
+      <table class="table">
+        <tbody>
+           <tr>
+             <th><%= "趣味" %></th>
+             <th><%= @member.hobby %></th>
+           </tr>
+           <tr>
+             <th><%= "仕事" %></th>
+             <th><%= @member.job %></th>
+           </tr>
+           <tr>
+             <th><%= "自己紹介" %></th>
+             <th><%= @member.introduction.truncate(24, omission: '...........') %></th>
+           </tr>
+        </tbody>
+      </table>
+    </div>
+   </div>
 </div>
 
-<div>
- <%= "ニックネーム" %>
- <%= @member.nickname %>
-</div>
 
-<div>
- <%= "性別" %>
- <%= @member.sex %>
-</div>
 
-<div>
- <%= "生年月日" %>
- <%= @member.birthday %>
-</div>
-
-<div>
- <%= "メールアドレス" %>
- <%= @member.email %>
-</div>
-<div>
- <%= "趣味" %>
- <%= @member.hobby %>
-</div>
-
-<div>
- <%= "仕事" %>
- <%= @member.job %>
-</div>
-
-<div>
- <%= "自己紹介" %>
- <%= @member.introduction %>
-</div>
-
-<div>
- <%= "フォロー中" %>
- <%= link_to @member.followings.count, member_followings_path(@member) %>
-</div>
-
-<div>
- <%= "フォロワー" %>
- <%= link_to @member.followers.count, member_followers_path(@member) %>
-</div>
-
-<% @requests.each do |req| %>
-<div><%= link_to req.title,request_path(req) %></div>
-<div><%= req.schedule %></div>
-<div><%= req.location %></div>
-<div><%= req.is_active %></div>
-<% end %>
-
-<% unless @member == current_member %>
-  <%= render 'members/relationships/follow_button',member: @member %>
-<% else %>
-  <%= link_to "プロフィール編集", edit_member_path(@member) %>
-<% end %>
-
-<%= paginate @requests %>
- </div>
-</div>
