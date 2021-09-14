@@ -1,4 +1,19 @@
 <div class="container">
+<div class="row">
+   <div class= "col-xs-12 col-lg-12 col-md-12 col-sm-12">
+     <div>
+       <% @tags.sort.reverse.each do |count| %>
+         <% count[1].each do |tag| %>
+           <p><%= link_to  "##{tag.name} (#{tag.requests.count}) ","/requests/tagshow/#{tag.name}" %></p>
+         <% end %>
+       <% end %>
+     </div>
+   </div>
+</div>
+</div>
+
+<h2>ハッシュタグ #<%= @tag.name %></h2>
+ <div class="container">
   <div class="row mt-3">
     <% @requests.each do |req| %>
 
@@ -24,8 +39,3 @@
     <% end %>
 
   </div>
-  <div class="row mt-5 mb-5 justify-content-center"> <%= paginate @requests %></div>
-</div>
-
-
-

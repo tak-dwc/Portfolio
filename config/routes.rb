@@ -35,6 +35,12 @@ Rails.application.routes.draw do
     resources :requests do
       resource :like, only: %i[create destroy]
       resources :comments, only: %i[create destroy]
+      patch :is_active_release
     end
+    get 'requests/tagshow/:name', to: 'requests#tagshow', as: 'tagshow'
+
+    resources :chats, only: %i[create]
+    resources :rooms, only: %i[create show]
+
   end
 end

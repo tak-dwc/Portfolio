@@ -9,9 +9,7 @@ module Members
     def create
       @request = Request.new(request_params)
       @request.member_id = current_member.id
-      tag_list = params[:request] [:tag_name].split(',')
       if @request.save
-        @request.save_tag(tag_list)
         redirect_to request_path(@request)
       else
         render :new
@@ -20,8 +18,6 @@ module Members
 
     def index
       @requests = Request.page(params[:page]).reverse_order
-      @tag_list = Tag.all
-
     end
 
     def show
@@ -38,9 +34,7 @@ module Members
 
     def update
       @request = Request.find(params[:id])
-      tag_list = params[:request] [:tag_name].split(',')
-      if @request.update_attributes(request_params)
-        @request.save_tag(tag_list)
+      if @request.update(request_params)
         redirect_to request_path(@request)
       else
         render :edit
@@ -53,10 +47,56 @@ module Members
       redirect_to requests_path
     end
 
+    def tagshow
+    #タグリンク用 
+      @member = current_member
+      @tag = Tag.find_by(name: params[:name])
+      @requests = @tag.requests.page(params[:page]).reverse_order
+    # タグ一覧  
+      if params[:name].nil?
+        @tags = Tag.all.to_a.group_by{ |tag| tag.request.count}
+      else
+        @tag = Tag.find_by(name: params[:name])
+        @request = @tag.requests.page(params[:page]).per(20).reverse_order
+        @tags = Tag.all.to_a.group_by{ |tag| tag.requests.count}
+      end
+    end  
+    
+    def is_active_release
+      @request = Request.find(params[:request_id])
+      # ステータス変更
+      if @request.release?
+        @request.in_transaction!
+      end
+
+      if @request.in_transaction?
+        @member = Member.find(@request.member_id)
+        
+        @currentMemberEntry = Entry.where(member_id: current_member.id)
+        @memberEntry = Entry.find_by(member_id: @member.id)
+        unless @member.id == current_member.id
+          @currentMemberEntry.each do |current|
+          @memberEntry.each do |member|
+          if current.room_id == member.room_id then
+            @isRoom = true
+            @roomId = current.room_id
+          end
+          end
+          end
+          unless @isRoom
+          @room = Room.new
+          @entry = Entry.new
+          end
+        end
+      else
+        render :show
+      end
+    end
+
     private
 
     def request_params
-      params.require(:request).permit(:title, :schedule, :content, :location, :is_active, :member_id)
+      params.require(:request).permit(:title, :schedule, :content, :location, :is_active, :member_id,:caption)
     end
   end
 end

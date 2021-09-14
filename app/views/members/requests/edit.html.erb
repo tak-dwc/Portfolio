@@ -3,31 +3,31 @@
 
  <div class="form-group">
   <lavel>タイトル</lavel>
-  <%=f.text_field :title ,class:"form-control book_title" %>
+  <%=f.text_field :title ,class:"form-control" %>
   </div>
 
  <div class="form-group">
   <lavel>予定日</lavel>
-  <%=f.date_field :schedule ,class:"form-control book_title" %>
+  <%=f.date_field :schedule ,class:"form-control " %>
   </div>
 
   <div class="form-group">
   <lavel class=book_opinion>場所</lavel>
-  <%=f.text_field :location ,class:"form-control book_body"%>
+  <%=f.text_field :location ,class:"form-control "%>
   </div><br>
 
   <div class="form-group">
   <lavel class=book_opinion>内容</lavel>
-  <%=f.text_area :content ,class:"form-control book_body"%>
+  <%=f.text_area :content ,class:"form-control "%>
   </div><br>
 
   <div class="form-group">
   <lavel class=book_opinion>状態</lavel>
-  <%=f.select :is_active ,Request.is_actives.keys.to_a, class:"form-control book_body"%>
+  <%=f.select :is_active ,Request.is_actives.keys.to_a, class:"form-control "%>
   </div><br>
   
   <div>
-   <%= f.text_field :tag_name ,value: @tag_list, placeholder: "タグをつける。複数つけるには','で区切ってください。" %>
+   <%= f.text_field :caption, class:"form-control"%>
   </div>
 
   <div class="form-group">

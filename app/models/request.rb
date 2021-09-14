@@ -9,18 +9,40 @@ class Request < ApplicationRecord
   has_many :request_tags, dependent: :destroy
   has_many :tags, through: :request_tags
 
-  def save_tag(sent_tags)
-    current_tags = tags.pluck(:name) unless tags.nil?
-    old_tags = current_tags - sent_tags
-    new_tags = sent_tags - current_tags
+  # def save_tag(sent_tags)
+  #   current_tags = tags.pluck(:name) unless tags.nil?
+  #   old_tags = current_tags - sent_tags
+  #   new_tags = sent_tags - current_tags
 
-    old_tags.each do |old|
-      tags.delete Tag.find_by(name: old)
+  #   old_tags.each do |old|
+  #     tags.delete Tag.find_by(name: old)
+  #   end
+
+  #   new_tags.each do |new|
+  #     new_request_tag = Tag.find_or_create_by(name: new)
+  #     tags << new_request_tag
+  #   end
+  # end
+  
+    #DBへのコミット直前に実施する
+  after_create do
+    request = Request.find_by(id: self.id)
+    tags  = self.caption.scan(/[#＃][\w\p{Han}ぁ-ヶｦ-ﾟー]+/)
+    request.tags = []
+    tags.uniq.map do |tag|
+      #ハッシュタグは先頭の'#'を外した上で保存
+      tag = Tag.find_or_create_by(name: tag.downcase.delete('#'))
+      request.tags << tag
     end
+  end
 
-    new_tags.each do |new|
-      new_request_tag = Tag.find_or_create_by(name: new)
-      tags << new_request_tag
+  before_update do 
+    request = Request.find_by(id: self.id)
+    request.tags.clear
+    tags = self.caption.scan(/[#＃][\w\p{Han}ぁ-ヶｦ-ﾟー]+/)
+    tags.uniq.map do |tag|
+      tag = Tag.find_or_create_by(name: tag.downcase.delete('#'))
+      request.tags << tag
     end
   end
 
@@ -36,4 +58,5 @@ class Request < ApplicationRecord
     end_transaction: 2,   # 依頼終了
     release_stop: 9      # 公開停止
   }
+  
 end

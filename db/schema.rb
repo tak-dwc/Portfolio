@@ -99,6 +99,7 @@ ActiveRecord::Schema.define(version: 2021_09_13_072139) do
     t.string "location", null: false
     t.integer "is_active", default: 0, null: false
     t.string "title", null: false
+    t.string "caption"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

@@ -1,36 +1,46 @@
-<div class="container">
-  <div class="row mt-3">
-    
 
-<div>
+<tr class="container">
+  <tr class="row mt-3">
+
+<table class="table">
+<tr>
   <%= @request.title %>
-</div>
+</tr>
 
-<div>
+<tr>
   <%= @request.schedule %>
-</div>
-<div>
+</tr>
+<tr>
   <%= @request.location %>
-</div>
-<div>
+</tr>
+<tr>
   <%= @request.content %>
-</div>
-<div>
+</tr>
+<tr>
+  ステータス:
   <%= @request.is_active %>
-</div>
-<div>
-  <% @request_tags.each  do |tag| %>
-    <%=  tag.name %>
-  <% end %>
-</div>
+</tr>
+<tr>
+<%= render_with_tags(@request.caption) %>
+</tr>
+</table>
 
 <div id="like-btn_<%= @request.id %>">
   <%= render 'members/likes/like-btn', request: @request %>
 </div>
 
 <div>
-  <%= link_to "リクエスト受諾",requests_path %>
-</div>
+  <% unless @member == current_member %>  
+    <%= form_with model: @request,url: request_is_active_release_path(@request),method: :patch,local:true do |f| %>
+    <%= f.submit "リクエスト受諾" %>
+    <% end %>
+  <% else %>
+   <div></div>
+  <% end %>
+
+  <%#= link_to "リクエスト受諾",request_is_active_release_path(@request),method: :patch,"data-confirm" => "リクエストを受諾しますか？" %>
+
+
 </div>
 
 <div class="row">

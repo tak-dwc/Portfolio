@@ -13,13 +13,13 @@ ja:
         end_transaction: "依頼終了"
         release_stop: "公開停止"
 
-
-
-
-
-
   date:
     order:
       - :year
       - :month
       - :day
+      
+  activerecord:
+  errors:
+    messages:
+      record_invalid: "バリデーションに失敗しました: %{errors}"    

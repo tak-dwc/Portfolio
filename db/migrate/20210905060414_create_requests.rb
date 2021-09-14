@@ -9,6 +9,7 @@ class CreateRequests < ActiveRecord::Migration[5.2]
       t.string :location, null: false
       t.integer :is_active, null: false, default: 0
       t.string :title, null: false
+      t.string :caption
 
       t.timestamps
     end
