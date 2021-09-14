@@ -40,6 +40,12 @@ class Member < ApplicationRecord
   def following?(member)
     followings.include?(member)
   end
+  
+   # 検索
+  def self.looks(search)
+    return Member.all unless search
+    Member.where('nickname LIKE(?)', "%#{search}%")
+  end
 
   has_many :requests, dependent: :destroy
   has_many :likes, dependent: :destroy

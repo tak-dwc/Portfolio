@@ -1,2 +1,34 @@
-<h1>Members::Rooms#show</h1>
-<p>Find me in app/views/members/rooms/show.html.erb</p>
+div class="left-button">
+</div>
+<h4 class="rooms-title">気になる同士</h4>
+<% @entries.each do |e| %>
+  <div >
+  <strong>
+        <%= e.member.nickname %>さん
+  </strong>
+  </div>
+<% end %>
+<hr>
+<div class="chats">
+  <div class="chat">
+    <% if @chats.present? %>
+      <% @chats.each do |c| %>
+        <div class="chat-box">
+          <div class="chat-face">
+            <%= c.member.nickname %>
+          </div>
+          <div class="chat-hukidashi"> <strong><%= c.body %></strong> <br>
+            <%= c.created_at.strftime("%Y-%m-%d %H:%M")%>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="posts">
+    <%= form_with model: @chat ,local:true do |f| %>
+      <%= f.text_field :body, placeholder: "メッセージを入力して下さい" , size: 70, class:"form-text-field" %>
+        <%= f.hidden_field :room_id, value: @room.id %>
+          <%= f.submit "投稿",class: 'form-submit'%>
+    <% end %>
+  </div>
+</div>

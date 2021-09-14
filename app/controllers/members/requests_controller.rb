@@ -48,11 +48,11 @@ module Members
     end
 
     def tagshow
-    #タグリンク用 
+    #タグリンク用
       @member = current_member
       @tag = Tag.find_by(name: params[:name])
       @requests = @tag.requests.page(params[:page]).reverse_order
-    # タグ一覧  
+    # タグ一覧
       if params[:name].nil?
         @tags = Tag.all.to_a.group_by{ |tag| tag.request.count}
       else
@@ -60,8 +60,8 @@ module Members
         @request = @tag.requests.page(params[:page]).per(20).reverse_order
         @tags = Tag.all.to_a.group_by{ |tag| tag.requests.count}
       end
-    end  
-    
+    end
+
     def is_active_release
       @request = Request.find(params[:request_id])
       # ステータス変更
@@ -71,23 +71,28 @@ module Members
 
       if @request.in_transaction?
         @member = Member.find(@request.member_id)
-        
         @currentMemberEntry = Entry.where(member_id: current_member.id)
-        @memberEntry = Entry.find_by(member_id: @member.id)
+        @memberEntry = Entry.where(member_id: @member.id)
         unless @member.id == current_member.id
-          @currentMemberEntry.each do |current|
-          @memberEntry.each do |member|
-          if current.room_id == member.room_id then
-            @isRoom = true
-            @roomId = current.room_id
+          if @currentMemberEntry.present? && @memberEntry.present?
+            @currentMemberEntry.each do |current|
+              @memberEntry.each do |member|
+                if current.room_id == member.room_id then
+                  @isRoom = true
+                  @roomId = current.room_id
+                end
+              end
+            end
+          else  
+            # @room = Room.new
+            # @entry = Entry.ne
+          
+            @room = Room.create
+            @entry1 = Entry.create(room_id: @room.id, member_id: current_member.id)
+            @entry2 = Entry.create(room_id: @room.id, member_id: @member.id)
+            redirect_to room_path(@room.id)
           end
-          end
-          end
-          unless @isRoom
-          @room = Room.new
-          @entry = Entry.new
-          end
-        end
+        end  
       else
         render :show
       end
@@ -98,5 +103,6 @@ module Members
     def request_params
       params.require(:request).permit(:title, :schedule, :content, :location, :is_active, :member_id,:caption)
     end
+
   end
 end

@@ -1,1 +1,9 @@
-<h1>検索結果</h1>
+<% if @model == "Member" %>
+    <% @members.each do |member| %>
+        <%= member.nickname %>   
+    <% end %>
+<% else %>
+    <% @requests.each do |req| %>
+        <%= req.title %>  　
+    <% end %>
+<% end %>
