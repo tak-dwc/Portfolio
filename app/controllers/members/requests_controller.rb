@@ -68,7 +68,7 @@ module Members
       if @request.release?
         @request.in_transaction!
       end
-
+      #ステータス変更を機にチャットルームの作成
       if @request.in_transaction?
         @member = Member.find(@request.member_id)
         @currentMemberEntry = Entry.where(member_id: current_member.id)
@@ -83,16 +83,13 @@ module Members
                 end
               end
             end
-          else  
-            # @room = Room.new
-            # @entry = Entry.ne
-          
+          else
             @room = Room.create
             @entry1 = Entry.create(room_id: @room.id, member_id: current_member.id)
             @entry2 = Entry.create(room_id: @room.id, member_id: @member.id)
             redirect_to room_path(@room.id)
           end
-        end  
+        end
       else
         render :show
       end

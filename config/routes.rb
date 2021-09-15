@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  namespace :members do
+    get 'notifications/index'
+  end
   devise_for :admins, controllers: {
     sessions: 'admins/sessions',
     passwords: 'admins/passwords',
@@ -41,6 +44,9 @@ Rails.application.routes.draw do
 
     resources :chats, only: %i[create]
     resources :rooms, only: %i[create show]
+    resources :notifications, only: [:index]
+    delete 'notifications/destroy_all', to: 'notifications#destroy_all', as: 'destroy_all_notifications'
+
 
   end
 end
