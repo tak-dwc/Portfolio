@@ -1,2 +1,47 @@
-<h1>Admins::Requests#show</h1>
-<p>Find me in app/views/admins/requests/show.html.erb</p>
+
+<tr class="container">
+  <tr class="row mt-3">
+
+<table class="table">
+<tr>
+  <%= @request.title %>
+</tr>
+
+<tr>
+  <%= @request.schedule %>
+</tr>
+<tr>
+  <%= @request.location %>
+</tr>
+<tr>
+  <%= @request.content %>
+</tr>
+<tr>
+  ステータス:
+  <%= @request.is_active %>
+</tr>
+<tr>
+<%= render_with_tags(@request.caption) %>
+</tr>
+</table>
+
+<div id="like-btn_<%= @request.id %>">
+  <%= render 'members/likes/like-btn', request: @request %>
+</div>
+
+<div>
+
+    <%= form_with model: @request,url: request_is_active_release_path(@request),method: :patch,local:true do |f| %>
+    <%= f.submit "リクエスト受諾" %>
+    <% end %>
+</div>
+
+<div class="row">
+<div id="comments_index">
+  <%= render 'members/comments/index',comments: @comments  %>
+</div>
+
+<div>
+  <%= render 'members/comments/form', request: @request, comment: @comment %>
+</div>
+</div>
