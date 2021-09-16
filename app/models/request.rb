@@ -5,12 +5,15 @@ class Request < ApplicationRecord
   has_many :likes, dependent: :destroy
   has_many :comments, dependent: :destroy
 
-  # タグ機能
+  #タグ機能
   has_many :request_tags, dependent: :destroy
   has_many :tags, through: :request_tags
 
   #通知機能
   has_many :notifications, dependent: :destroy
+
+  #評価機能
+  has_many :rates, dependent: :destroy
 
   #タグ作成・更新
   #DBへのコミット直前に実施する
@@ -55,10 +58,6 @@ class Request < ApplicationRecord
     if temp.blank?
       #visitor_idはcurrent_member.idのため記載なし
       notification =current_member.go_notifications.new(visited_id: member_id, request_id: id, action: "like")
-      #自分の投稿に対してはすでに通知済みとする
-      if notification.visitor_id == notification.visited_id
-        notification.checked = true
-      end
       notification.save if notification.valid?
     end
   end
@@ -77,10 +76,6 @@ class Request < ApplicationRecord
   def save_notification_comment!(current_member, comment_id, visited_id)
     #コメントは複数回することが考えられるため
     notification = current_member.go_notifications.new(visited_id: visited_id, request_id: id, comment_id: comment_id, action: "comment")
-    #自分の投稿に対してはすでに通知済みとする
-    if notification.visitor_id == notification.visited_id
-      notification.checked = true
-    end
     notification.save if notification.valid?
   end
 

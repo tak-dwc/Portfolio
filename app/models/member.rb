@@ -30,8 +30,19 @@ class Member < ApplicationRecord
   #通知を受け取る
   has_many :come_notifications,class_name: "Notification", foreign_key: "visited_id", dependent: :destroy
   
-  #問い合わせ
+  #問い合わせ機能
   has_many :contacts,dependent: :destroy
+  
+  #評価機能
+  has_many :rates,dependent: :destroy
+  
+  #評価した人
+  has_many :rates, class_name: "Rate", foreign_key: "member_id", dependent: :destroy
+  has_many :active_rates, through: :rates, source: :rated_id
+
+  #評価された人
+  has_many :re_rates, class_name: "Rate", foreign_key: "rated_id", dependent: :destroy
+  has_many :passive_rates, through: :re_rates, source: :member_id
   
   #論理削除
   def active_for_authentication?

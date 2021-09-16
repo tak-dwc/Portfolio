@@ -2,7 +2,7 @@
 
 module Members
   class CommentsController < ApplicationController
-    
+
     def create
       # @comment = Comment.new(comment_params)
       # @request = @comment.request
@@ -13,14 +13,14 @@ module Members
       #   respond_to do |format|
       #   format.html {redirect_to request.referrer}
       #   format.js
-      #   end  
+      #   end
       # end
- 
+
       @request = Request.find(params[:request_id])
       @comment = @request.comments.build(comment_params) # build→request.idを持った状態でコメントnewをする
       @comment.member_id = current_member.id
       @comment.save
-      @request.create_notification_comment!(current_member, @comment.id)
+      @request.create_notification_comment!(current_member, @comment.id) if @request.member_id != current_member.id
     end
 
     def destroy

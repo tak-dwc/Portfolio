@@ -73,8 +73,8 @@ module Members
         @member = Member.find(@request.member_id)
         @currentMemberEntry = Entry.where(member_id: current_member.id,request_id: @request.id)
         @memberEntry = Entry.where(member_id: @member.id,request_id: @request.id)
-        unless @member.id == current_member.id
-          if @currentMemberEntry.present? && @memberEntry.present?
+        # unless @member.id == current_member.id
+          if !(@member.id == current_member.id) && @currentMemberEntry.present? && @memberEntry.present?
             @currentMemberEntry.each do |current|
               @memberEntry.each do |member|
                 if current.room_id == member.room_id then
@@ -90,7 +90,7 @@ module Members
             @entry2 = Entry.create(room_id: @room.id, member_id: @member.id, request_id: @request.id)
             redirect_to room_path(@room.id)
           end
-        end
+        # end
       else
         render :show
       end

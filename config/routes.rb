@@ -34,16 +34,20 @@ Rails.application.routes.draw do
     patch 'members/:id/withdraw', to: 'members#withdraw', as: 'withdraw'
     get 'members/:id/main', to: 'members#main', as: 'main'
 
+    scope :requests do
+      resources :chats, only: %i[create]
+      resources :rooms, only: %i[index show]
+    end
+
     resources :requests do
       resource :like, only: %i[create destroy]
       resources :comments, only: %i[create destroy]
       resources :rates, only: [:create, :new]
       patch :is_active_release
     end
+
     get 'requests/tagshow/:name', to: 'requests#tagshow', as: 'tagshow'
 
-    resources :chats, only: %i[create]
-    resources :rooms, only: %i[index show]
     resources :notifications, only: [:index]
     delete 'notifications/destroy_all', to: 'notifications#destroy_all', as: 'destroy_all_notifications'
 

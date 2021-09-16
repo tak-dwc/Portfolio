@@ -6,7 +6,7 @@ module Members
       like = current_member.likes.new(request_id:params[:request_id])
       like.save
       @request = Request.find(params[:request_id])
-      @request.create_notification_like!(current_member)
+      @request.create_notification_like!(current_member) if @request.member_id != current_member.id
     end
 
     def destroy
@@ -15,4 +15,4 @@ module Members
       like.destroy
     end
   end
-end  
+end

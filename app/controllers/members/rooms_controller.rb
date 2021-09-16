@@ -1,9 +1,10 @@
 class Members::RoomsController < ApplicationController
 
   def index
-    @rooms = Room.all
+    # @rooms = Room.all
+    @rooms = Entry.where(member_id: current_member.id)
   end
-  
+
   def show
     @room = Room.find(params[:id])
     if Entry.where(member_id: current_member.id,room_id: @room.id).present?

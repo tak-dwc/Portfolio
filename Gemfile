@@ -75,6 +75,8 @@ gem 'jquery-rails'
 gem 'kaminari', '~> 1.2.1'
 
 gem 'enum_help'
+gem 'rails-i18n'
+gem 'devise-i18n'
 
 # デフロイ・環境変数
 gem 'dotenv-rails'
