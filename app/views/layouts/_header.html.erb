@@ -9,6 +9,13 @@
         <ul class="nav navbar-nav">
         <% if member_signed_in? %>
           <li class="nav-item active">
+            <%= link_to "管理者側会員一覧",admins_members_path, class: 'nav-link text-danger' %>
+          </li>
+          <li class="nav-item active">
+            <%= link_to "問い合わせ一覧",admins_contacts_path, class: 'nav-link text-danger' %>
+          </li>
+
+          <li class="nav-item active">
             <%= link_to "ログアウト",destroy_member_session_path,method: :delete, class: 'nav-link text-dark' %>
           </li>
           <li class="nav-item">
@@ -24,7 +31,7 @@
           <li class="nav-item">
             <%= link_to "取引一覧",rooms_path, class: 'nav-link text-dark' %>
           </li>
-         
+
           <% if unchecked_notifications.any? %>
             <i class="fa fa-circle" style="color: gold;"></i>
         <% end %>

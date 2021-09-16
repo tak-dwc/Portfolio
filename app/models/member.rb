@@ -29,7 +29,9 @@ class Member < ApplicationRecord
   has_many :go_notifications,class_name: "Notification", foreign_key: "visitor_id", dependent: :destroy
   #通知を受け取る
   has_many :come_notifications,class_name: "Notification", foreign_key: "visited_id", dependent: :destroy
-
+  
+  #問い合わせ
+  has_many :contacts,dependent: :destroy
   
   #論理削除
   def active_for_authentication?

@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   namespace :admins do
     resources :members, only: %i[index show edit update]
     resources :requests, only: [:index,:show,:edit,:update]
+    resources :contacts, only: [:index,:edit,:update]
   end
 
   devise_for :members, controllers: {
@@ -46,7 +47,7 @@ Rails.application.routes.draw do
     resources :notifications, only: [:index]
     delete 'notifications/destroy_all', to: 'notifications#destroy_all', as: 'destroy_all_notifications'
 
-
+    resources :contacts, only: [:new,:create]
 
   end
 end
