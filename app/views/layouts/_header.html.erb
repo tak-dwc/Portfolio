@@ -20,6 +20,11 @@
           <li class="nav-item">
             <%= link_to "リクエスト一覧",requests_path, class: 'nav-link text-dark' %>
           </li>
+
+          <li class="nav-item">
+            <%= link_to "取引一覧",rooms_path, class: 'nav-link text-dark' %>
+          </li>
+         
           <% if unchecked_notifications.any? %>
             <i class="fa fa-circle" style="color: gold;"></i>
         <% end %>

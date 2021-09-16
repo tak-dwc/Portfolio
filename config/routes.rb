@@ -1,9 +1,6 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  namespace :members do
-    get 'notifications/index'
-  end
   devise_for :admins, controllers: {
     sessions: 'admins/sessions',
     passwords: 'admins/passwords',
@@ -12,6 +9,7 @@ Rails.application.routes.draw do
 
   namespace :admins do
     resources :members, only: %i[index show edit update]
+    resources :requests, only: [:index,:show,:edit,:update]
   end
 
   devise_for :members, controllers: {
@@ -38,14 +36,16 @@ Rails.application.routes.draw do
     resources :requests do
       resource :like, only: %i[create destroy]
       resources :comments, only: %i[create destroy]
+      resources :rates, only: [:create, :new]
       patch :is_active_release
     end
     get 'requests/tagshow/:name', to: 'requests#tagshow', as: 'tagshow'
 
     resources :chats, only: %i[create]
-    resources :rooms, only: %i[create show]
+    resources :rooms, only: %i[index show]
     resources :notifications, only: [:index]
     delete 'notifications/destroy_all', to: 'notifications#destroy_all', as: 'destroy_all_notifications'
+
 
 
   end

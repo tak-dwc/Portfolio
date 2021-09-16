@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(version: 2021_09_15_011549) do
   create_table "entries", force: :cascade do |t|
     t.integer "member_id", null: false
     t.integer "room_id", null: false
+    t.integer "request_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -90,8 +91,12 @@ ActiveRecord::Schema.define(version: 2021_09_15_011549) do
   end
 
   create_table "rates", force: :cascade do |t|
-    t.integer "member_id"
-    t.integer "request_id"
+    t.integer "member_id", null: false
+    t.integer "request_id", null: false
+    t.integer "reted_id", null: false
+    t.text "rate_comment"
+    t.boolean "rate_choice", default: false, null: false
+    t.float "rate_star", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

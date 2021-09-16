@@ -71,8 +71,8 @@ module Members
       #ステータス変更を機にチャットルームの作成
       if @request.in_transaction?
         @member = Member.find(@request.member_id)
-        @currentMemberEntry = Entry.where(member_id: current_member.id)
-        @memberEntry = Entry.where(member_id: @member.id)
+        @currentMemberEntry = Entry.where(member_id: current_member.id,request_id: @request.id)
+        @memberEntry = Entry.where(member_id: @member.id,request_id: @request.id)
         unless @member.id == current_member.id
           if @currentMemberEntry.present? && @memberEntry.present?
             @currentMemberEntry.each do |current|
@@ -80,13 +80,14 @@ module Members
                 if current.room_id == member.room_id then
                   @isRoom = true
                   @roomId = current.room_id
+                  redirect_to room_path(@roomId)
                 end
               end
             end
           else
             @room = Room.create
-            @entry1 = Entry.create(room_id: @room.id, member_id: current_member.id)
-            @entry2 = Entry.create(room_id: @room.id, member_id: @member.id)
+            @entry1 = Entry.create(room_id: @room.id, member_id: current_member.id, request_id: @request.id)
+            @entry2 = Entry.create(room_id: @room.id, member_id: @member.id, request_id: @request.id)
             redirect_to room_path(@room.id)
           end
         end

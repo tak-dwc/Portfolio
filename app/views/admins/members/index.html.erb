@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h3 class="my-5 under">会員一覧</h3>
+
+      <table class="table">
+        <thead>
+          <tr class="table-active">
+            <th>会員ID</th>
+            <th>氏名</th>
+            <th>メールアドレス</th>
+            <th>ステータス</th>
+          </tr>
+        </thead>
+        <% @members.each do |member| %>
+        <tbody>
+          <tr>
+            <td><%= member.id %></td>
+            <td><%= link_to member.nickname, admins_member_path(member) %></td>
+            <td nowrap><%= member.email %></td>
+            <td>
+              <% if member.is_deleted? %>
+                <span class="text-secondary font-weight-bold">退会</span>
+              <% else %>
+                <span class="text-success font-weight-bold">有効</span>
+              <% end %>
+            </td>
+          </tr>
+        </tbody>
+        <% end %>
+      </table>
+      <%= paginate(@members) %>
+    </div>
+  </div>
+</div>

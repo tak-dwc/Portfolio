@@ -30,13 +30,13 @@
 </div>
 
 <div>
-  <% unless @member == current_member %>  
+
     <%= form_with model: @request,url: request_is_active_release_path(@request),method: :patch,local:true do |f| %>
     <%= f.submit "リクエスト受諾" %>
     <% end %>
-  <% else %>
+
    <div></div>
-  <% end %>
+
 
   <%#= link_to "リクエスト受諾",request_is_active_release_path(@request),method: :patch,"data-confirm" => "リクエストを受諾しますか？" %>
 
