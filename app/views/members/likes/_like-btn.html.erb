@@ -1,5 +1,11 @@
 <% if request.liked_by?(current_member) %>
-  <div>いいね:<%= link_to request.likes.count, request_like_path(request), method: :delete,remote: true %></div>
+  <%= link_to request_like_path(request), method: :delete,remote: true do %>
+    <i class="fas fa-thumbs-up fa-lg text-danger"></i>
+  <% end %>
+  <%= request.likes.count %>件
 <% else %>
-  <div>いいね:<%= link_to request.likes.count, request_like_path(request), method: :post, remote: true %></div>
+  <%= link_to request_like_path(request), method: :post,remote: true do %>
+    <i class="fas fa-thumbs-up fa-lg text-light"></i>
+  <% end %>
+  <%= request.likes.count %>件
 <% end %>

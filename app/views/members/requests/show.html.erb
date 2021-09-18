@@ -1,61 +1,60 @@
-
-<tr class="container">
-  <tr class="row mt-3">
-
-<table class="table">
-<tr>
-  <%= @request.title %>
-</tr>
-
-<tr>
-  <%= @request.schedule %>
-</tr>
-<tr>
-  <%= @request.location %>
-</tr>
-<tr>
-  <%= @request.content %>
-</tr>
-<tr>
-  ステータス:
-  <%= @request.is_active %>
-</tr>
-<tr>
-<%= render_with_tags(@request.caption) %>
-</tr>
-</table>
-
-<div id="like-btn_<%= @request.id %>">
-  <%= render 'members/likes/like-btn', request: @request %>
+<div class="container">
+  <div class="card mt-5">
+    <!--<div class="row mt-3">-->
+      <div class="card-header bg-dark text-white ">
+        <div class="h3"><%= @request.title %></div>
+        <div id="like-btn_<%= @request.id %>" class="text-right">
+          <%= render 'members/likes/like-btn', request: @request %>
+        </div>
+      </div>
+      <div class="card-body">
+        <table class="table">
+          <tbody>
+           <tr>
+             <th><%= "予定日 " %></th>
+             <th><%= @request.schedule %></th>
+           </tr>
+           <tr>
+             <th><%= "場所" %></th>
+             <th><%= @request.location %></th>
+           </tr>
+           <tr>
+             <th><%= "詳細  " %></th>
+             <th><%= @request.content %></th>
+           </tr>
+          </tbody>
+        </table>
+      <div class="card-footer bg-transparent">
+        <div class="h5 text-black"><%= render_with_tags(@request.caption) %></div> 
+        <div class="text-right">
+        <% if @request.member_id == current_member.id %>
+          <%= link_to "リクエスト編集",edit_request_path(@request) ,class:"btn btn-outline-dark" %>
+          <%= link_to "リクエスト削除",request_path(@request), class:"btn btn-outline-dark",method: :delete,"data-confirm" => "本当に削除しますか？" %>
+        <% else %>
+          <%= form_with model: @request,url: request_is_active_release_path(@request),method: :patch,local:true do |f| %>
+            <%= f.submit "リクエスト受諾",class:"btn btn-outline-dark", "data-confirm" => "取引を開始しますか？" %>
+          <% end %>
+        <% end %>
+        </div>
+      </div>
+  </div>
+</div>  
+<div class="container mt-2">
+  <div id="comments_index">
+    <%= render 'members/comments/index',comments: @comments  %>
+  </div>
 </div>
 
-<div>
-  <% if @request.member_id == current_member.id %>
-    <div><p class="text-danger">リクエスト状態変更ボタン作成予定</p></div>
+  <div class="row mt-2 mb-3">
+    <div class="col-12" >
+  <% if member_signed_in? %>
+      <%= render 'members/comments/form', request: @request, comment: @comment %>
   <% else %>
-    <%= form_with model: @request,url: request_is_active_release_path(@request),method: :patch,local:true do |f| %>
-    <%= f.submit "リクエスト受諾" %>
-    <% end %>
-  <% end %>  
-
-   <div></div>
-
-
-</div>
-
-<div class="row">
-<div id="comments_index">
-  <%= render 'members/comments/index',comments: @comments  %>
-</div>
-
-<div>
-  <%= render 'members/comments/form', request: @request, comment: @comment %>
-</div>
-</div>
-
-<% if @request.member == current_member %>
-<%= link_to "リクエスト編集",edit_request_path(@request) %>
-<%= link_to "リクエスト削除",request_path(@request), method: :delete,"data-confirm" => "本当に削除しますか？" %>
-<% end %>
- </div>
-</div>
+    <%= link_to "コメントをするにはログインをしてください", new_member_session_path %>
+  <% end %>
+  </div>
+</div> 
+<!--<% if @request.member == current_member %>-->
+<!--<%= link_to "リクエスト編集",edit_request_path(@request) %>-->
+<!--<%= link_to "リクエスト削除",request_path(@request), method: :delete,"data-confirm" => "本当に削除しますか？" %>-->
+<!--<% end %>-->

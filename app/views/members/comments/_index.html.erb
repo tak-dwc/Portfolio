@@ -1,15 +1,49 @@
-    <table>
-      <% comments.each do |comment| %>
 
-      <tr>
-      <td><%= attachment_image_tag comment.member, :image, fallback: "noimage.jpg",size:"40x40"%></td>
-      <td><%= comment.member.nickname %></td>
-      <td><%= comment.comment %></td>
-      <% if comment.member == current_member %>
-      <td><%= link_to "コメントを消す",request_comment_path(comment.request, comment),method: :delete,remote: true,class:"btn btn-sm btn-danger" %></td>
-      <% else %>
-      <rd></rd>
-      <% end %>
-      </tr>
-      <% end %>
-    </table>
+  <div class="h5"><i class="fas fa-comment-dots" style="color: black;"></i>
+    <%= comments.count %>件
+    <h6 class="more" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">コメントを全て表示する</h6>
+  </div>
+  <% comments.first(2).each do |comment| %>
+    <% unless comment.id.nil? %>
+      <div class="row mt-2 ">
+        <div class="col-12 border-bottom">
+          <div>
+            <%= link_to member_path(comment.member.id) do %>
+              <%= attachment_image_tag comment.member, :image, fallback: "noimage.jpg",size:"35x35" ,class:"rounded-circle border border-dark"%>
+              <%= comment.member.nickname %>
+            <% end %>
+          </div>
+          <div class="my-2"><%= comment.comment %></div>
+          <div class="comment-date pull-right">
+            <%= comment.created_at.strftime('%Y/%m/%d %H:%M') %>
+            <%= link_to request_comment_path(comment.request, comment),"data-confirm" => "削除しますか？",method: :delete,remote: true do  %>
+              <i class="fas fa-trash" style="color: black;"></i>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+<!--コメント３件目以降-->
+<div class="collapse" id="collapseExample">
+  <% comments.offset(2).each do |comment| %>
+    <% unless comment.id.nil? %>
+      <div class="row mt-2">
+        <div class="col-12 border-bottom">
+          <div>
+            <%= link_to member_path(comment.member.id) do %>
+              <%= attachment_image_tag comment.member, :image, fallback: "noimage.jpg",size:"35x35" ,class:"rounded-circle border border-dark"%>
+              <%= comment.member.nickname %>
+            <% end %>
+          </div>
+          <div class="my-2"><%= comment.comment %></div>
+          <div class="pull-right">
+            <%= comment.created_at.strftime('%Y/%m/%d %H:%M') %>
+            <%= link_to request_comment_path(comment.request, comment),"data-confirm" => "削除しますか？",method: :delete,remote: true do  %>
+              <i class="fas fa-trash" style="color: black;"></i>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <% end %>

@@ -1,15 +1,19 @@
-<div>
-  <h4 class="sub-title">通知</h4>
-  <%= link_to destroy_all_notifications_path, method: :delete do %>
-        <i class="fas fa-trash" style="color: black;"></i>
-        <h7 style="color: black;">全削除</h7>
+<div class="container mt-5">
+  <div class="row text-right">
+    <h5 class="sub-title">通知</h5>
+    <%= link_to destroy_all_notifications_path, method: :delete do %>
+      <i class="fas fa-trash" style="color: black;"></i>
+      <h7 class="text-dark">全削除</h7>
     <% end %>
+  </div>  
   <% if @notifications.exists? %>
-    <div >
-      <%= render @notifications %>
-      <%= paginate @notifications %>
-    </div>
+  <div class="row justify-content-center">
+    <div class="col-5 ">
+    <%= render @notifications %>
   <% else %>
     <p>通知はありません</p>
   <% end %>
+    </div>
+  </div>
+    <div class=" row justify-content-center mb-2"><%= paginate @notifications %></div>
 </div>

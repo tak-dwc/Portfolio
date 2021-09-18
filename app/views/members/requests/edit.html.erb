@@ -1,36 +1,45 @@
+<div class="container">
+ <div class="row">
+   <h3 class="mt-5 mb-3">リクエスト情報編集</h3>
+ </div>
 
-<%= form_with model:@request,local:true do |f| %>
-
- <div class="form-group">
+ <%= form_with model:@request,local:true do |f| %>
+ <div class="col-5">
+ <div class="form-group row">
   <lavel>タイトル</lavel>
-  <%=f.text_field :title ,class:"form-control" %>
-  </div>
+  <%= f.text_field :title ,class:"form-control" %>
+ </div>
 
- <div class="form-group">
+ <div class="form-group row ">
   <lavel>予定日</lavel>
-  <%=f.date_field :schedule ,class:"form-control " %>
+  <%= f.date_field :schedule ,class:"form-control" %>
   </div>
 
-  <div class="form-group">
-  <lavel class=book_opinion>場所</lavel>
-  <%=f.text_field :location ,class:"form-control "%>
-  </div><br>
-
-  <div class="form-group">
-  <lavel class=book_opinion>内容</lavel>
-  <%=f.text_area :content ,class:"form-control "%>
-  </div><br>
-
-  <div class="form-group">
-  <lavel class=book_opinion>状態</lavel>
-  <%=f.select :is_active ,Request.is_actives.keys.to_a, class:"form-control "%>
-  </div><br>
+  <div class="form-group row ">
+  <lavel>場所</lavel>
+  <%=f.text_field :location ,class:"form-control" %>
+  </div>
   
-  <div>
+    <div class="form-group row">
+   <lavel>タグ</lavel>
    <%= f.text_field :caption, class:"form-control"%>
+   <small class="form-text text-muted">※1つずつに#(ハッシュ)を入力してください。(例:#タグ1#タグ2#タグ3)</small>
+  </div>
+  
+  <div class="form-group row">
+  <lavel>内容</lavel>
+  <%=f.text_area :content ,class:"form-control "%>
   </div>
 
-  <div class="form-group">
-  <%=f.submit'編集保存',class:"btn btn-success" %>
+  <div class="form-group row">
+  <lavel>状態</lavel>
+  <%=f.select :is_active ,Request.is_actives.keys.to_a, class:" custom-select" %>
+  </div>
+ 
+  <div class="form-group row">
+  <%=f.submit'編集保存',class:"btn btn-warning" %>
   </div>
 <% end %>
+  </div>
+  </div>
+</div>

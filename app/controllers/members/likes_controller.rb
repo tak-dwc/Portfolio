@@ -14,5 +14,9 @@ module Members
       like = current_member.likes.find_by(request_id: @request.id)
       like.destroy
     end
+    
+    def index
+      @requests = Request.where
+    end  
   end
 end
