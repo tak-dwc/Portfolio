@@ -1,17 +1,18 @@
 ja:
   enums:
-    member:
-      sex:
-        man: "男性"
-        woman: "女性"
-        other: "その他"
-
     request:
       is_active:
         release: "公開中"
         in_transaction: "取引中"
         end_transaction: "依頼終了"
         release_stop: "公開停止"
+
+    member:
+      sex:
+        man: "男性"
+        woman: "女性"
+        other: "その他"
+
 
   date:
     order:

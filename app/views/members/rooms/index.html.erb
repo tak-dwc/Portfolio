@@ -4,6 +4,7 @@
       <thead>
         <tr>
           <th>取引ID</th>
+          <th>投稿詳細へ</th>
           <th>取引ユーザー名</th>
           <th>取引開始日</th>
           <th>取引ページへ</th>
@@ -11,12 +12,16 @@
       </thead>
       <tbody>
         <% @rooms.each do |room| %>
+          <%# @entries.member.nickname |member| %>
+          <% request = Request.find(room.request_id) %>
         <tr>
-          <td><%= room.room_id %></td>
-          <td><%# member.nickname %></td>
+          <td><%=  room.room_id  %></td>
+          <td><%= link_to request.title, request_path(room.request_id),class:"btn btn-warning"  %></td>
+          <td></td>
           <td><%= room.created_at.strftime('%Y/%m/%d') %></td>
           <td><%= link_to "チャットする", room_path(room.room_id),class:"btn btn-warning" %></td>
         </tr>
+          <%# end %>
         <% end %>
       </tbody>
     </table>

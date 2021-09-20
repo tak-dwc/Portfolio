@@ -4,6 +4,7 @@
     <div class="col-5 card" >
     <%= form_with model: @member, url: member_session_path, local: true do |f| %>
       <h4 class="card-header text-center mt-1">ログイン</h4></br>
+
       <div class="mt-2">
         <%= f.email_field :email, autofocus: true, autocomplete: "email",placeholder:"メールアドレス",class:"form-control border-dark" %>
       </div>
@@ -14,7 +15,7 @@
         <%= f.submit "ログイン", class:"btn btn-outline-dark btn-block mt-3 "%>
       </div>
       <div class="text-center  mt-2 mb-3">
-        <%= link_to "アカウントをお持ちでない方", new_member_registration_path,class:"text-dark" %></br>
+        <%= link_to "アカウントをお持ちでない方", new_member_registration_path,class:"text-dark" %>
         <%= link_to "パスワードをお忘れの方",class:"text-dark" %>
       </div>
     <% end %>

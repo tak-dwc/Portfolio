@@ -1,3 +1,4 @@
+<% en = Entry.find_by(member_id: current_member.id, request_id: params[:id]) %>
 <div class="container">
   <div class="card mt-5">
     <!--<div class="row mt-3">-->
@@ -20,41 +21,41 @@
            </tr>
            <tr>
              <th><%= "詳細  " %></th>
-             <th><%= @request.content %></th>
+             <th><%= safe_join(@request.content.split("\n"),tag(:br)) %></th> 
            </tr>
           </tbody>
         </table>
       <div class="card-footer bg-transparent">
-        <div class="h5 text-black"><%= render_with_tags(@request.caption) %></div> 
+        <div class="h5 text-black"><%= render_with_tags(@request.caption) %></div>
         <div class="text-right">
         <% if @request.member_id == current_member.id %>
           <%= link_to "リクエスト編集",edit_request_path(@request) ,class:"btn btn-outline-dark" %>
           <%= link_to "リクエスト削除",request_path(@request), class:"btn btn-outline-dark",method: :delete,"data-confirm" => "本当に削除しますか？" %>
         <% else %>
-          <%= form_with model: @request,url: request_is_active_release_path(@request),method: :patch,local:true do |f| %>
-            <%= f.submit "リクエスト受諾",class:"btn btn-outline-dark", "data-confirm" => "取引を開始しますか？" %>
+          <% if @request.is_active == "release" %>
+            <%= form_with model: @request,url: request_is_active_release_path(@request),method: :patch,local:true do |f| %>
+              <%= f.submit "リクエスト受諾",class:"btn btn-outline-dark", "data-confirm" => "取引を開始しますか？" %>
+            <% end %>
+          <% elsif @request.is_active == "in_transaction" %>
+            <%= link_to "取引画面へ", room_path(en.room_id) ,class:"btn btn-outline-dark" %>
+          <% else %>
+            <div></div>
           <% end %>
         <% end %>
         </div>
       </div>
   </div>
-</div>  
+</div>
 <div class="container mt-2">
   <div id="comments_index">
     <%= render 'members/comments/index',comments: @comments  %>
   </div>
 </div>
-
   <div class="row mt-2 mb-3">
-    <div class="col-12" >
-  <% if member_signed_in? %>
+    <% if member_signed_in? %>
       <%= render 'members/comments/form', request: @request, comment: @comment %>
-  <% else %>
-    <%= link_to "コメントをするにはログインをしてください", new_member_session_path %>
-  <% end %>
+    <% else %>
+      <%= link_to "コメントをするにはログインをしてください", new_member_session_path %>
+    <% end %>
   </div>
-</div> 
-<!--<% if @request.member == current_member %>-->
-<!--<%= link_to "リクエスト編集",edit_request_path(@request) %>-->
-<!--<%= link_to "リクエスト削除",request_path(@request), method: :delete,"data-confirm" => "本当に削除しますか？" %>-->
-<!--<% end %>-->
+</div>

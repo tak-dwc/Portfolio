@@ -1,34 +1,45 @@
-div class="left-button">
+<div class="container mx-auto">
+  <% @entries.each do |e| %>
+  <div class="row mt-3">
+      <%= attachment_image_tag e.member,:image, fallback: "noimage.jpg",size:"35x35" ,class:"rounded-circle border border-dark" %>
+      <%= e.member.nickname %>
+  </div>
+  <% end %>
+   <hr>
 </div>
-<h4 class="rooms-title">気になる同士</h4>
-<% @entries.each do |e| %>
-  <div >
-  <strong>
-        <%= e.member.nickname %>さん
-  </strong>
-  </div>
-<% end %>
-<hr>
-<div class="chats">
-  <div class="chat">
-    <% if @chats.present? %>
-      <% @chats.each do |c| %>
-        <div class="chat-box">
-          <div class="chat-face">
-            <%= c.member.nickname %>
-          </div>
-          <div class="chat-hukidashi"> <strong><%= c.body %></strong> <br>
-            <%= c.created_at.strftime("%Y-%m-%d %H:%M")%>
-          </div>
-        </div>
-      <% end %>
+<div class="container mr-5 pl-5">
+  <% if @chats.present? %>
+    <% @chats.each do |c| %>
+    <% if c.member_id != current_member.id %>
+     <div class="row mt-1 ">
+     <div class="col-7 text-left">
+      <div><%= attachment_image_tag c.member,:image, fallback: "noimage.jpg",size:"15x15" ,class:"rounded-circle border border-dark" %></div>
+      <div><%= c.body %></div>
+      <div class="col-7 text-right border-bottom"><%= c.created_at.strftime("%m/%d %H:%M")%></div>
+      </div>
+    </div>
+    <% else %>
+    <div class="row mt-1 justify-content-end">
+     <div class="col-7 text-right">
+      <div class="text-left"><%= c.body %></div>
+      <div class="col-7 border-bottom"><%= c.created_at.strftime("%Y/%m/%d %H:%M")%>
+        <% if c.member_id == current_member.id %>
+              <i class="fas fa-trash" style="color: black;"></i>
+        <% end %>
+      </div>
+      </div>
+    </div>
     <% end %>
-  </div>
-  <div class="posts">
+    <% end %>
+  <% end %>
+</div>
+ <hr>
+  <div class="row">
     <%= form_with model: @chat ,local:true do |f| %>
       <%= f.text_field :body, placeholder: "メッセージを入力して下さい" , size: 70, class:"form-text-field" %>
         <%= f.hidden_field :room_id, value: @room.id %>
           <%= f.submit "投稿",class: 'form-submit'%>
     <% end %>
   </div>
+</div>
 </div>

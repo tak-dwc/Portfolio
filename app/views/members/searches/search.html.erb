@@ -1,9 +1,76 @@
-<% if @model == "Member" %>
+<% if @model != "Request" %>
+<div class="container">
+  <div class="row">
     <% @members.each do |member| %>
-        <%= member.nickname %>   
+    <% if member != current_member %>
+    <div class="col-4 mt-3">
+      <div class="card " style="min-width: 15rem;">
+        <div class="card-body text-center ">
+           <div><%= attachment_image_tag member, :image, fallback: "noimage.jpg",size:"50x50" ,class:"rounded-circle border border-dark"%></div>
+          <div class="border-bottom"><%= link_to member.nickname, member_path(member) ,class:"text-dark" %></div>
+          <table class="table table-borderless">
+            <tbody>
+              <tr>
+                <th><%= "趣味 " %></th>
+                <th><%= member.hobby %></th>
+              </tr>
+              <tr>
+                <th><%= "フォロー中" %></th>
+                <th><%= link_to member.followings.count, member_followings_path(member),class:"text-dark" %></th>
+              </tr>
+              <tr>
+                <th><%= "フォロワー" %></th>
+                <th><%= link_to member.followers.count, member_followers_path(member),class:"text-dark" %></th>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="card-footer">
+          <div><%= render 'members/relationships/follow_button',member: member %></div>
+        </div>
+      </div>
+    </div>
     <% end %>
+    <% end %>
+  </div>
+   <div class="row mt-5 mb-5 justify-content-center"> <%= paginate @members %></div>
+</div>
 <% else %>
+<div class="container">
+  <div class="row">
     <% @requests.each do |req| %>
-        <%= req.title %>  　
+    <% if req.is_active == "release" &&  req.member != current_member %>
+    <div class="col-4 mt-3">
+      <div class="card " style="min-width: 15rem;">
+        <div class="card-body text-center ">
+          <div><%= attachment_image_tag req.member, :image, fallback: "noimage.jpg",size:"50x50" ,class:"rounded-circle border border-dark"%></div>
+          <div class="border-bottom"><%= link_to req.member.nickname, member_path(req.member) ,class:"text-dark" %></div>
+          <table class="table table-borderless">
+            <tbody>
+              <tr>
+                <th><%= "タイトル " %></th>
+                <th><%= req.title.truncate(10) %></th>
+              </tr>
+              <tr>
+                <th><%= "予定日" %></th>
+                <th><%= req.schedule %></th>
+              </tr>
+              <tr>
+                <th><%= "場所" %></th>
+                <th><%= req.location %></th>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="card-footer">
+          <%= link_to "詳細を見る",request_path(req),class:"btn btn-outline-dark btn-block" %>
+        </div>
+      </div>
+    </div>
     <% end %>
+    <% end %>
+  </div>
+  <div class="row mt-5 mb-5 justify-content-center"> <%= paginate @requests %></div>
+</div>
 <% end %>
+

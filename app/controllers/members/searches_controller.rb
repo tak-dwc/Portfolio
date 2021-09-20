@@ -2,10 +2,10 @@ class Members::SearchesController < ApplicationController
   def search
       @model = params[:model]
 
-      if @model == "Member"
-        @members = Member.looks(params[:search])
+      if @model == "Request"
+        @requests = Request.looks(params[:search]).page(params[:page]).reverse_order
       else
-        @requests = Request.looks(params[:search])
+        @members = Member.looks(params[:search]).page(params[:page]).reverse_order
       end
   end
 end

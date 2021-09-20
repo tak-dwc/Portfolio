@@ -29,7 +29,17 @@ module Members
 
     def edit
       @request = Request.find(params[:id])
-      @tag_list = @request.tags.pluck(:name).join(',')
+      #ステータス管理：編集用
+      @delete_at = 
+      if @request.is_active == "release"
+        ["in_transaction","end_transaction"]
+      elsif @request.is_active == "in_transaction"
+        ["release","end_transaction","release_stop"]
+      elsif @request.is_active == "end_transaction"
+       ["release","in_transaction","release_stop"]
+      elsif @request.is_active == "release_stop"
+       ["in_transaction","end_transaction"]
+      end
     end
 
     def update

@@ -2,6 +2,7 @@
 
 class Request < ApplicationRecord
   belongs_to :member
+  # has_many :entries, through: :member
   has_many :likes, dependent: :destroy
   has_many :comments, dependent: :destroy
 

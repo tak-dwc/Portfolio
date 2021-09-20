@@ -14,6 +14,12 @@
           <li class="nav-item active">
             <%= link_to "問い合わせ一覧",admins_contacts_path, class: 'nav-link text-danger' %>
           </li>
+          <li class="nav-item active">
+            <%= link_to "管理者ログアウト",destroy_admin_session_path,method: :delete, class: 'nav-link text-danger' %>
+          </li>
+          <li class="nav-item active">
+            <%= link_to "管理者ログイン",admin_session_path, class: 'nav-link text-danger' %>
+          </li>
 
           <li class="nav-item active">
             <%= link_to "ログアウト",destroy_member_session_path,method: :delete, class: 'nav-link text-dark' %>
