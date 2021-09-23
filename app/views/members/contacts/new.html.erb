@@ -1,14 +1,22 @@
-<% if @contact.errors.any? %>
-        <%= @contact.errors.count %>件のエラー。
-        <% @contact.errors.full_messages.each do |message| %>
-          <%= message %>。
-        <% end %>
-  <% end %>
-  <h2 class="contact-title">お問い合わせフォーム</h2>
+<div class="container mt-3">
+  <div class="row">
+    <div class="h4">お問い合わせフォーム</div>
+  </div>
+  <div class="row">
+    <div class="col-10">
       <%= form_with model: @contact, url: contacts_path, local:true do |f| %>
+        <div class="form-group">
           <%= f.label :タイトル %>
-              <%= f.text_field :title, class:"form-control" %>
+          <%= f.text_field :title, class:"form-control" %>
+        </div>
+        <div class="form-group">  
           <%= f.label :内容 %>
-              <%= f.text_field :body, class:"form-control" %>
-          <%= f.submit "送信" %>
+          <%= f.text_area :body,rows:"5", class:"form-control" %>
+        </div>
+        <div class="form-group">
+          <%= f.submit "送信",class:"btn btn-outline-dark btn-bolck" %>
+        </div>
       <% end %>
+    </div>
+  </div>
+</div>

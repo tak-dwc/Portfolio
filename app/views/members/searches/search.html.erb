@@ -11,7 +11,7 @@
             <tbody>
               <tr>
                 <th><%= "趣味 " %></th>
-                <th><%= member.hobby %></th>
+                <th><%= member.hobby.truncate(10) unless member.hobby.nil? %></th>
               </tr>
               <tr>
                 <th><%= "フォロー中" %></th>

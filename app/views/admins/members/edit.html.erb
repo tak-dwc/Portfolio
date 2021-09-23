@@ -1,43 +1,60 @@
 <div class="container">
   <div class="row">
     <div class="col-8 mr-auto">
-      <h3 class="my-5"><%= @member.nickname %> さんの会員情報編集</h3>
-
-      <%= form_with model: @member,url: admins_member_path(@member),local: true do |f| %>
-      <div class=" form-group row">
-        <div class="offset-1 col-3 mb-3">会員ID</div>
-        <div class="col-8"><%= @member.id %></div>
-
-        <div class="offset-1 col-3 mb-3"><%= f.label :氏名 %></div>
-        <div class="col-4"><%= f.text_field :last_name,class:"form-control" %></div>
-        <div class="col-4"><%= f.text_field :first_name,class:"form-control" %></div>
-
-        <div class="offset-1 col-3 mb-3"><%= f.label :フリガナ %></div>
-        <div class="col-4"><%= f.text_field :last_name_kana,class:"form-control" %></div>
-        <div class="col-4"><%= f.text_field :first_name_kana,class:"form-control" %></div>
-
-        <div class="offset-1 col-3 mb-3"><%= f.label :メールアドレス %></div>
-        <div class="col-4"><%= f.email_field :email,class:"form-control" %></div>
-        <div class="col-4"></div>
-
-        <div class="offset-1 col-3 mb-3"><%= f.label :会員ステータス %></div>
-        <div class="col-4">
-          <%= f.radio_button :is_deleted,false,checked:true %>
-          <%= f.label "有効",class:"mr-3" %>
-
-          <%= f.radio_button :is_deleted,true %>
-          <%= f.label "退会" %>
-        </div>
-        <div class="col-4"></div>
-
-        <div class="offset-1 col-3"></div>
-      <div class="col-4">
-        <%= f.submit "変更を保存",class:"btn btn-outline-dark" %>
-      </div>
-
-      <% end %>
-      </div>
-
+      <h4 class="my-5"><%= @member.nickname %> さんの情報編集</h4>
     </div>
   </div>
+  
+  <%= form_with model: @member,url: admins_member_path(@member),local: true do |f| %>
+  <div class="row">
+    <div class="col-3">
+      <%= f.label :姓（姓名）%>
+      <%= f.text_field :last_name, placeholder:"山田" ,class:"form-control" %>
+    </div>
+    <div class="col-3">
+      <%= f.label :名（姓名）%>
+      <%= f.text_field :first_name, placeholder:"太郎"  ,class:"form-control" %>
+    </div>
+  </div>
+  <div class="row mt-2">
+    <div class="col-3">
+      <%= f.label :セイ（フリガナ）%>
+      <%= f.text_field :last_name_kana, placeholder:"ヤマダ"  ,class:"form-control" %>
+    </div>
+    <div class="col-3">    
+      <%= f.label :メイ（フリガナ）%>
+      <%= f.text_field :first_name_kana, placeholder:"タロウ"  ,class:"form-control" %>
+    </div>
+  </div>
+  <div class="row mt-2">
+    <div class="col-3">
+      <%= f.label :生年月日 %>
+      <%=f.text_field :birthday ,class:"form-control" %>
+    </div>
+    <div class="col-3">
+      <%= f.label :性別 %>
+      <%= f.select :sex,(Member.sexes_i18n.keys.to_a).map{|k| [I18n.t("enums.member.sex.#{k}"), k]},{},{class: "form-control"} %>
+    </div>
+  </div>  
+  <div class="row mt-2 mb-5">
+    <div class="col-6">
+      <%= f.label :メールアドレス%>
+      <%= f.email_field :email, autofocus: true,placeholder:"sample@exmple.com" ,class:"form-control"%>
+    </div> 
+  </div>
+  <div class="row mt-2 mb-2">
+    <div class="col-6"> 
+      <%= f.label :会員ステータス %>
+      <%= f.radio_button :is_deleted,false,checked:true ,class:"ml-3" %>
+        <%= f.label "有効" %>
+      <%= f.radio_button :is_deleted,true,class:"ml-3" %>
+        <%= f.label "退会" %>
+    </div>    
+  </div>
+  <div class="row mt-1 mb-2">
+    <div class="col-6">
+      <%= f.submit "変更を保存",class:"btn btn-outline-dark" %>
+    </div>
+  </div> 
+   <% end %>
 </div>

@@ -1,6 +1,8 @@
-<h2>問い合わせ一覧</h2>
-    <table>
-        <thead>
+<div class="container mt-3">
+  <div class="row">
+      <h4 class="my-5 under">問い合わせ一覧</h4>
+    <table class="table table-hover table-inverse">
+      <thead>
         <tr>
           <th>ユーザー名</th>
           <th>メールアドレス</th>
@@ -9,18 +11,20 @@
           <th></th>
           <th></th>
         </tr>
-    </thead>
-    <tbody>
+      </thead>
+      <tbody>
         <% @members.each do |member| %>
-            <% member.contacts.each do |contact| %>
-              <tr>
-                  <td><%= contact.member.nickname %></td>
-                  <td><%= contact.member.email %></td>
-                  <td><%= contact.title %></td>
-                  <td><%= contact.created_at.strftime("%Y年%m月%d日 ") %></td>
-                  <td><%= link_to "返信", edit_admins_contact_path(contact) %></td>
-              </tr>
-            <% end %>
-       <% end %>
-        </tbody>
-</table>
+        <% member.contacts.each do |contact| %>
+        <tr>
+          <td><%= contact.member.nickname %></td>
+          <td><%= contact.member.email %></td>
+          <td><%= contact.title %></td>
+          <td><%= contact.created_at.strftime("%Y年%m月%d日 ") %></td>
+          <td><%= link_to "返信", edit_admins_contact_path(contact) %></td>
+        </tr>
+        <% end %>
+        <% end %>
+      </tbody>
+    </table>
+  </div>  
+</div>  
