@@ -1,15 +1,9 @@
 class Members::RoomsController < ApplicationController
 
   def index
-    # @rooms = Room.all
     @rooms = Entry.where(member_id: current_member.id)
-    # @room = Room.find(params[:id])
-    # member = Entry.where(member_id: member.id) if member.id !=current_member.id
-    # if Entry.where(member_id: current_member.id,room_id: @room.id).present?
-    #   @entries = @room.entries
-    # else
-    #   redirect_back(fallback_location: root_path)
-    # end
+    #member名をとってきたい
+    # @member = @rooms.entry.member.where.not(member_id: current_member.id)
   end
 
   def show

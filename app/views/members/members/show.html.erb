@@ -1,7 +1,7 @@
 <div class="container">
     <div class="card mt-5">
       <div class="row text-center">
-        <div class ="col-4 mt-3"><%= attachment_image_tag @member, :image,fallback: "noimage.jpg",size:"200x200" ,class:"rounded-circle border border-dark"%></div>
+        <div class="col-4 mt-3"><%= attachment_image_tag @member, :image,fallback: "noimage.jpg",size:"200x200" ,class:"rounded-circle border border-dark"%></div>
         <div class="col-2 mt-5"><%= link_to @member.followings.count, member_followings_path(@member),class:"text-dark" %><br>フォロー</div>
         <div class="col-2 mt-5"><%= link_to @member.followers.count, member_followers_path(@member) ,class:"text-dark" %><br>フォロワー</div>
         <div class="col-2 mt-5"><%= link_to @member.requests.count,main_path(@member),class:"text-dark"  %><br>投稿</div>
@@ -15,7 +15,7 @@
         </div>
       </div>
     <div class="card-body">
-      <h4><%= @member.nickname %> : <%= @member.sex %></h4>
+      <h4><%= @member.nickname %> : <%= @member.sex_i18n %></h4>
       <table class="table">
         <tbody>
            <tr>
@@ -28,7 +28,7 @@
            </tr>
            <tr>
              <th><%= "自己紹介" %></th>
-             <th><%= safe_join(@member.introduction.split("\n"),tag(:br)) %></th>
+             <th><%= safe_join(@member.introduction.split("\n"),tag(:br)) unless @member.introduction.nil? %></th>
            </tr>
         </tbody>
       </table>

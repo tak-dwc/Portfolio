@@ -1,29 +1,40 @@
 <!--current_memberの投稿のみ-->
-<div class="container">
-  <div class="row mt-3">
+<div class="container mt-3 px-0">
+  <div class="row">
     <% @requests.each do |req| %>
-    <div class="col-4 mt-3">
-      <div class="card " style="min-width: 15rem;">
-        <div class="card-header h3"><%= req.title %></div>
+    <div class="col-6 mt-3">
+      <div class="card h-100" style="width: 20rem;">
+        <div class="card-header h4"><%= req.title.truncate(15) %></div>
         <div class="card-body">
-          <div><%= req.schedule %></div>
-          <div><%= req.location %></div>
-          <div><%= req.is_active %></div>
-          <div class="text-right"><%= link_to "詳細を見る",request_path(req),class:"btn btn-outline-dark" %></div>
+          <table class="table table-borderless">
+            <tbody>
+              <tr>
+                <th><%= "ステータス" %></th>
+                <% if req.is_active == "release_stop" %>
+                  <th class="text-danger"><%= req.is_active_i18n %></th>
+                <% else %>
+                  <th><%= req.is_active_i18n %></th>
+                <% end %>
+              </tr>
+              <tr>
+                <th><%= "予定日" %></th>
+                <th><%= req.schedule %></th>
+              </tr>
+              <tr>
+                <th><%= "場所" %></th>
+                <th><%= req.location.truncate(10) %></th>
+              </tr>
+            </tbody>
+          </table>
         </div>
         <div class="card-footer">
-          <div>
-            <%= link_to member_path(@member) do %>
-            <%= attachment_image_tag @member, :image,fallback: "noimage.jpg",size:"35x35" ,class:"rounded-circle border border-dark"%>
-            <%= @member.nickname %>
-            <% end %>
-          </div>
+          <%= link_to "詳細を見る",request_path(req),class:"btn btn-outline-dark btn-block" %>
         </div>
       </div>
     </div>
     <% end %>
   </div>
-  <div class="row mt-5 mb-5 justify-content-center"> <%= paginate @requests %></div>
+  <div class="row mt-3 mb-3 justify-content-center"> <%= paginate @requests %></div>
 </div>
 
 

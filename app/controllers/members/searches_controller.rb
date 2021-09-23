@@ -3,9 +3,9 @@ class Members::SearchesController < ApplicationController
       @model = params[:model]
 
       if @model == "Request"
-        @requests = Request.looks(params[:search]).page(params[:page]).reverse_order
+        @requests = Request.where(is_active: :release).where.not(member_id: current_member.id).looks(params[:search]).page(params[:page]).reverse_order
       else
-        @members = Member.looks(params[:search]).page(params[:page]).reverse_order
+        @members = Member.where.not(id: current_member.id).looks(params[:search]).page(params[:page]).reverse_order
       end
   end
 end

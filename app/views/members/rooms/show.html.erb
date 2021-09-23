@@ -1,45 +1,56 @@
-<div class="container mx-auto">
+<div class="container mt-5 ">
   <% @entries.each do |e| %>
   <div class="row mt-3">
-      <%= attachment_image_tag e.member,:image, fallback: "noimage.jpg",size:"35x35" ,class:"rounded-circle border border-dark" %>
-      <%= e.member.nickname %>
+    <% if e.member_id != current_member.id %>
+      <div><%= attachment_image_tag e.member,:image, fallback: "noimage.jpg",size:"40x40" ,class:"rounded-circle border border-dark" %></div>
+      <div><%= link_to e.member.nickname, member_path(e.member), class:"text-dark " %>さん</div>
+    <% end %>
   </div>
   <% end %>
    <hr>
 </div>
-<div class="container mr-5 pl-5">
+<div class="container  pl-5">
   <% if @chats.present? %>
     <% @chats.each do |c| %>
     <% if c.member_id != current_member.id %>
      <div class="row mt-1 ">
-     <div class="col-7 text-left">
-      <div><%= attachment_image_tag c.member,:image, fallback: "noimage.jpg",size:"15x15" ,class:"rounded-circle border border-dark" %></div>
-      <div><%= c.body %></div>
-      <div class="col-7 text-right border-bottom"><%= c.created_at.strftime("%m/%d %H:%M")%></div>
-      </div>
+       <div class="col-7 text-left">
+         <div><%= attachment_image_tag c.member,:image, fallback: "noimage.jpg",size:"15x15" ,class:"rounded-circle border border-dark" %></div>
+         <div><%= c.body %></div>
+         <div class="col-7 text-right border-bottom"><%= c.created_at.strftime("%m/%d %H:%M")%></div>
+       </div>
     </div>
     <% else %>
     <div class="row mt-1 justify-content-end">
-     <div class="col-7 text-right">
-      <div class="text-left"><%= c.body %></div>
-      <div class="col-7 border-bottom"><%= c.created_at.strftime("%Y/%m/%d %H:%M")%>
-        <% if c.member_id == current_member.id %>
-              <i class="fas fa-trash" style="color: black;"></i>
-        <% end %>
-      </div>
+      <div class="col-7 text-right">
+        <div class="text-left">
+         <%= safe_join(c.body.split("\n"),tag(:br)) unless c.body.nil? %> 
+        </div>
+        <div class="col-7 border-bottom"><%= c.created_at.strftime("%Y/%m/%d %H:%M")%>
+          <i class="fas fa-trash" style="color: black;"></i>
+        </div>
       </div>
     </div>
     <% end %>
     <% end %>
+  <% else %>
+    <div class="row mt-1 justify-content-center">
+      <div class="col-7">
+        <h5>さっそくやりとりを始めましょう!</h5>
+      </div>  
+    </div>
   <% end %>
 </div>
- <hr>
-  <div class="row">
-    <%= form_with model: @chat ,local:true do |f| %>
-      <%= f.text_field :body, placeholder: "メッセージを入力して下さい" , size: 70, class:"form-text-field" %>
-        <%= f.hidden_field :room_id, value: @room.id %>
-          <%= f.submit "投稿",class: 'form-submit'%>
-    <% end %>
+<hr>
+  <div class="row mt-3 mb-3">
+    <div class="col-10">
+      <%= form_with model: @chat ,local:true do |f| %>
+        <%= f.text_area :body, placeholder: "メッセージを入力して下さい" , rows:"5", class:"form-control" %>
+          <%= f.hidden_field :room_id, value: @room.id %>
+    </div>
+    <div class="col-1">
+        <input type="submit" value="&#xf1d8;" class="fas fa-paper-plane btn btn-lg btn-outline-dark">
+      <% end %>
+    </div>
   </div>
-</div>
 </div>

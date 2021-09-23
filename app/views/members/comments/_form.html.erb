@@ -1,4 +1,8 @@
- <%= form_with model: [request, comment] do |f| %>
-   <%= f.text_area :comment,placeholder:"コメントを入力" %>
-   <%= f.submit "送信",class: "btn btn-outline-dark btn-sm mb-4  " %>
-<% end %>
+<div class="col-10">
+  <%= form_with model: [request, comment] do |f| %>
+  <%= f.text_area :comment,placeholder:"コメントを入力", rows:"3", class:"form-control" %>
+</div> 
+<div class="col-1">
+  <input type="submit" value="&#xf1d8;" class="fas fa-paper-plane btn btn-lg btn-outline-dark">
+  <% end %> 
+</div>

@@ -1,64 +1,89 @@
 <%= form_with model:@member, local:true do |f| %>
 <div class="container">
- <div class="row mt-5 justify-content-center">
-  <h5 class="under">プロフィールを編集</h5>
-    <div class="offset-sm-2 col-sm-6">
-      <%= f.submit "編集内容を保存",class:"btn btn-outline-dark font-weight-bold "%>
+  <div class="row mt-5 mb-3">
+    <div class="col-2">
+     <h5>投稿編集</h5>
+    </div> 
+    <div class="col-4">
+    
     </div>
-     <% if member_signed_in?  %>
-    <div class="col-sm-2"><%= link_to "退会する", unsubscribe_path, class:"btn btn-outline-danger font-weight-bold px-3"%></div>
-  <% end %>
- </div>
+    <div class="col-3 justify-content-end">
+       <input type="submit" value="&#xf4ff; 完了" class="fas fa-share　btn btn-lg btn-warning  btn-block">
+    </div>
+    <div class="col-3">
+      <% if member_signed_in?  %>
+        <%= link_to "退会する", unsubscribe_path, class:"btn btn-outline-danger btn-block font-weight-bold px-3"%></div>
+      <% end %>
+    </div>  
 
-<div class="container">
   <div class="row">
-   <div class="col-8">
-     <div class="form-inline  mt-2 text-center">
-      <%= f.label :プロフィール写真を変更 ,class:"col-3"%>
-      <%= f.attachment_field :image ,class:"col-5" %>
-     </div>
-     <div class="form-inline  mt-2">
-       <%= f.label :ユーザー名,class:"col-3" %>
-       <%= f.text_field :nickname,placeholder:"ユーザー名",class:"form-control border-dark col-5" %>
-     </div>
-     <div class="form-inline  mt-2">
-       <%= f.label :趣味,class:"col-3" %>
-      <%= f.text_field :hobby,placeholder:"趣味",class:"form-control border-dark col-5" %>
-     </div> 
-     <div class="form-inline  mt-2">
-       <%= f.label :職業,class:"col-3" %>
-       <%= f.text_field :job,placeholder:"職業",class:"form-control border-dark col-5" %>
-     </div>
-     <div class="form-inline  mt-2">
-       <%= f.label :自己紹介,class:"col-3"  %>
-       <%= f.text_area :introduction,placeholder:"自己紹介",class:"form-control border-dark col-5 " %>
-     </div>
-     <button class="btn btn-outline-dark" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-    個人情報を変更
-  </button>
- <div class="collapse" id="collapseExample">
-  <div class="form-group mt-2">
-       <div ><%= f.text_field :last_name, placeholder:"姓",class:"form-control border-dark" %></div>
-       <div ><%= f.text_field :first_name, placeholder:"名",class:"form-control border-dark" %></div>
-     </div>
-     <div class="form-group mt-2">
-       <div ><%= f.text_field :last_name_kana, placeholder:"セイ",class:"form-control border-dark" %></div>
-       <div ><%= f.text_field :first_name_kana, placeholder:"メイ",class:"form-control border-dark" %></div>
-     </div>
-     <div class="form-group mt-2">
-       <div><%= f.text_field :birthday, placeholder:"セイ",class:"form-control border-dark" %></div>
-     </div>
-      <div class="form-group  mt-2">
-       <div ><%= f.email_field :email, autofocus: true,placeholder:"メールアドレス" ,class:"form-control border-dark"%></div>
-     </div>
-     <div class="form-group  mt-2">
-       <div ><%= f.select :sex,Member.sexes.keys.to_a,{},{include_blank: "性別",class: "form-control border-dark"} %></div>
-     </div>
- </div> 
-
-   </div>
-
+    <div class="col-6">
+      <div class="form-group">
+        <%= f.label :プロフィール写真 %>
+        <%= f.attachment_field :image %>
+      </div>
+      <div class="form-group">
+        <%= f.label :ユーザー名 %>
+        <%= f.text_field :nickname ,class:"form-control border-dark " %>
+      </div>
+      <div class="form-group">
+        <%= f.label :趣味 %>
+        <%= f.text_field :hobby,placeholder:"例（DIY、カメラ、ラーメン）",class:"form-control border-dark " %>
+      </div> 
+      <div class="form-group">
+         <%= f.label :職業 %>
+         <%= f.text_field :job,placeholder:"例（会社員、学生、フリーランス）",class:"form-control border-dark " %>
+      </div>
+    </div>  
+    <div class="col-6"> 
+      <div class="form-group">
+        <%= f.label :自己紹介 %>
+        <%= f.text_area :introduction,placeholder:"例（DIYが好きです。よろしくお願いします！）" ,rows:"12" , class:"form-control" %>
+      </div>
+    </div>  
   </div>
+  
+ <button class="btn btn-outline-dark" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+   個人情報を変更
+ </button>
+ <small class="form-text text-muted">ボタンを押すと本人確認情報の入力欄がございます</small>
+ <div class="collapse" id="collapseExample">
+   <div class="row">
+     <div class="col-3">
+       <%= f.label :姓（姓名）%>
+       <%= f.text_field :last_name, placeholder:"山田" ,class:"form-control" %>
+     </div>
+     <div class="col-3">
+       <%= f.label :名（姓名）%>
+       <%= f.text_field :first_name, placeholder:"太郎"  ,class:"form-control" %>
+     </div>
+   </div>
+   <div class="row mt-2">
+     <div class="col-3">
+       <%= f.label :セイ（フリガナ）%>
+       <%= f.text_field :last_name_kana, placeholder:"ヤマダ"  ,class:"form-control" %>
+     </div>
+     <div class="col-3">    
+       <%= f.label :メイ（フリガナ）%>
+       <%= f.text_field :first_name_kana, placeholder:"タロウ"  ,class:"form-control" %>
+     </div>
+   </div>
+   <div class="row mt-2">
+     <div class="col-3">
+       <%= f.label :生年月日 %>
+       <%=f.text_field :birthday ,class:"form-control" %>
+     </div>
+     <div class="col-3">
+       <%= f.label :性別 %>
+       <%= f.select :sex,(Member.sexes_i18n.keys.to_a).map{|k| [I18n.t("enums.member.sex.#{k}"), k]},{},{class: "form-control"} %>
+     </div>
+   </div>  
+   <div class="row mt-2 mb-5">
+     <div class="col-3">
+       <%= f.label :メールアドレス%>
+       <%= f.email_field :email, autofocus: true,placeholder:"sample@exmple.com" ,class:"form-control"%>
+     </div> 
+   </div>
+ </div>
 </div>
-
- <% end %>
+<% end %>

@@ -17,7 +17,7 @@ module Members
     end
 
     def index
-      @requests = Request.page(params[:page]).reverse_order
+      @active_requests = Request.where(is_active: :release).where.not(member_id: current_member.id).page(params[:page]).reverse_order
     end
 
     def show
@@ -30,7 +30,7 @@ module Members
     def edit
       @request = Request.find(params[:id])
       #ステータス管理：編集用
-      @delete_at = 
+      @delete_at =
       if @request.is_active == "release"
         ["in_transaction","end_transaction"]
       elsif @request.is_active == "in_transaction"
@@ -53,6 +53,7 @@ module Members
 
     def destroy
       @request = Request.find(params[:id])
+      Room.destroy(@request.room_id) 
       @request.destroy
       redirect_to requests_path
     end
@@ -61,13 +62,13 @@ module Members
     #タグリンク用
       @member = current_member
       @tag = Tag.find_by(name: params[:name])
-      @requests = @tag.requests.page(params[:page]).reverse_order
+      @requests = @tag.requests.where(is_active: :release).page(params[:page]).reverse_order
     # タグ一覧
       if params[:name].nil?
         @tags = Tag.all.to_a.group_by{ |tag| tag.request.count}
       else
         @tag = Tag.find_by(name: params[:name])
-        @request = @tag.requests.page(params[:page]).per(20).reverse_order
+        @request = @tag.requests.where(is_active: :release).page(params[:page]).reverse_order
         @tags = Tag.all.to_a.group_by{ |tag| tag.requests.count}
       end
     end
@@ -76,6 +77,7 @@ module Members
       @request = Request.find(params[:request_id])
       # ステータス変更
       if @request.release?
+        # binding.irb
         @request.in_transaction!
       end
       #ステータス変更を機にチャットルームの作成
@@ -83,7 +85,6 @@ module Members
         @member = Member.find(@request.member_id)
         @currentMemberEntry = Entry.where(member_id: current_member.id,request_id: @request.id)
         @memberEntry = Entry.where(member_id: @member.id,request_id: @request.id)
-        # unless @member.id == current_member.id
           if !(@member.id == current_member.id) && @currentMemberEntry.present? && @memberEntry.present?
             @currentMemberEntry.each do |current|
               @memberEntry.each do |member|
@@ -98,9 +99,9 @@ module Members
             @room = Room.create
             @entry1 = Entry.create(room_id: @room.id, member_id: current_member.id, request_id: @request.id)
             @entry2 = Entry.create(room_id: @room.id, member_id: @member.id, request_id: @request.id)
+            @request.update(room_id: @room.id)
             redirect_to room_path(@room.id)
           end
-        # end
       else
         render :show
       end

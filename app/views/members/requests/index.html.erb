@@ -1,16 +1,16 @@
-<div class="container">
-  <div class="row">
-    <% @requests.each do |req| %>
-    <% if req.is_active == "release" %>
-    <div class="col-4 mt-3">
-      <div class="card " style="min-width: 15rem;">
+<div class="container mt-3 px-0">
+  <div class="row ">
+    <% @active_requests.each do |req| %>
+    <!--<%# if req.is_active == "release" && req.member != current_member.id %>-->
+    <div class="col-6 mt-3">
+      <div class="card h-100" style="width: 20rem;">
         <div class="card-body text-center ">
-          <div><%= attachment_image_tag req.member, :image, fallback: "noimage.jpg",size:"50x50" ,class:"rounded-circle border border-dark"%></div>
+          <div><%= attachment_image_tag req.member, :image, fallback: "noimage.jpg",size:"35x35" ,class:"rounded-circle border border-dark"%></div>
           <div class="border-bottom"><%= link_to req.member.nickname, member_path(req.member) ,class:"text-dark" %></div>
           <table class="table table-borderless">
             <tbody>
               <tr>
-                <th><%= "タイトル " %></th>
+                <th><%= "タイトル" %></th>
                 <th><%= req.title.truncate(10) %></th>
               </tr>
               <tr>
@@ -19,7 +19,7 @@
               </tr>
               <tr>
                 <th><%= "場所" %></th>
-                <th><%= req.location %></th>
+                <th><%= req.location.truncate(10) %></th>
               </tr>
             </tbody>
           </table>
@@ -30,11 +30,8 @@
       </div>
     </div>
     <% end %>
-    <% end %>
   </div>
-</div>
-  </div>
-  <div class="row mt-5 mb-5 justify-content-center"> <%= paginate @requests %></div>
+  <div class="row  mt-3 mb-3 justify-content-center"> <%= paginate @active_requests %></div>
 </div>
 
 

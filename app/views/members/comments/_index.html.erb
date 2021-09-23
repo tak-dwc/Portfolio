@@ -12,7 +12,7 @@
               <%= comment.member.nickname %>
             <% end %>
           </div>
-          <div class="my-2"><%= comment.comment %></div>
+          <div class="my-2"><%= safe_join(comment.comment.split("\n"),tag(:br))%></div>
           <div class="comment-date pull-right">
             <%= comment.created_at.strftime('%Y/%m/%d %H:%M') %>
             <% if comment.member_id == current_member.id %>
@@ -37,7 +37,7 @@
               <%= comment.member.nickname %>
             <% end %>
           </div>
-          <div class="my-2"><%= comment.comment %></div>
+          <div class="my-2"><%= safe_join(comment.comment.split("\n"),tag(:br)) %></div>
           <div class="pull-right">
             <%= comment.created_at.strftime('%Y/%m/%d %H:%M') %>
             <% if comment.member_id == current_member.id %>

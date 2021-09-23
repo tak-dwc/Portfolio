@@ -6,21 +6,18 @@ ja:
         in_transaction: "取引中"
         end_transaction: "依頼終了"
         release_stop: "公開停止"
-
     member:
       sex:
         man: "男性"
         woman: "女性"
         other: "その他"
-
-
   date:
     order:
       - :year
       - :month
       - :day
-      
+
   activerecord:
   errors:
     messages:
-      record_invalid: "バリデーションに失敗しました: %{errors}"    
+      record_invalid: "バリデーションに失敗しました: %{errors}"

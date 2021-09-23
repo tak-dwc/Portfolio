@@ -8,3 +8,4 @@ class ContactMailer < ApplicationMailer
     mail to: member.email, subject: '【Sharehobby カスタマーセンター】 お問い合わせありがとうございます'
   end
 end
+

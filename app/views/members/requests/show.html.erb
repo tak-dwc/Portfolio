@@ -21,7 +21,11 @@
            </tr>
            <tr>
              <th><%= "詳細  " %></th>
-             <th><%= safe_join(@request.content.split("\n"),tag(:br)) %></th> 
+             <th><%= safe_join(@request.content.split("\n"),tag(:br)) unless @request.content.nil? %></th>
+           </tr>
+           <tr>
+             <th><%= "ステータス 最後に消す！" %></th>
+             <th><%= @request.is_active_i18n %></th>
            </tr>
           </tbody>
         </table>

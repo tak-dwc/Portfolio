@@ -1,13 +1,15 @@
+<% unless current_page?(new_member_registration_path) %>
+<% unless current_page?(root_path) %>
+
 <nav class="navbar navbar-expand-lg" style="background-color:#FFFF66;" >
   <div class="container">
     <span>
-      <h2>SH</h2>
       <%= render 'layouts/search' %>
     </span>
     <div class="row justify-content-center">
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="nav navbar-nav">
-        <% if member_signed_in? %>
+        <% if admin_signed_in? %>
           <li class="nav-item active">
             <%= link_to "管理者側会員一覧",admins_members_path, class: 'nav-link text-danger' %>
           </li>
@@ -20,29 +22,24 @@
           <li class="nav-item active">
             <%= link_to "管理者ログイン",admin_session_path, class: 'nav-link text-danger' %>
           </li>
-
+        <% elsif member_signed_in? %>
+          <li class="nav-item">
+            <%= link_to member_path(current_member), class: 'nav-link text-dark' do %>
+              <i class="fas fa-house-user fa-2x"></i>
+            <% end %>
+          </li>
           <li class="nav-item active">
-            <%= link_to "ログアウト",destroy_member_session_path,method: :delete, class: 'nav-link text-dark' %>
+            <%= link_to notifications_path ,class: 'nav-link text-dark' do %>
+            <i class="far fa-bell fa-2x"></i>
+            <% end %>
           </li>
-          <li class="nav-item">
-            <%= link_to "マイページ", member_path(current_member), class: 'nav-link text-dark' %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "新規投稿作成",new_request_path, class: 'nav-link text-dark' %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "投稿一覧",requests_path, class: 'nav-link text-dark' %>
-          </li>
-
-          <li class="nav-item">
-            <%= link_to "取引一覧",rooms_path, class: 'nav-link text-dark' %>
-          </li>
-
-          <% if unchecked_notifications.any? %>
-            <i class="fa fa-circle" style="color: black;"></i>
-          <% end %>
+            <% if unchecked_notifications.any? %>
+              <i class="far fa-circle fa-sm" style="color: red;"></i>
+            <% end %>
           <li class="nav-item active">
-            <%= link_to "通知",notifications_path ,class: 'nav-link text-dark' %>
+            <%= link_to destroy_member_session_path,method: :delete, class: 'nav-link text-dark' do %>
+              <i class="fas fa-sign-out-alt fa-2x"></i>
+            <% end %>
           </li>
         <% else %>
           <li class="nav-item">
@@ -57,32 +54,5 @@
     </div>
   </div>
 </nav>
-
-<!--<div class="container">-->
-<!--  <div class="row">-->
-<!--    <div class="col-lg-3">-->
-<!--    <%= "シェアホビ" %>-->
-<!--   </div> -->
-<!--   <% if member_signed_in? %>-->
-<!--   <div class="col-lg-3">-->
-<!--    <%= link_to "ログアウト",destroy_member_session_path,method: :delete, class: 'nav-link text-dark' %>-->
-<!--   </div>-->
-<!--   <div class="col-lg-3">-->
-<!--     <%= link_to "マイページ", member_path(current_member), class: 'nav-link text-dark' %>-->
-<!--   </div> -->
-<!--   <div class="col-lg-3">-->
-<!--    <%= link_to "リクエスト作成",new_request_path(current_member), class: 'nav-link text-dark' %>-->
-<!--   </div>-->
-<!--   <div class="col-lg-3">-->
-<!--    <%= link_to "リクエスト一覧",requests_path, class: 'nav-link text-dark' %>-->
-<!--   </div> -->
-<!--  <% else %>-->
-<!--    <div class="col-lg-3">-->
-<!--    <%= link_to "リクエスト一覧",requests_path, class: 'nav-link text-dark' %>-->
-<!--   </div> -->
-<!--   <div class="col-lg-3">-->
-<!--    <%= link_to "ログイン", new_member_session_path, class: 'nav-link text-dark' %>-->
-<!--   </div> -->
-<!--  <% end %>-->
-<!--  </div>-->
-<!--</div>-->
+<% end %>
+<% end %>
