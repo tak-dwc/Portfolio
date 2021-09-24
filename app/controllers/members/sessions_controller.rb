@@ -28,11 +28,11 @@ module Members
       if @member
         # @memberのemailに紐づいているpasswardが正しいか　&&  modelで定義したis_deletedがtrueではないか
         if @member.valid_password?(params[:member][:password]) && (@member.active_for_authentication? == false)
-          flash[:error] = '退会済みです。'
+          flash[:error] = '退会済みです。。'
           redirect_to new_member_session_path
         end
       else
-        flash[:error] = '必須項目を入力してください。'
+        flash[:error] = '必須項目を入力してください!'
       end
     end
     

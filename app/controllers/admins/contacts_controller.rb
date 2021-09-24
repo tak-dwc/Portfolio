@@ -1,6 +1,7 @@
 class Admins::ContactsController < ApplicationController
+before_action :authenticate_member!,except: [:index,:edit,:update]
   def index
-    @contacts = Contact.page(params[:page]).order(created_at: :desc).per(10)
+    @contacts = Contact.page(params[:page]).order(created_at: :desc).per(6)
     @members = Member.all
   end
   

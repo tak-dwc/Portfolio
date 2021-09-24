@@ -1,4 +1,6 @@
 class Admins::RequestsController < ApplicationController
+   before_action :authenticate_member!,except: [:index,:show]
+
   def index
     @requests = Request.page(params[:page]).reverse_order
   end

@@ -1,18 +1,18 @@
 <%= form_with model:@member, local:true do |f| %>
 <div class="container">
+  <%= render 'members/members/error' , member: @member %>
   <div class="row mt-5 mb-3">
     <div class="col-2">
-     <h5>投稿編集</h5>
+     <h5>編集画面</h5>
     </div> 
-    <div class="col-4">
-    
+    <div class="col-4"> 
     </div>
     <div class="col-3 justify-content-end">
-       <input type="submit" value="&#xf4ff; 完了" class="fas fa-share　btn btn-lg btn-warning  btn-block">
+       <input type="submit" value="&#xf4ff; 完了" class="fas fa-share btn btn-lg btn-outline-dark btn-block">
     </div>
     <div class="col-3">
       <% if member_signed_in?  %>
-        <%= link_to "退会する", unsubscribe_path, class:"btn btn-outline-danger btn-block font-weight-bold px-3"%></div>
+        <%= link_to "退会手続きへ", unsubscribe_path, class:"btn btn-outline-danger btn-block"%></div>
       <% end %>
     </div>  
 
@@ -70,16 +70,20 @@
    </div>
    <div class="row mt-2">
      <div class="col-3">
-       <%= f.label :生年月日 %>
-       <%=f.text_field :birthday ,class:"form-control" %>
+       <%= f.label :生年月日 %></br>
+       <%= @member.age %>歳</br>
+       （<%= @member.birthday.strftime("%Y年%m月%d日") %>）
+     
+       <%#=f.text_field :birthday ,class:"form-control" %>
      </div>
      <div class="col-3">
-       <%= f.label :性別 %>
-       <%= f.select :sex,(Member.sexes_i18n.keys.to_a).map{|k| [I18n.t("enums.member.sex.#{k}"), k]},{},{class: "form-control"} %>
+       <%= f.label :性別 %></br>
+       <%= @member.sex_i18n %>
+       <%#= f.select :sex,(Member.sexes_i18n.keys.to_a).map{|k| [I18n.t("enums.member.sex.#{k}"), k]},{},{class: "form-control"} %>
      </div>
    </div>  
    <div class="row mt-2 mb-5">
-     <div class="col-3">
+     <div class="col-6">
        <%= f.label :メールアドレス%>
        <%= f.email_field :email, autofocus: true,placeholder:"sample@exmple.com" ,class:"form-control"%>
      </div> 

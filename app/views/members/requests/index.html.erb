@@ -15,7 +15,7 @@
               </tr>
               <tr>
                 <th><%= "予定日" %></th>
-                <th><%= req.schedule %></th>
+                <th><%= req.schedule.strftime("%Y年%m月%d日")  %></th>
               </tr>
               <tr>
                 <th><%= "場所" %></th>

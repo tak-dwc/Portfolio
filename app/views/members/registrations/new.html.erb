@@ -1,7 +1,7 @@
-<div class="container" >
+<div class="container px-0" >
   <%= render "members/shared/error_messages", resource: resource %>
-  <div class="row justify-content-center mt-5 mb-5">
-    <div class="col-5 card" >
+  <div class="row mt-2 mb-2 ml-5">
+    <div class="col-7 card" >
     <%= form_with model: @member, url: member_registration_path, id: 'new_member', class: 'new_member', local: true do |f| %>
       <h4 class="card-header text-center mt-1">新規アカウント作成</h4></br>
       <div class=" mt-2">
@@ -16,7 +16,13 @@
       <div class="mt-2">
         <%= f.password_field :password_confirmation, autocomplete: "new-password" ,placeholder:"パスワード確認用",class:"form-control border-dark"%>
       </div>
+      <div class="mt-2">
+        <%= f.text_field :hobby ,placeholder:"趣味",class:"form-control border-dark"%>
+      </div>
+     
       <div class=" mt-2">
+         <small class="form-text">本人確認情報</small>
+         <small class="form-text text-muted ">※登録後も変更できます</small>
         <%= f.text_field :last_name, autofocus: true,placeholder:"姓",class:"form-control border-dark"%>
         <%= f.text_field :first_name, autofocus: true,placeholder:"名",class:"form-control border-dark"%>
       </div>
@@ -25,13 +31,14 @@
         <%= f.text_field :first_name_kana, autofocus: true , autofocus: true,placeholder:"メイ",class:"form-control border-dark "%>
       </div>
       <div class="mt-2">
+        <small class="form-text text-muted ">生年月日・性別は登録後の変更はできません</small>
         <div class="col-12"><%= f.label :生年月日 %></div>
         <div class="col-12">
           <%= raw sprintf(f.date_select(:birthday,
                   use_month_numbers: true,
                   start_year:        1980,
                   end_year:          Time.now.year,
-                  default:           Date.new(1989, 1, 1),
+                  default:           Date.today,
                   date_separator:    '%s'), # 年月日区切りをそれぞれ指定
                   '年 ', '月 ') + '日' %>
         </div>

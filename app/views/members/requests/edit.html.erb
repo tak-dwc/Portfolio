@@ -1,15 +1,15 @@
 <%= form_with model:@request,local:true do |f| %>
 <div class="container mt-3">
+  <%= render 'members/requests/error', request: @request %>
   <div class="row mt-5 mb-3">
     <div class="col-2">
      <h5>投稿編集</h5>
     </div> 
     <div class="offset-7"></div>
     <div class="col-3 justify-content-end">
-       <input type="submit" value="&#xf064; 編集" class="fas fa-share　btn btn-lg btn-warning  btn-block">
+       <input type="submit" value="&#xf064; 編集" class="fas fa-share btn btn-lg btn-outline-dark btn-block">
     </div>
   </div>
-
   <div class="row">
     <div class="col-5">
       <div class="form-group">

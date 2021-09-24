@@ -17,8 +17,8 @@
           <td><%=  room.room_id  %></td>
           <!--<td><#%= link_to @member.nickname, request_path(room.request_id),class:"btn btn-warning"  %></td>-->
           <td><%= room.created_at.strftime('%Y/%m/%d') %></td>
-          <td><%= link_to request.title, request_path(room.request_id),class:"btn btn-warning"  %></td>
-          <td><%= link_to "チャットする", room_path(room.room_id),class:"btn btn-warning" %></td>
+          <td><%= link_to request.title, request_path(room.request_id),class:"text-dark" %></td>
+          <td><%= link_to "チャットする", room_path(room.room_id),class:"btn btn-outline-dark" %></td>
         </tr>
         <% end %>
       </tbody>
@@ -26,9 +26,9 @@
   </div>
   <% else %>
   <div class="row justify-content-center">
-    <div class="col-5 ">
+    <div class="col-5 mt-3">
       <h4>取引はありません</h4>
     </div>
   </div> 
-  <% end %>
+  <% end %>  
 </div>

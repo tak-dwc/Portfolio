@@ -5,7 +5,7 @@
   <%= request.likes.count %>件
 <% else %>
   <%= link_to request_like_path(request), method: :post,remote: true do %>
-    <i class="fas fa-thumbs-up fa-lg text-light"></i>
+    <i class="fas fa-thumbs-up fa-lg text-dark"></i>
   <% end %>
   <%= request.likes.count %>件
 <% end %>

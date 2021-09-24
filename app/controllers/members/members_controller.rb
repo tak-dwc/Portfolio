@@ -4,6 +4,7 @@ module Members
   class MembersController < ApplicationController
     def show
       @member = Member.find(params[:id])
+      @requests = @member.requests.where(is_active: :release).all
     end
 
     def edit
@@ -12,8 +13,12 @@ module Members
 
     def update
       @member = Member.find(params[:id])
-      @member.update(member_params)
-      redirect_to member_path(@member)
+      if @member.update(member_params)
+        redirect_to member_path(@member)
+        flash[:success]="プロフィール編集完了しました!"
+      else
+        render :edit
+      end  
     end
 
     def unsubscribe; end
@@ -27,7 +32,7 @@ module Members
 
    def main
       @member = Member.find(params[:id])
-      @requests = @member.requests.page(params[:page]).reverse_order
+      @requests = @member.requests.where(is_active: :release).page(params[:page]).reverse_order
    end
 
     private

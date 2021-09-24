@@ -1,9 +1,11 @@
-
-<div class="search-form">
-  <%= form_with url: search_path, method: :get, local: true do |f| %>
-    <%= f.select :model, options_for_select({ "ユーザー名" => "Member", "リクエスト" => "Request" }) %>
-    <%= f.text_field :search,placeholder:"キーワードで検索"  %>
-    <%= f.submit '検索' %>
-  <% end %>
+<%= form_with url: search_path, method: :get, local: true do |f| %>
+<div class="input-group">
+  <div class="input-group-append">
+    <%= f.select :model, options_for_select({ "ユーザー" => "Member", "投稿" => "Request" }),class:"form-control" %>
+  </div>
+  <input type="text"  class="form_control" placeholder="キーワード検索" aria-label="キーワード検索" aria-describedby="button-addon2"  >
+  <div class="input-group-append">
+    <button class="btn btn-outline-dark" type="submit" id="button-addon2"><i class="fas fa-search"></i></button>
+  </div>
 </div>
-
+<% end %>

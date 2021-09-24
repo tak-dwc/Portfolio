@@ -44,6 +44,19 @@ class Member < ApplicationRecord
   has_many :re_rates, class_name: "Rate", foreign_key: "rated_id", dependent: :destroy
   has_many :passive_rates, through: :re_rates, source: :member_id
   
+  validates :nickname, presence: true, uniqueness: true
+  validates :hobby, presence: true
+   
+   
+   
+  def age
+    d1=self.birthday.strftime("%Y%m%d").to_i
+    d2=Date.today.strftime("%Y%m%d").to_i
+    return (d2 - d1) / 10000
+  end
+  
+  
+  
   #論理削除
   def active_for_authentication?
     super && (is_deleted == false)

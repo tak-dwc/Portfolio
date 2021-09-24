@@ -24,10 +24,10 @@ module Admins
         admins_members_path
       end
 
-    # # サインアウト後の遷移先を修正する
-    #   def after_sign_out_path_for(resource)
-    #     admin_sign_in_path
-    #   end
+    # サインアウト後の遷移先を修正する
+      def after_sign_out_path_for(resource)
+        admin_session_path
+      end
 
 
     # If you have extra params to permit, append them to the sanitizer.

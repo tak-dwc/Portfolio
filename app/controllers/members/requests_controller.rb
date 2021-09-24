@@ -11,6 +11,7 @@ module Members
       @request.member_id = current_member.id
       if @request.save
         redirect_to request_path(@request)
+        flash[:success]="投稿完了しました!"
       else
         render :new
       end
@@ -46,6 +47,7 @@ module Members
       @request = Request.find(params[:id])
       if @request.update(request_params)
         redirect_to request_path(@request)
+        flash[:success]="投稿編集完了しました!"
       else
         render :edit
       end
@@ -53,9 +55,15 @@ module Members
 
     def destroy
       @request = Request.find(params[:id])
-      Room.destroy(@request.room_id) 
-      @request.destroy
-      redirect_to requests_path
+      if @request.room_id.present?
+        Room.destroy(@request.room_id)
+      end
+      if @request.destroy
+        redirect_to requests_path
+        flash[:success]="投稿削除しました!"
+      else
+        render :show
+      end  
     end
 
     def tagshow
@@ -65,11 +73,11 @@ module Members
       @requests = @tag.requests.where(is_active: :release).page(params[:page]).reverse_order
     # タグ一覧
       if params[:name].nil?
-        @tags = Tag.all.to_a.group_by{ |tag| tag.request.count}
+        @set_tags = Tag.all.to_a.group_by{ |tag| tag.request.count}
       else
         @tag = Tag.find_by(name: params[:name])
         @request = @tag.requests.where(is_active: :release).page(params[:page]).reverse_order
-        @tags = Tag.all.to_a.group_by{ |tag| tag.requests.count}
+        #@tags = Tag.all.to_a.group_by{ |tag| tag.requests.count}
       end
     end
 
@@ -101,6 +109,7 @@ module Members
             @entry2 = Entry.create(room_id: @room.id, member_id: @member.id, request_id: @request.id)
             @request.update(room_id: @room.id)
             redirect_to room_path(@room.id)
+            flash[:success]="取引!"
           end
       else
         render :show

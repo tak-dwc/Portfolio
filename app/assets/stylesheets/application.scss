@@ -17,24 +17,42 @@
  @import 'font-awesome-sprockets';
  @import 'font-awesome';
 
+
 // header
 .header {
-
-
+ // background-color: #e6f0f0;
 }
+
 // main
 .main {
- min-height: 600px;
+ min-height: 550px;
 }
+
 // footer
 .footer {
  height: 40px;
- background-color: #FFFF66;
 }
 
 .top-image {
- background-image: image-url("foundly1.jpg");
- height: 800px;
- background-repeat: no-repeat;
- background-size: cover;
+ // background-image: image-url("top2.jpg");
+ // background-repeat: no-repeat;
+ // background-size: cover;
+ background-color: #ffff9e;
+ width: 100vw;
+ height: 100vh;
+}
+
+body{
+ font-family: 'Comfortaa', cursive;
+ background-color: #fff8cf;
+}
+
+.card{
+ border-width: 4px;
+ border-style: solid;
+ border-color: #888888;
+}
+
+.error-style{
+ list-style: none;
 }

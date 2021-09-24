@@ -1,7 +1,7 @@
 <div class="container " >
   <%= render "members/shared/error_messages", resource: resource %>
-  <div class="row justify-content-center mt-5 mb-5">
-    <div class="col-5 card" >
+  <div class="row mt-5 mb-5">
+    <div class="col-8 card" >
     <%= form_with model: @member, url: member_session_path, local: true do |f| %>
       <h4 class="card-header text-center mt-1">ログイン</h4></br>
 

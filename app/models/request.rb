@@ -14,6 +14,11 @@ class Request < ApplicationRecord
 
   #評価機能
   has_many :rates, dependent: :destroy
+  
+  validates :title, presence: true
+  validates :content, presence: true
+  validates :location, presence: true
+  validates :schedule, presence: true
 
   #タグ作成・更新
   #DBへのコミット直前に実施する

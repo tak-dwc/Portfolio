@@ -4,7 +4,7 @@
         <div class="col-4 mt-3 ml-5"><%= attachment_image_tag @member, :image,fallback: "noimage.jpg",size:"200x200" ,class:"rounded-circle border border-dark"%></div>
         <div class="col-2 mt-5"><%= link_to @member.followings.count, member_followings_path(@member),class:"text-dark" %><br>フォロー</div>
         <div class="col-2 mt-5"><%= link_to @member.followers.count, member_followers_path(@member) ,class:"text-dark" %><br>フォロワー</div>
-        <div class="col-2 mt-5"><%= link_to @member.requests.count,main_path(@member),class:"text-dark"  %><br>投稿</div>
+        <div class="col-2 mt-5"><%= link_to @requests.count,main_path(@member),class:"text-dark"  %><br>投稿</div>
         <div class="offset-4"></div>
         <div class ="col-5" >
           <% unless @member == current_member %>
