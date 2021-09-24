@@ -1,0 +1,10 @@
+<div class="row mt-3">
+  <ul class="error-style">
+    <% if @request.errors.any? %>
+     <h3><strong class="text-danger"><%= @request.errors.count %>件のエラーが発生しました</strong></h3>
+      <% @request.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    <% end %>
+  </ul>
+</div>

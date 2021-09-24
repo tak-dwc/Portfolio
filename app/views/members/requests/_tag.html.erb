@@ -1,0 +1,10 @@
+  <li class="nav-item dropdown">
+    <div class="nav-link dropdown-tggle" data-toggle="dropdown">タグ一覧</div>
+      <div class="dropdown-menu">
+        <% @set_tags.sort.reverse.each do |tag| %>
+          <%# count[1].each do |tag| %>
+            <p><%= link_to "##{tag.name} (#{tag.count})","/requests/tagshow/#{tag.name}" ,class: 'dropdown-item text-dark'%></
+          <%# end %>
+        <% end %>
+      </div>
+  </li>
