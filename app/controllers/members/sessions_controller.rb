@@ -35,8 +35,8 @@ module Members
         flash[:error] = '必須項目を入力してください!'
       end
     end
-    
-    #sign_in後の変移先
+
+    # sign_in後の変移先
     def after_sign_in_path_for(resource)
       member_path(current_member)
     end

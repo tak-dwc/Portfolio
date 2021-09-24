@@ -5,5 +5,4 @@ class Members::RoomsControllerTest < ActionDispatch::IntegrationTest
     get members_rooms_show_url
     assert_response :success
   end
-
 end

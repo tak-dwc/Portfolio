@@ -11,7 +11,7 @@ module Members
       @request.member_id = current_member.id
       if @request.save
         redirect_to request_path(@request)
-        flash[:success]="投稿完了しました!"
+        flash[:success] = "投稿完了しました!"
       else
         render :new
       end
@@ -30,24 +30,24 @@ module Members
 
     def edit
       @request = Request.find(params[:id])
-      #ステータス管理：編集用
+      # ステータス管理：編集用
       @delete_at =
-      if @request.is_active == "release"
-        ["in_transaction","end_transaction"]
-      elsif @request.is_active == "in_transaction"
-        ["release","end_transaction","release_stop"]
-      elsif @request.is_active == "end_transaction"
-       ["release","in_transaction","release_stop"]
-      elsif @request.is_active == "release_stop"
-       ["in_transaction","end_transaction"]
-      end
+        if @request.is_active == "release"
+          ["in_transaction", "end_transaction"]
+        elsif @request.is_active == "in_transaction"
+          ["release", "end_transaction", "release_stop"]
+        elsif @request.is_active == "end_transaction"
+          ["release", "in_transaction", "release_stop"]
+        elsif @request.is_active == "release_stop"
+          ["in_transaction", "end_transaction"]
+        end
     end
 
     def update
       @request = Request.find(params[:id])
       if @request.update(request_params)
         redirect_to request_path(@request)
-        flash[:success]="投稿編集完了しました!"
+        flash[:success] = "投稿編集完了しました!"
       else
         render :edit
       end
@@ -60,24 +60,24 @@ module Members
       end
       if @request.destroy
         redirect_to requests_path
-        flash[:success]="投稿削除しました!"
+        flash[:success] = "投稿削除しました!"
       else
         render :show
-      end  
+      end
     end
 
     def tagshow
-    #タグリンク用
+      # タグリンク用
       @member = current_member
       @tag = Tag.find_by(name: params[:name])
       @requests = @tag.requests.where(is_active: :release).page(params[:page]).reverse_order
-    # タグ一覧
+      # タグ一覧
       if params[:name].nil?
-        @set_tags = Tag.all.to_a.group_by{ |tag| tag.request.count}
+        @set_tags = Tag.all.to_a.group_by { |tag| tag.request.count }
       else
         @tag = Tag.find_by(name: params[:name])
         @request = @tag.requests.where(is_active: :release).page(params[:page]).reverse_order
-        #@tags = Tag.all.to_a.group_by{ |tag| tag.requests.count}
+        # @tags = Tag.all.to_a.group_by{ |tag| tag.requests.count}
       end
     end
 
@@ -88,29 +88,29 @@ module Members
         # binding.irb
         @request.in_transaction!
       end
-      #ステータス変更を機にチャットルームの作成
+      # ステータス変更を機にチャットルームの作成
       if @request.in_transaction?
         @member = Member.find(@request.member_id)
-        @currentMemberEntry = Entry.where(member_id: current_member.id,request_id: @request.id)
-        @memberEntry = Entry.where(member_id: @member.id,request_id: @request.id)
-          if !(@member.id == current_member.id) && @currentMemberEntry.present? && @memberEntry.present?
-            @currentMemberEntry.each do |current|
-              @memberEntry.each do |member|
-                if current.room_id == member.room_id then
-                  @isRoom = true
-                  @roomId = current.room_id
-                  redirect_to room_path(@roomId)
-                end
+        @currentMemberEntry = Entry.where(member_id: current_member.id, request_id: @request.id)
+        @memberEntry = Entry.where(member_id: @member.id, request_id: @request.id)
+        if !(@member.id == current_member.id) && @currentMemberEntry.present? && @memberEntry.present?
+          @currentMemberEntry.each do |current|
+            @memberEntry.each do |member|
+              if current.room_id == member.room_id
+                @isRoom = true
+                @roomId = current.room_id
+                redirect_to room_path(@roomId)
               end
             end
-          else
-            @room = Room.create
-            @entry1 = Entry.create(room_id: @room.id, member_id: current_member.id, request_id: @request.id)
-            @entry2 = Entry.create(room_id: @room.id, member_id: @member.id, request_id: @request.id)
-            @request.update(room_id: @room.id)
-            redirect_to room_path(@room.id)
-            flash[:success]="取引!"
           end
+        else
+          @room = Room.create
+          @entry1 = Entry.create(room_id: @room.id, member_id: current_member.id, request_id: @request.id)
+          @entry2 = Entry.create(room_id: @room.id, member_id: @member.id, request_id: @request.id)
+          @request.update(room_id: @room.id)
+          redirect_to room_path(@room.id)
+          flash[:success] = "取引開始しました!"
+        end
       else
         render :show
       end
@@ -119,8 +119,7 @@ module Members
     private
 
     def request_params
-      params.require(:request).permit(:title, :schedule, :content, :location, :is_active, :member_id,:caption)
+      params.require(:request).permit(:title, :schedule, :content, :location, :is_active, :member_id, :caption)
     end
-
   end
 end

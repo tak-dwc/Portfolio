@@ -10,5 +10,4 @@ class Admins::RequestsControllerTest < ActionDispatch::IntegrationTest
     get admins_requests_show_url
     assert_response :success
   end
-
 end

@@ -1,5 +1,5 @@
 class Admins::RequestsController < ApplicationController
-   before_action :authenticate_member!,except: [:index,:show]
+  before_action :authenticate_member!, except: [:index, :show]
 
   def index
     @requests = Request.page(params[:page]).reverse_order
@@ -11,17 +11,16 @@ class Admins::RequestsController < ApplicationController
     @comments = @request.comments.order(created: :desc)
     @request_tags = @request.tags
   end
-  
-  def edit 
-    
+
+  def edit
   end
-  
-  def update 
-  
-  end  
-  
-  private 
+
+  def update
+  end
+
+  private
+
   def request_params
-    params.require(:request).permit(:title, :schedule, :content, :location, :is_active, :member_id,:caption)
-  end  
+    params.require(:request).permit(:title, :schedule, :content, :location, :is_active, :member_id, :caption)
+  end
 end

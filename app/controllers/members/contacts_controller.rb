@@ -10,13 +10,14 @@ class Members::ContactsController < ApplicationController
       flash[:success] = 'お問い合わせを送信しました。'
       redirect_to member_path(current_member)
     else
-      render :new
-      flash[:success] = 'お問い合わせに失敗しました。'
+      redirect_back(fallback_location: root_path)
+      flash[:error] = 'お問い合わせに失敗しました。'
     end
   end
 
   private
+
   def contact_params
-    params.require(:contact).permit(:member_id,:title,:body)
+    params.require(:contact).permit(:member_id, :title, :body)
   end
 end

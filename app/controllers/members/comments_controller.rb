@@ -2,7 +2,6 @@
 
 module Members
   class CommentsController < ApplicationController
-
     def create
       # @comment = Comment.new(comment_params)
       # @request = @comment.request

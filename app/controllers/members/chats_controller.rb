@@ -9,9 +9,10 @@ class Members::ChatsController < ApplicationController
       redirect_back(fallback_location: root_path)
     end
   end
-  
-  private 
+
+  private
+
   def chat_params
-   params.require(:chat).permit(:member_id,:room_id, :body)
-  end  
+    params.require(:chat).permit(:member_id, :room_id, :body)
+  end
 end

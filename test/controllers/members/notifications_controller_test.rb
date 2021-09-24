@@ -5,5 +5,4 @@ class Members::NotificationsControllerTest < ActionDispatch::IntegrationTest
     get members_notifications_index_url
     assert_response :success
   end
-
 end

@@ -5,7 +5,7 @@ module Members
     def create
       @member = Member.find(params[:member_id])
       current_member.follow(params[:member_id])
-      @member.create_notification_follow!(current_member) 
+      @member.create_notification_follow!(current_member)
       redirect_to request.referer
     end
 

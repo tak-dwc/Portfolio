@@ -1,14 +1,13 @@
 class Members::RoomsController < ApplicationController
-
   def index
     @rooms = Entry.where(member_id: current_member.id)
-    #member名をとってきたい
+    # member名をとってきたい
     # @member = @rooms.entry.member.where.not(member_id: current_member.id)
   end
 
   def show
     @room = Room.find(params[:id])
-    if Entry.where(member_id: current_member.id,room_id: @room.id).present?
+    if Entry.where(member_id: current_member.id, room_id: @room.id).present?
       @chats = @room.chats.all
       @chat = Chat.new
       @entries = @room.entries
@@ -17,8 +16,9 @@ class Members::RoomsController < ApplicationController
     end
   end
 
-   private
-    def entry_params
-      params.require(:entry).permit(:member_id, :room_id)
-    end
+  private
+
+  def entry_params
+    params.require(:entry).permit(:member_id, :room_id)
+  end
 end

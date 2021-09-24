@@ -3,7 +3,7 @@
 module Members
   class LikesController < ApplicationController
     def create
-      like = current_member.likes.new(request_id:params[:request_id])
+      like = current_member.likes.new(request_id: params[:request_id])
       like.save
       @request = Request.find(params[:request_id])
       @request.create_notification_like!(current_member) if @request.member_id != current_member.id
@@ -14,9 +14,9 @@ module Members
       like = current_member.likes.find_by(request_id: @request.id)
       like.destroy
     end
-    
+
     def index
       @requests = Request.where
-    end  
+    end
   end
 end

@@ -15,10 +15,10 @@ module Members
       @member = Member.find(params[:id])
       if @member.update(member_params)
         redirect_to member_path(@member)
-        flash[:success]="プロフィール編集完了しました!"
+        flash[:success] = "プロフィール編集完了しました!"
       else
         render :edit
-      end  
+      end
     end
 
     def unsubscribe; end
@@ -30,15 +30,15 @@ module Members
       redirect_to root_path
     end
 
-   def main
+    def main
       @member = Member.find(params[:id])
       @requests = @member.requests.where(is_active: :release).page(params[:page]).reverse_order
-   end
+    end
 
     private
 
     def member_params
-      params.require(:member).permit(:is_deleted,:last_name, :first_name, :last_name_kana, :first_name_kana, :nickname, :sex, :image, :hobby,:job, :introduction, :email)
+      params.require(:member).permit(:is_deleted, :last_name, :first_name, :last_name_kana, :first_name_kana, :nickname, :sex, :image, :hobby, :job, :introduction, :email)
     end
   end
 end
