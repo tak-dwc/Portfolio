@@ -24,7 +24,7 @@ module Members
     def show
       @request = Request.find(params[:id])
       @comment = Comment.new
-      @comments = @request.comments.order(created: :desc)
+      @comments = @request.comments.order(created_at: :desc)
       @request_tags = @request.tags
     end
 
