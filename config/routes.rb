@@ -19,6 +19,7 @@ Rails.application.routes.draw do
     registrations: 'members/registrations',
   }
 
+
   scope module: :members do
     root to: 'homes#top'
     get '/about', to: 'homes#about'
@@ -33,6 +34,10 @@ Rails.application.routes.draw do
     get 'members/:id/unsubscribe', to: 'members#unsubscribe', as: 'unsubscribe'
     patch 'members/:id/withdraw', to: 'members#withdraw', as: 'withdraw'
     get 'members/:id/main', to: 'members#main', as: 'main'
+
+    # sign_upのリロード用
+    get "/members" => redirect("/members/sign_up")
+
 
     scope :requests do
       resources :chats, only: %i(create)

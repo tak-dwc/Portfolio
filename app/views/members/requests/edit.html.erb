@@ -4,10 +4,10 @@
   <div class="row mt-5 mb-3">
     <div class="col-2">
      <h5>投稿編集</h5>
-    </div> 
+    </div>
     <div class="offset-7"></div>
     <div class="col-3 justify-content-end">
-       <input type="submit" value="&#xf064; 編集" class="fas fa-share btn btn-lg btn-outline-dark btn-block">
+       <input type="submit" value="&#xf064; 更新" class="fas fa-share btn btn-lg btn-outline-dark btn-block">
     </div>
   </div>
   <div class="row">
@@ -33,10 +33,11 @@
       <div class="form-group ">
         <%= f.label :ステータス %>
          <!--<#%=f.select :is_active ,(Request.is_actives_i18n.keys.to_a - @delete_at),{}, {class:" custom-select"} %>-->
+         <%# byebug %>
         <%=f.select :is_active ,(Request.is_actives_i18n.keys.to_a  - @delete_at).map{|k| [I18n.t("enums.request.is_active.#{k}"), k]},{}, {class:" custom-select"} %>
       </div>
     </div>
-    
+
     <div class="col-7">
       <div class="form-group ">
         <%= f.label :詳細 %>

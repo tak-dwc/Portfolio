@@ -30,17 +30,8 @@ module Members
 
     def edit
       @request = Request.find(params[:id])
-      # ステータス管理：編集用
-      @delete_at =
-        if @request.is_active == "release"
-          ["in_transaction", "end_transaction"]
-        elsif @request.is_active == "in_transaction"
-          ["release", "end_transaction", "release_stop"]
-        elsif @request.is_active == "end_transaction"
-          ["release", "in_transaction", "release_stop"]
-        elsif @request.is_active == "release_stop"
-          ["in_transaction", "end_transaction"]
-        end
+      # ステータス管理：編集
+      @delete_at = set_delete_at
     end
 
     def update
@@ -49,6 +40,7 @@ module Members
         redirect_to request_path(@request)
         flash[:success] = "投稿編集完了しました!"
       else
+        @delete_at = set_delete_at
         render :edit
       end
     end
@@ -120,6 +112,18 @@ module Members
 
     def request_params
       params.require(:request).permit(:title, :schedule, :content, :location, :is_active, :member_id, :caption)
+    end
+
+    def set_delete_at
+      if @request.is_active == "release"
+        ["in_transaction", "end_transaction"]
+      elsif @request.is_active == "in_transaction"
+        ["release", "end_transaction", "release_stop"]
+      elsif @request.is_active == "end_transaction"
+        ["release", "in_transaction", "release_stop"]
+      elsif @request.is_active == "release_stop"
+        ["in_transaction", "end_transaction"]
+      end
     end
   end
 end
