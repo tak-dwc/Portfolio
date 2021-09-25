@@ -46,7 +46,8 @@ class Member < ApplicationRecord
 
   validates :nickname, presence: true, uniqueness: true
   validates :hobby, presence: true
-
+  
+  #生年月日から年齢
   def age
     d1 = birthday.strftime("%Y%m%d").to_i
     d2 = Date.today.strftime("%Y%m%d").to_i
@@ -81,7 +82,7 @@ class Member < ApplicationRecord
   # 検索
   def self.looks(search)
     return Member.all unless search
-    Member.where("nickname LIKE(?)", "%#{search}%")
+    Member.where("nickname LIKE(?) OR hobby LIKE(?) OR introduction LIKE(?) ", "%#{search}%","%#{search}%","%#{search}%")
   end
 
   # 通知：フォロー

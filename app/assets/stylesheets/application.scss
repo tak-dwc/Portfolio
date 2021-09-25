@@ -33,6 +33,7 @@
  height: 40px;
 }
 
+// TOPの
 .top-image {
  // background-image: image-url("top2.jpg");
  // background-repeat: no-repeat;
@@ -42,17 +43,28 @@
  height: 100vh;
 }
 
+// ページ全体の背景色とフォント設定
 body{
  font-family: 'Comfortaa', cursive;
  background-color: #fff8cf;
 }
 
+// カード全てのスタイル
 .card{
  border-width: 4px;
  border-style: solid;
  border-color: #888888;
 }
 
+// エラーメッセージの点を消すため
 .error-style{
  list-style: none;
+}
+
+// 通知未確認の設定
+.fa-notification{
+  position: absolute;
+  padding-left: 1.2rem;
+  padding-top: 0rem;
+  color: red;
 }

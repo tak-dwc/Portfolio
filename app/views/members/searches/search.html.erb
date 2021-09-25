@@ -46,7 +46,7 @@
             <tbody>
               <tr>
                 <th><%= "タイトル " %></th>
-                <th><%= req.title.truncate(15) %></th>
+                <th><%= req.title.truncate(10) %></th>
               </tr>
               <tr>
                 <th><%= "予定日" %></th>
@@ -54,7 +54,7 @@
               </tr>
               <tr>
                 <th><%= "場所" %></th>
-                <th><%= req.location.truncate(15) %></th>
+                <th><%= req.location.truncate(10) %></th>
               </tr>
             </tbody>
           </table>

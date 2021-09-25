@@ -11,13 +11,14 @@ ja:
         man: "男性"
         woman: "女性"
         other: "その他"
-  date:
-    order:
-      - :year
-      - :month
-      - :day
 
+# validateエラーメッセージ request
   activerecord:
-  errors:
-    messages:
-      record_invalid: "バリデーションに失敗しました: %{errors}"
+    models:
+      request: 投稿
+    attributes:
+      request:
+        title: タイトル
+        location: 予定場所
+        schedule: 予定日時
+        content: 詳細

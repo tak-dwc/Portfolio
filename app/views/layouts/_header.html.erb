@@ -1,6 +1,8 @@
 <div class="container pt-2 ">
   <h4 class="text-center">sharehobby</h4>
 </div>
+<% unless current_page?(member_session_path) %>
+<% unless current_page?(new_member_registration_path) %>
 <nav class="navbar navbar-expand-lg border-top border-bottom border-dark"  >
   <div class="container">
     <div class="row justify-content-center">
@@ -23,13 +25,19 @@
             <% end %>
           </li>
           <li class="nav-item active">
-            <%= link_to notifications_path ,class: 'nav-link text-dark' do %>
-            <i class="far fa-bell fa-2x"></i>
+            <% if unchecked_notifications.any? %>
+              <span class="fa-stack">
+                <%= link_to notifications_path ,class: 'nav-link text-dark' do %>
+                  <i class="far fa-bell fa-stack-2x"></i>
+                  <i class="fas fa-circle fa-stack-1x fa-notification"></i>
+                <% end %>
+              </span>
+            <% else %>
+                <%= link_to notifications_path ,class: 'nav-link text-dark' do %>
+                  <i class="far fa-bell fa-2x"></i>
+                <% end %>
             <% end %>
           </li>
-            <% if unchecked_notifications.any? %>
-              <i class="far fa-circle fa-sm" style="color: red;"></i>
-            <% end %>
           <li class="nav-item active">
             <%= link_to destroy_member_session_path,method: :delete, class: 'nav-link text-dark' do %>
               <i class="fas fa-sign-out-alt fa-2x"></i>
@@ -55,3 +63,5 @@
     <% end %>
   </div>
 </nav>
+<% end %>
+<% end %>

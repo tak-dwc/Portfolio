@@ -5,7 +5,7 @@ class Members::ChatsController < ApplicationController
     if chat.save
       redirect_back(fallback_location: root_path)
     else
-      flash[:alert] = "メッセージ送信に失敗しました。"
+      flash[:error] = "文字を入力してください"
       redirect_back(fallback_location: root_path)
     end
   end

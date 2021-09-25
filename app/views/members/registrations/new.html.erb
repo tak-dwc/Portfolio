@@ -5,7 +5,7 @@
     <%= form_with model: @member, url: member_registration_path, id: 'new_member', class: 'new_member', local: true do |f| %>
       <h4 class="card-header text-center mt-1">新規アカウント作成</h4></br>
       <div class=" mt-2">
-        <%= f.text_field :nickname, autofocus: true,placeholder:"ニックネーム",class:"form-control border-dark"%>
+        <%= f.text_field :nickname, autofocus: true,placeholder:"ユーザー名",class:"form-control border-dark"%>
       </div>
       <div class="mt-2">
         <%= f.email_field :email, autofocus: true, autocomplete: "email",placeholder:"メールアドレス",class:"form-control border-dark" %>
