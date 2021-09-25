@@ -3,6 +3,8 @@
 module Admins
   class MembersController < ApplicationController
     before_action :authenticate_member!, except: [:index, :show, :edit, :update]
+    before_action :authenticate_admin!
+    
     def index
       @members = Member.page(params[:page]).per(8)
     end
