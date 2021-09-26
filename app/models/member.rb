@@ -23,6 +23,7 @@ class Member < ApplicationRecord
   # チャット機能
   has_many :chats, dependent: :destroy
   has_many :entries, dependent: :destroy
+  has_many :rooms, through: :entries
 
   # 通知機能
   # 通知を送る

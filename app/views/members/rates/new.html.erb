@@ -1,6 +1,12 @@
+<div class="container">
+  <div class="row">
+    
+  </div>
+</div>
+
 <h1>1111</h1>
-<%= form_with model: @rate, local:true do |f| %>
+<%= form_with model:[@request, @rate], local:true do |f| %>
   <%= f.select :rate_choice,[['Good',0],['Bad',1]], { include_blank: true, selected: 0} %>
   <%= f.text_area :rate_comment %>
-  <%= f.submit "評価送信"%>
+  <%= f.submit "送信" %>
 <% end %>

@@ -73,7 +73,7 @@ module Members
       end
     end
 
-    def is_active_release
+    def is_active_in_transaction
       @request = Request.find(params[:request_id])
       # ステータス変更
       if @request.release?
@@ -83,9 +83,9 @@ module Members
       # ステータス変更を機にチャットルームの作成
       if @request.in_transaction?
         @member = Member.find(@request.member_id)
-        @currentMemberEntry = Entry.where(member_id: current_member.id, request_id: @request.id)
-        @memberEntry = Entry.where(member_id: @member.id, request_id: @request.id)
-        if !(@member.id == current_member.id) && @currentMemberEntry.present? && @memberEntry.present?
+        @currentMemberEntry = Entry.where(member_id: current_member.id)
+        @memberEntry = Entry.where(member_id: @member.id)
+        if !(@member.id == current_member.id) && @currentMemberEntry.present? && @memberEntry.present? && @request.room.present?
           @currentMemberEntry.each do |current|
             @memberEntry.each do |member|
               if current.room_id == member.room_id
@@ -96,10 +96,11 @@ module Members
             end
           end
         else
-          @room = Room.create
-          @entry1 = Entry.create(room_id: @room.id, member_id: current_member.id, request_id: @request.id)
-          @entry2 = Entry.create(room_id: @room.id, member_id: @member.id, request_id: @request.id)
-          @request.update(room_id: @room.id)
+          @room = Room.create(request_id: @request.id)
+          @entry1 = Entry.create(room_id: @room.id, member_id: current_member.id)
+          @entry2 = Entry.create(room_id: @room.id, member_id: @member.id)
+          #@entry1 = Entry.create(room_id: @room.id, member_id: current_member.id, request_id: @request.id)
+          #@entry2 = Entry.create(room_id: @room.id, member_id: @member.id, request_id: @request.id)
           redirect_to room_path(@room.id)
           flash[:success] = "取引開始しました!"
         end
@@ -107,7 +108,16 @@ module Members
         render :show
       end
     end
-
+    
+    def is_active_in_review
+      @request = Request.find(params[:request_id])
+      if @request.in_transaction?
+        @request.in_review!
+      end
+      redirect_to room_path(@request.room)
+    
+    end  
+    
     private
 
     def request_params
@@ -116,13 +126,13 @@ module Members
 
     def set_delete_at
       if @request.is_active == "release"
-        ["in_transaction", "end_transaction"]
+        ["in_transaction","in_review", "end_transaction"]
       elsif @request.is_active == "in_transaction"
-        ["release", "end_transaction", "release_stop"]
+        ["release", "end_transaction","in_review", "release_stop"]
       elsif @request.is_active == "end_transaction"
-        ["release", "in_transaction", "release_stop"]
+        ["release", "in_transaction", "in_review","release_stop"]
       elsif @request.is_active == "release_stop"
-        ["in_transaction", "end_transaction"]
+        ["in_transaction", "in_review","end_transaction"]
       end
     end
   end

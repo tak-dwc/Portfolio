@@ -35,18 +35,12 @@
         </table>
       <div class="card-footer bg-transparent">
         <div class="text-right">
-        <% if @request.member_id == current_member.id %>
+        <% if @request.member_id == current_member.id  %>
           <%= link_to "投稿編集",edit_request_path(@request) ,class:"btn btn-outline-dark" %>
           <%= link_to "投稿削除",request_path(@request), class:"btn btn-outline-dark",method: :delete,"data-confirm" => "本当に削除しますか？" %>
         <% else %>
           <% if @request.is_active == "release" %>
-            <%= form_with model: @request,url: request_is_active_release_path(@request),method: :patch,local:true do |f| %>
-              <%= f.submit "取引を始める",class:"btn btn-outline-dark", "data-confirm" => "取引を開始しますか？" %>
-            <% end %>
-          <%# elsif @request.is_active == "in_transaction" %>
-            <%#= link_to "取引画面へ", room_path(en.room_id) ,class:"btn btn-outline-dark" %>
-          <%# else %>
-            <div></div>
+            <%= link_to "取引をする", request_is_active_in_transaction_path(@request), method: :patch ,class:"btn btn-outline-dark" ,"data-confirm" => "取引を開始しますか？？"%>
           <% end %>
         <% end %>
         </div>

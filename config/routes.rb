@@ -47,7 +47,10 @@ Rails.application.routes.draw do
     resources :requests do
       resource :like, only: %i(create destroy)
       resources :comments, only: %i(create destroy)
-      patch :is_active_release
+      resources :rates, only: [:create, :new]
+      patch :is_active_in_transaction
+      patch :is_active_in_review
+  
     end
     get 'requests/tagshow/:name', to: 'requests#tagshow', as: 'tagshow'
 
@@ -55,6 +58,6 @@ Rails.application.routes.draw do
     delete 'notifications/destroy_all', to: 'notifications#destroy_all', as: 'destroy_all_notifications'
 
     resources :contacts, only: [:new, :create]
-    resources :rates, only: [:create, :new]
+    # resources :rates, only: [:create, :new]
   end
 end

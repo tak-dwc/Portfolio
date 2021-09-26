@@ -1,12 +1,12 @@
 class Members::RoomsController < ApplicationController
   def index
-    @rooms = Entry.where(member_id: current_member.id)
-    # member名をとってきたい
-    # @member = @rooms.entry.member.where.not(member_id: current_member.id)
+    @rooms = current_member.rooms
   end
 
   def show
-    @room = Room.find(params[:id])
+      @room = Room.find(params[:id])
+      @rate  = @room.request.rates.find_by(params[:id])
+      # binding.pry
     if Entry.where(member_id: current_member.id, room_id: @room.id).present?
       @chats = @room.chats.all
       @chat = Chat.new

@@ -4,21 +4,33 @@
     <table class="table table-hover table-inverse">
       <thead>
         <tr>
-          <th>取引ID</th>
-          <th>取引開始日</th>
-          <th>投稿詳細へ</th>
-          <th>取引ページへ</th>
+          <th>取引ステージ</th>
+          <th>投稿者</th>
+          <th>投稿詳細</th>
+        　<th>取引開始日</th>
         </tr>
       </thead>
       <tbody>
         <% @rooms.each do |room| %>
-          <% request = Request.find(room.request_id) %>
         <tr>
-          <td><%=  room.room_id  %></td>
-          <!--<td><#%= link_to @member.nickname, request_path(room.request_id),class:"btn btn-warning"  %></td>-->
+          <td>
+            <% if room.request.is_active == "in_transaction" %>
+              <%= link_to "チャットをする", room_path(room),class:"btn btn-outline-dark" %>
+            <% elsif room.request.is_active == "in_review" %>
+              <%= link_to "評価をする", room_path(room), class:"btn btn-outline-danger" %>
+            <% elsif room.request.is_active == "end_transaction" %>
+              <div class="text-secondary">取引終了しました</div>
+            <% end %>
+          </td>
+          <td>
+            <% if room.request.member_id == current_member.id %>
+              自分
+            <% else %>
+              <%= link_to room.request.member.nickname, member_path(room.request.member) %>
+            <% end %>
+          </td>
+          <td><%= link_to room.request.title, request_path(room.request),class:"text-dark" %></td>
           <td><%= room.created_at.strftime('%Y/%m/%d') %></td>
-          <td><%= link_to request.title, request_path(room.request_id),class:"text-dark" %></td>
-          <td><%= link_to "チャットする", room_path(room.room_id),class:"btn btn-outline-dark" %></td>
         </tr>
         <% end %>
       </tbody>
@@ -29,6 +41,6 @@
     <div class="col-5 mt-3">
       <h4>取引はありません</h4>
     </div>
-  </div> 
-  <% end %>  
+  </div>
+  <% end %>
 </div>

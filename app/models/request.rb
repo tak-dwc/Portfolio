@@ -4,6 +4,7 @@ class Request < ApplicationRecord
   belongs_to :member
   has_many :likes, dependent: :destroy
   has_many :comments, dependent: :destroy
+  has_one :room, dependent: :destroy
 
   # タグ機能
   has_many :request_tags, dependent: :destroy
@@ -88,7 +89,8 @@ class Request < ApplicationRecord
   enum is_active: {
     release: 0,           # 公開中
     in_transaction: 1,    # 取引中-作業中
-    end_transaction: 2,   # 依頼終了
+    in_review: 2,         # 評価中
+    end_transaction: 3,   # 依頼終了
     release_stop: 9,      # 公開停止
   }
 end
