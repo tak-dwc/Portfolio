@@ -21,7 +21,8 @@
               <%= attachment_image_tag rate.member, :image, fallback: "noimage.jpg",size:"35x35" ,class:"rounded-circle border border-dark"%>
               <%= link_to rate.member.nickname, member_path(rate.member), class:"text-dark " %>:<%= rate.rate_choice %>
             </div>     
-            <div class="mt-2 mb-2"><%= safe_join(rate.rate_comment.split("\n"),tag(:br)) %></div>          
+            <div class="mt-2 mb-2"><%= safe_join(rate.rate_comment.split("\n"),tag(:br)) %></div>    
+            <div class="text-right"><%= rate.created_at.strftime('%Y/%m/%d') %></div>
           </div>
         <% end %>
       </div>

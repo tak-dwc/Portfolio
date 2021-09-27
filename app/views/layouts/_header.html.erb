@@ -1,26 +1,29 @@
 <div class="container pt-2 ">
-  <% unless member_signed_in? %>  
+  <% unless member_signed_in? %>
     <h4 class="text-center"><%= link_to "sharehobby",root_path ,class:"text-dark"%></h4>
   <% else %>
     <h4 class="text-center"><%= link_to "sharehobby",member_path(current_member) ,class:"text-dark"%></h4>
-  <% end %>  
+  <% end %>
 </div>
 
 <% unless current_page?(member_session_path) %>
 <% unless current_page?(new_member_registration_path) %>
-<nav class="navbar navbar-expand-lg border-top border-bottom border-dark"  >
+<nav class="navbar navbar-expand-lg navbar-light border-top border-bottom border-dark">
   <div class="container">
-    <div class="row justify-content-center">
+    <div class="col">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="nav navbar-nav">
+        <ul class="navbar-nav">
         <% if admin_signed_in? %>
-          <li class="nav-item active">
+          <li class="nav-item ">
             <%= link_to "管理者側会員一覧",admins_members_path, class: 'nav-link text-danger' %>
           </li>
-          <li class="nav-item active">
+          <li class="nav-item ">
             <%= link_to "問い合わせ一覧",admins_contacts_path, class: 'nav-link text-danger' %>
           </li>
-          <li class="nav-item active">
+          <li class="nav-item ">
             <%= link_to "管理者ログアウト",destroy_admin_session_path,method: :delete, class: 'nav-link text-danger' %>
           </li>
         <% elsif member_signed_in? %>
@@ -29,7 +32,7 @@
               <i class="fas fa-house-user fa-2x"></i>
             <% end %>
           </li>
-          <li class="nav-item active">
+          <li class="nav-item ">
             <% if unchecked_notifications.any? %>
               <span class="fa-stack">
                 <%= link_to notifications_path ,class: 'nav-link text-dark' do %>
@@ -43,7 +46,7 @@
                 <% end %>
             <% end %>
           </li>
-          <li class="nav-item active">
+          <li class="nav-item ">
             <%= link_to destroy_member_session_path,method: :delete, class: 'nav-link text-dark' do %>
               <i class="fas fa-sign-out-alt fa-2x"></i>
             <% end %>
@@ -61,12 +64,15 @@
         </ul>
       </div>
     </div>
+    <div class="col">
     <% if member_signed_in? %>
-    <span>
-      <%= render 'layouts/search' %>
-    </span>
+      <span>
+        <%= render 'layouts/search' %>
+      </span>
     <% end %>
+    </div>
   </div>
 </nav>
 <% end %>
 <% end %>
+

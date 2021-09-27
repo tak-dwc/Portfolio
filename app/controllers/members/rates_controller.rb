@@ -17,7 +17,7 @@ class Members::RatesController < ApplicationController
       flash[:success] = "評価完了しました!"
     else
       render :new
-      flash[:error] = "失敗しました"
+      flash[:error] = "送信に失敗しました。"
     end
   end
 
