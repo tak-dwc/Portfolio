@@ -1,6 +1,6 @@
 class Members::RoomsController < ApplicationController
   def index
-    @rooms = current_member.rooms
+    @rooms = current_member.rooms.page(params[:page]).per(10)
   end
 
   def show

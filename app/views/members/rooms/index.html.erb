@@ -12,6 +12,7 @@
       </thead>
       <tbody>
         <% @rooms.each do |room| %>
+        
         <tr>
           <td>
             <% if room.request.is_active == "in_transaction" %>
@@ -26,7 +27,7 @@
             <% if room.request.member_id == current_member.id %>
               自分
             <% else %>
-              <%= link_to room.request.member.nickname, member_path(room.request.member) %>
+              <%= link_to room.request.member.nickname, member_path(room.request.member) , class:"text-dark" %>
             <% end %>
           </td>
           <td><%= link_to room.request.title, request_path(room.request),class:"text-dark" %></td>
@@ -43,4 +44,5 @@
     </div>
   </div>
   <% end %>
+  <div class="row  mt-3 mb-3 justify-content-center"> <%= paginate @rooms %></div>
 </div>

@@ -4,13 +4,7 @@ module Members
   class MembersController < ApplicationController
     def show
       @member = Member.find(params[:id])
-      @requests = @member.requests.where(is_active: :release).all
-      # @rates = Rate.where(member_id: params[:id])
-      # @good_rate = Rate.select(:rate_choice).where(rate_choice: false)
-      @good_rate = Rate.select(:request_id)
-      # <% @good_rate.count %>
-
-      # @rate = @request.rates.where.not(member_id: current_member.id)
+      @requests = @member.requests.where(is_active: ['0','3']).all
     end
 
     def edit
@@ -38,7 +32,7 @@ module Members
 
     def main
       @member = Member.find(params[:id])
-      @requests = @member.requests.where(is_active: :release).page(params[:page]).reverse_order
+      @requests = @member.requests.where(is_active: ['0','3']).page(params[:page]).reverse_order
       # @requests = @member.requests.select(is_active: :release ,)
     end
 

@@ -1,29 +1,21 @@
 <div class="container mt-3 mb-3 px-0">
-    <div class="card mt-5">
-      <div class="row text-center">
-         <div class="offset-4"></div>
-          <div class="col-2 mt-5 "><%= link_to @member.followings.count, member_followings_path(@member),class:"text-dark" %><br><small>フォロー</small></div>
-          <div class="col-2 mt-5"><%= link_to @member.followers.count, member_followers_path(@member) ,class:"text-dark" %><br><small>フォロワー</small></div>
-          <div class="col-2 mt-5"><%= link_to @requests.count,main_path(@member),class:"text-dark"  %><br><small>投稿</small></div>
-          <div class="offset-2"></div>
-        <div class="col-4 pb-5"><%= attachment_image_tag @member, :image,fallback: "noimage.jpg",size:"200x200" ,class:"rounded-circle border border-dark"%></div>
-         <div class ="col-5  mt-5 ml-4" >
-            <%= link_to "評価一覧", edit_member_path(@member) ,class:"btn btn-outline-dark btn-block" %>
-            <!--<%# @rates.each do |rate| %>-->
-            <!-- <div>-->
-            <!-- <%#= Request.find(rate.request_id).title %>-->
-            <!-- <%#= Request.find(rate.request_id).rates.where.not(member_id: @member.id).where(rate_choice: false).count %>-->
-            <!-- <%#= Request.find(rate.request_id).rates.where.not(member_id: @member.id).where(rate_choice: true).count %>-->
-            <!-- </div>-->
-            <!--<%# end %>-->
-            <% unless @member == current_member %>
-            <%= render 'members/relationships/follow_button',member: @member %>
-          <% else %>
-            <%= link_to "プロフィール編集", edit_member_path(@member) ,class:"btn btn-outline-dark btn-block" %>
-          <% end %>
-        </div>
+  <div class="card mt-5">
+    <div class="row text-center">
+      <div class="offset-4"></div>
+      <div class="col-2 mt-5 "><%= link_to @member.followings.count, member_followings_path(@member),class:"text-dark" %><br><small>フォロー</small></div>
+      <div class="col-2 mt-5"><%= link_to @member.followers.count, member_followers_path(@member) ,class:"text-dark" %><br><small>フォロワー</small></div>
+      <div class="col-2 mt-5"><%= link_to @requests.count,main_path(@member),class:"text-dark"  %><br><small>投稿</small></div>
+      <div class="offset-2"></div>
+      <div class="col-4 ml-3 mb-5"><%= attachment_image_tag @member, :image,fallback: "noimage.jpg",size:"200x200" ,class:"rounded-circle border border-dark", style:"margin: -50px;"%></div>
+      <div class ="col-6  mt-5 ml-4" >
+        <%= link_to "評価一覧", member_rates_path(@member) ,class:"btn btn-outline-dark btn-block" %>
+        <% unless @member == current_member %>
+          <%= render 'members/relationships/follow_button',member: @member %>
+        <% else %>
+          <%= link_to "プロフィール編集", edit_member_path(@member) ,class:"btn btn-outline-dark btn-block" %>
+        <% end %>
       </div>
-
+    </div>
     <div class="card-body">
       <div class="h4"><%= @member.nickname %><small class=="ml-2">（<%= @member.sex_i18n %>・<%= @member.age %>歳）</small></div>
       <table class="table">
@@ -43,7 +35,7 @@
         </tbody>
       </table>
     </div>
-   </div>
+  </div>
 </div>
 
 

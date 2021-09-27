@@ -30,11 +30,12 @@ Rails.application.routes.draw do
       resource :relationships, only: %i(create destroy)
       get 'followings', to: 'relationships#followings', as: 'followings'
       get 'followers', to: 'relationships#followers', as: 'followers'
+      resources :rates, only: [:index]
     end
     get 'members/:id/unsubscribe', to: 'members#unsubscribe', as: 'unsubscribe'
     patch 'members/:id/withdraw', to: 'members#withdraw', as: 'withdraw'
     get 'members/:id/main', to: 'members#main', as: 'main'
-
+  
     # sign_upのリロード用
     get "/members" => redirect("/members/sign_up")
 
@@ -50,7 +51,6 @@ Rails.application.routes.draw do
       resources :rates, only: [:create, :new]
       patch :is_active_in_transaction
       patch :is_active_in_review
-  
     end
     get 'requests/tagshow/:name', to: 'requests#tagshow', as: 'tagshow'
 
