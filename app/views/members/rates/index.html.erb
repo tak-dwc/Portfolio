@@ -5,41 +5,46 @@
 
     <p>
       <button class="btn btn-danger btn-block" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-        <i class="far fa-laugh-beam fa-lg"></i> Good評価 : <%= @false_count %>件
+        <i class="far fa-laugh-beam fa-lg"></i> Good評価 : <%= @passive_rates_good.count %>件
       </button>
       <button class="btn btn-secondary btn-block" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-        <i class="far fa-sad-tear fa-lg"></i> Bad評価 : <%= @true_count %>件
+        <i class="far fa-sad-tear fa-lg"></i> Bad評価 : <%= @passive_rates_bad.count %>件
       </button>
     </p>
-  <div class="row mt-5">  
+  <div class="row mt-5">
     <div class="col">
       <div id="collapseOne" class="collapse contents">
         <div class="h6 text-center">gooooooooooood</div>
-        <% @passive_rates.each do |rate| %>
+        <% @good_page.each do |rate| %>
+        <%# if rate.rate_choice == false %>
           <div class="border-bottom">
             <div class="mt-1">
               <%= attachment_image_tag rate.member, :image, fallback: "noimage.jpg",size:"35x35" ,class:"rounded-circle border border-dark"%>
               <%= link_to rate.member.nickname, member_path(rate.member), class:"text-dark " %>:<%= rate.rate_choice %>
-            </div>     
-            <div class="mt-2 mb-2"><%= safe_join(rate.rate_comment.split("\n"),tag(:br)) %></div>    
+            </div>
+            <div class="mt-2 mb-2"><%= safe_join(rate.rate_comment.split("\n"),tag(:br)) %></div>
             <div class="text-right"><%= rate.created_at.strftime('%Y/%m/%d') %></div>
           </div>
+        <%# end %>
         <% end %>
+        <%= paginate @good_page %>
       </div>
-    </div>  
+    </div>
     <div class="col">
       <div id="collapseTwo" class="collapse contents" >
         <div class="h6 text-center">baaaaaaaaaaaaad</div>
-        <% @passive_rates.each do |rate| %>
+        <% @passive_rates_bad.each do |rate| %>
+        <%# if rate.rate_choice == true %>
           <div class="border-bottom">
             <div class="mt-1">
               <%= attachment_image_tag rate.member, :image, fallback: "noimage.jpg",size:"35x35" ,class:"rounded-circle border border-dark"%>
               <%= link_to rate.member.nickname, member_path(rate.member), class:"text-dark " %>:<%= rate.rate_choice %>
-            </div>     
-            <div class="mt-2 mb-2"><%= safe_join(rate.rate_comment.split("\n"),tag(:br)) %></div>          
+            </div>
+            <div class="mt-2 mb-2"><%= safe_join(rate.rate_comment.split("\n"),tag(:br)) %></div>
           </div>
+        <%# end %>
         <% end %>
-      </div> 
-    </div>  
+      </div>
+    </div>
   </div>
-</div>  
+</div>

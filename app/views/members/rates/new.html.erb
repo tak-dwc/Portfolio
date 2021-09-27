@@ -1,7 +1,7 @@
 <div class="container mt-3">
   <div class="row">
     <%# binding.pry %>
-    <div class="h4"><%= @member %>さんとの取引評価</div>
+    <div class="h4"><%= @member.nickname %>さんとの取引評価</div>
   </div>
   <div class="row mt-3">
     <div class="col-10">
@@ -10,7 +10,7 @@
           <%= f.label :評価 %>
           <%= f.select :rate_choice,[['Good',0],['Bad',1]], { include_blank: true, selected: 0}, class:"form-control" %>
         </div>
-        <div class="form-group">  
+        <div class="form-group">
           <%= f.label :コメント %>
           <%= f.text_area :rate_comment ,rows:"5", class:"form-control"%>
         </div>
