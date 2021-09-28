@@ -1,4 +1,5 @@
 <div class="container mt-3 px-0">
+  <% if @active_requests.present? %>
   <div class="row ">
     <% @active_requests.each do |req| %>
     <!--<%# if req.is_active == "release" && req.member != current_member.id %>-->
@@ -32,6 +33,11 @@
     <% end %>
   </div>
   <div class="row  mt-3 mb-3 justify-content-center"> <%= paginate @active_requests %></div>
+  <% else %>
+  <div class="row">
+    <p>取引ができる投稿はありません。</p>
+  </div>
+  <% end %>
 </div>
 
 

@@ -19,10 +19,9 @@
       <div class="mt-2">
         <%= f.text_field :hobby ,placeholder:"趣味",class:"form-control border-dark"%>
       </div>
-     
+      
       <div class=" mt-2">
          <small class="form-text">本人確認情報</small>
-         <small class="form-text text-muted ">※登録後も変更できます</small>
         <%= f.text_field :last_name, autofocus: true,placeholder:"姓",class:"form-control border-dark"%>
         <%= f.text_field :first_name, autofocus: true,placeholder:"名",class:"form-control border-dark"%>
       </div>
@@ -31,7 +30,7 @@
         <%= f.text_field :first_name_kana, autofocus: true , autofocus: true,placeholder:"メイ",class:"form-control border-dark "%>
       </div>
       <div class="mt-2">
-        <small class="form-text text-muted ">生年月日・性別は登録後の変更はできません</small>
+        <small class="form-text text-danger">※生年月日・性別は登録後の変更はできません</small>
         <div class="col-12"><%= f.label :生年月日 %></div>
         <div class="col-12">
           <%= raw sprintf(f.date_select(:birthday,
