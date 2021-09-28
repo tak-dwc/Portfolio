@@ -5,8 +5,8 @@ ja:
         release: "公開中"
         in_transaction: "取引中"
         in_review: "評価中"
-        end_transaction: "依頼終了"
-        release_stop: "公開停止"
+        end_transaction: "取引終了"
+        release_stop: "停止中"
     member:
       sex:
         man: "男性"

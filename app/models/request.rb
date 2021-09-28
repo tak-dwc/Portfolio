@@ -90,7 +90,7 @@ class Request < ApplicationRecord
     release: 0,           # 公開中
     in_transaction: 1,    # 取引中-作業中
     in_review: 2,         # 評価中
-    end_transaction: 3,   # 依頼終了
-    release_stop: 9,      # 公開停止
+    end_transaction: 3,   # 終了
+    release_stop: 4,      # 停止
   }
 end
