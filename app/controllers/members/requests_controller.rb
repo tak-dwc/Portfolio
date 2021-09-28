@@ -47,9 +47,6 @@ module Members
 
     def destroy
       @request = Request.find(params[:id])
-      if @request.room_id.present?
-        Room.destroy(@request.room_id)
-      end
       if @request.destroy
         redirect_to requests_path
         flash[:success] = "投稿削除しました!"
@@ -108,16 +105,16 @@ module Members
         render :show
       end
     end
-    
+
     def is_active_in_review
       @request = Request.find(params[:request_id])
       if @request.in_transaction?
         @request.in_review!
       end
       redirect_to room_path(@request.room)
-    
-    end  
-    
+
+    end
+
     private
 
     def request_params
@@ -127,10 +124,16 @@ module Members
     def set_delete_at
       if @request.is_active == "release"
         ["in_transaction","in_review", "end_transaction"]
+
       elsif @request.is_active == "in_transaction"
         ["release", "end_transaction","in_review", "release_stop"]
+
+      elsif @request.is_active == "in_review"
+        ["release", "in_transaction", "end_transaction", "release_stop"]
+
       elsif @request.is_active == "end_transaction"
         ["release", "in_transaction", "in_review","release_stop"]
+
       elsif @request.is_active == "release_stop"
         ["in_transaction", "in_review","end_transaction"]
       end

@@ -15,35 +15,33 @@
     <div class="col">
       <div id="collapseOne" class="collapse contents">
         <div class="h6 text-center">gooooooooooood</div>
-        <% @good_page.each do |rate| %>
-        <%# if rate.rate_choice == false %>
+        <% @good_rates.each do |rate| %>
           <div class="border-bottom">
             <div class="mt-1">
               <%= attachment_image_tag rate.member, :image, fallback: "noimage.jpg",size:"35x35" ,class:"rounded-circle border border-dark"%>
-              <%= link_to rate.member.nickname, member_path(rate.member), class:"text-dark " %>:<%= rate.rate_choice %>
+              <%= link_to rate.member.nickname, member_path(rate.member), class:"text-dark " %>
             </div>
             <div class="mt-2 mb-2"><%= safe_join(rate.rate_comment.split("\n"),tag(:br)) %></div>
             <div class="text-right"><%= rate.created_at.strftime('%Y/%m/%d') %></div>
           </div>
-        <%# end %>
         <% end %>
-        <%= paginate @good_page %>
+        <div class="row  mt-3 mb-3 justify-content-center"> <%= paginate @good_rates %></div>
       </div>
     </div>
     <div class="col">
       <div id="collapseTwo" class="collapse contents" >
         <div class="h6 text-center">baaaaaaaaaaaaad</div>
-        <% @passive_rates_bad.each do |rate| %>
-        <%# if rate.rate_choice == true %>
+        <% @bad_rates.each do |rate| %>
           <div class="border-bottom">
             <div class="mt-1">
               <%= attachment_image_tag rate.member, :image, fallback: "noimage.jpg",size:"35x35" ,class:"rounded-circle border border-dark"%>
-              <%= link_to rate.member.nickname, member_path(rate.member), class:"text-dark " %>:<%= rate.rate_choice %>
+              <%= link_to rate.member.nickname, member_path(rate.member), class:"text-dark " %>
             </div>
             <div class="mt-2 mb-2"><%= safe_join(rate.rate_comment.split("\n"),tag(:br)) %></div>
+            <div class="text-right"><%= rate.created_at.strftime('%Y/%m/%d') %></div>
           </div>
-        <%# end %>
         <% end %>
+        <div class="row  mt-3 mb-3 justify-content-center"> <%= paginate @bad_rates %></div>
       </div>
     </div>
   </div>

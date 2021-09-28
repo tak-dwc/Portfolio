@@ -1,4 +1,3 @@
-<%# en = Entry.find_by(member_id: current_member.id, request_id: params[:id]) %>
 <div class="container">
   <div class="card mt-5">
     <!--<div class="row mt-3">-->
@@ -40,7 +39,7 @@
           <%= link_to "投稿削除",request_path(@request), class:"btn btn-outline-dark",method: :delete,"data-confirm" => "本当に削除しますか？" %>
         <% else %>
           <% if @request.is_active == "release" %>
-            <%= link_to "取引をする", request_is_active_in_transaction_path(@request), method: :patch ,class:"btn btn-outline-dark" ,"data-confirm" => "取引を開始しますか？？"%>
+            <%= link_to "取引をする", request_is_active_in_transaction_path(@request), method: :patch ,class:"btn btn-outline-dark" ,"data-confirm" => "取引を開始しますか？"%>
           <% end %>
         <% end %>
         </div>

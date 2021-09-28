@@ -1,16 +1,12 @@
 class Members::RoomsController < ApplicationController
   def index
-    # request_ids = current_member.rooms.pluck(:request_id)
-    @rooms = Request.where(id: current_member.rooms.pluck(:request_id))
-                    .where.not(is_active: 'end_transaction')
-                    .page(params[:page]).per(10)
-    # binding.pry
+    @rooms = Request.where(id: current_member.rooms.select(:request_id)).where.not(is_active: 'end_transaction').page(params[:page]).per(10)
   end
 
   def show
       @room = Room.find(params[:id])
-      @rate  = @room.request.rates.find_by(params[:id])
       # binding.pry
+      @rate  = @room.request.rates.find_by(params[:id])
     if Entry.where(member_id: current_member.id, room_id: @room.id).present?
       @chats = @room.chats.all
       @chat = Chat.new

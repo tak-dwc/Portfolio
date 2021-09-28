@@ -33,7 +33,6 @@ module Members
     def main
       @member = Member.find(params[:id])
       @requests = @member.requests.where(is_active: ['0','3']).page(params[:page]).reverse_order
-      # @requests = @member.requests.select(is_active: :release ,)
     end
 
     private

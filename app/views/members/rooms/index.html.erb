@@ -12,14 +12,13 @@
       </thead>
       <tbody>
         <% @rooms.each do |room| %>
+        <%# binding.pry %>
         <tr>
           <td>
             <% if room.is_active == "in_transaction" %>
               <%= link_to "チャットをする", room_path(room),class:"btn btn-outline-dark" %>
-            <% elsif room.is_active == "in_review" %>
+            <% else room.is_active == "in_review" %>
               <%= link_to "評価をする", room_path(room), class:"btn btn-outline-danger" %>
-            <% elsif room.is_active == "end_transaction" %>
-              <div class="text-secondary">取引終了しました</div>
             <% end %>
           </td>
           <td>

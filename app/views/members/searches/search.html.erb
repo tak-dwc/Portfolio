@@ -1,6 +1,16 @@
 <% if @model != "Request" %>
 <div class="container mt-3 px-0">
   <div class="row">
+    <% if @search.present? %>
+      <h5><strong>"<%= @search %>"</strong>の検索結果</h5>　:<%= @members.count %>件
+        <% if @requests.count == 0 %>
+          <div class="col">他のキーワードで検索してみましょう。</div>
+        <% end %>
+    <% else %>
+      全ユーザーを表示します。
+    <% end %>
+  </div>
+  <div class="row">
     <% @members.each do |member| %>
     <div class="col-6 mt-3">
       <div class="card " style="width: 20rem;">
@@ -35,6 +45,16 @@
 </div>
 <% else %>
 <div class="container mt-3 px-0">
+  <div class="row">
+    <% if @search.present? %>
+      <h5><strong>"<%= @search %>"</strong>の検索結果</h5>　:<%= @requests.count %>件
+        <% if @requests.count == 0 %>
+          <div class="col">他のキーワードで検索してみましょう。</div>
+        <% end %>
+    <% else %>
+      投稿全件を表示します。
+    <% end %>
+  </div>
   <div class="row">
     <% @requests.each do |req| %>
     <div class="col-6 mt-3">
