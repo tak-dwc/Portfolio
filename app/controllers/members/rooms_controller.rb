@@ -1,6 +1,7 @@
 class Members::RoomsController < ApplicationController
   def index
-    @rooms = Request.where(id: current_member.rooms.select(:request_id)).where.not(is_active: 'end_transaction').page(params[:page]).per(10)
+    # @rooms = Request.where(id: current_member.rooms.select(:request_id)).where.not(is_active: 'end_transaction').page(params[:page]).per(10)
+    @rooms = current_member.rooms.page(params[:page]).per(10)
   end
 
   def show

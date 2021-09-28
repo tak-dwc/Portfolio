@@ -12,23 +12,24 @@
       </thead>
       <tbody>
         <% @rooms.each do |room| %>
-        <%# binding.pry %>
         <tr>
           <td>
-            <% if room.is_active == "in_transaction" %>
+            <% if room.request.is_active == "in_transaction" %>
               <%= link_to "チャットをする", room_path(room),class:"btn btn-outline-dark" %>
-            <% else room.is_active == "in_review" %>
+            <% elsif room.request.is_active == "in_review" %>
               <%= link_to "評価をする", room_path(room), class:"btn btn-outline-danger" %>
+            <% elsif room.request.is_active == "end_transaction" %>
+              <div class="text-secondary">取引終了しました</div>
             <% end %>
           </td>
           <td>
-            <% if room.member_id == current_member.id %>
+            <% if room.request.member_id == current_member.id %>
               自分
             <% else %>
-              <%= link_to room.member.nickname, member_path(room.member) , class:"text-dark" %>
+              <%= link_to room.request.member.nickname, member_path(room.request.member) , class:"text-dark" %>
             <% end %>
           </td>
-          <td><%= link_to room.title, request_path(room),class:"text-dark" %></td>
+          <td><%= link_to room.request.title, request_path(room.request),class:"text-dark" %></td>
           <td><%= room.created_at.strftime('%Y/%m/%d') %></td>
         </tr>
         <% end %>

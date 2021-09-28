@@ -4,7 +4,7 @@ module Members
   class MembersController < ApplicationController
     def show
       @member = Member.find(params[:id])
-      @requests = @member.requests.where(is_active: ['0','3']).all
+      @requests = @member.requests.where(is_active: ['0','3','4']).all
     end
 
     def edit
