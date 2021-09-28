@@ -3,7 +3,7 @@
   <div class="row">
     <% if @search.present? %>
       <h5><strong>"<%= @search %>"</strong>の検索結果</h5>　:<%= @members.count %>件
-        <% if @requests.count == 0 %>
+        <% if @members.count == 0 %>
           <div class="col">他のキーワードで検索してみましょう。</div>
         <% end %>
     <% else %>
