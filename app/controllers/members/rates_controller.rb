@@ -32,6 +32,7 @@ class Members::RatesController < ApplicationController
     # bad評価
     @passive_rates_bad = other_request_rates.where(rate_choice: true)
     @bad_rates = @passive_rates_bad.page(params[:page]).per(6)
+    
       # rates = @member.rates
       # request_arr = rates.map{|x| x.request}  # mapは
       # res = request_arr.map{|x|

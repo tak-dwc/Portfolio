@@ -7,7 +7,11 @@
           <div class="col">他のキーワードで検索してみましょう。</div>
         <% end %>
     <% else %>
-      全ユーザーを表示します。
+      <% unless @members.present? %>
+        <p>ユーザーはいません。</p>
+      <% else %>
+        <p>全ユーザーを表示します。</p>
+      <% end %>
     <% end %>
   </div>
   <div class="row">
@@ -52,7 +56,11 @@
           <div class="col">他のキーワードで検索してみましょう。</div>
         <% end %>
     <% else %>
-      投稿全件を表示します。
+      <% unless @requests.present? %>
+        <p>取引ができる投稿はありません。</p>
+      <% else %>
+        <p>全投稿を表示します。</p>
+      <% end %>
     <% end %>
   </div>
   <div class="row">
