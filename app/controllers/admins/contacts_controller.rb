@@ -3,8 +3,17 @@ class Admins::ContactsController < ApplicationController
   before_action :authenticate_admin!
   
   def index
-    @contacts = Contact.page(params[:page]).order(created_at: :desc).per(6)
     @members = Member.all
+    
+    column = params[:column]
+    # binding.pry
+    if column.blank?
+      @contacts = Contact.page(params[:page]).order(created_at: :desc).per(6)
+    elsif column == "true"   
+      @contacts = Contact.where(reply_status: true).page(params[:page]).order(created_at: :desc).per(6)
+    elsif column == "false"
+      @contacts = Contact.where(reply_status: false).page(params[:page]).order(created_at: :desc).per(6)
+    end
   end
 
   def edit
