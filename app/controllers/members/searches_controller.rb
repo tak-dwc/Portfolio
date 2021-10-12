@@ -9,4 +9,5 @@ class Members::SearchesController < ApplicationController
       @members = Member.where.not(id: current_member.id).looks(params[:search]).page(params[:page]).reverse_order
     end
   end
+  
 end

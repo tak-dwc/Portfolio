@@ -35,7 +35,7 @@ Rails.application.routes.draw do
     get 'members/:id/unsubscribe', to: 'members#unsubscribe', as: 'unsubscribe'
     patch 'members/:id/withdraw', to: 'members#withdraw', as: 'withdraw'
     get 'members/:id/main', to: 'members#main', as: 'main'
-  
+
     # sign_upのリロード用
     get "/members" => redirect("/members/sign_up")
 

@@ -6,9 +6,9 @@
         <tr>
           <th>ユーザー名</th>
           <th>メールアドレス</th>
-          <th>問い合わせタイトル</th>
+          <th>タイトル</th>
           <th>受信日</th>
-          <th></th>
+          <th>対応ステータス</th>
           <th></th>
         </tr>
       </thead>
@@ -17,13 +17,14 @@
         <tr>
           <td><%= contact.member.nickname %></td>
           <td><%= contact.member.email %></td>
-          <td><%= contact.title %></td>
+          <td><%= contact.title.truncate(10) %></td>
           <td><%= contact.created_at.strftime("%Y年%m月%d日") %></td>
-          <td><%= link_to "返信", edit_admins_contact_path(contact) %></td>
+          <td><%= contact.reply_status %></td>
+          <td><%= link_to "返信", edit_admins_contact_path(contact)  %></td
         </tr>
         <% end %>
       </tbody>
     </table>
   </div>
   <div class="row  mt-3 mb-3 justify-content-center"> <%= paginate @contacts %></div>
-</div>  
+</div>

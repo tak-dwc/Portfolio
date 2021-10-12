@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(version: 2021_09_16_044455) do
     t.string "title"
     t.text "body"
     t.text "reply"
+    t.boolean "reply_status", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
