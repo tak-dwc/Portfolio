@@ -3,8 +3,14 @@
      <h4 class="my-3">問い合わせ一覧</h4>
     <div class="col my-3">
       <%= form_with url: admins_contacts_path, method: :get , local: true do |f| %>
-        <%= f.select :column, options_for_select({"対応済み" => "true","未対応" => "false" }),include_blank: "全てを表示",class:"form-control" %>
-        <%= f.submit  %>
+      <div class="input-group">
+        <div class="input-group-append">
+          <%= f.select :column, options_for_select({"対応済み" => "true","未対応" => "false" }),include_blank: "全て",class:"form-control" %>
+        </div>  
+        <div class="input-group-append">
+          <button class="btn btn-outline-dark" type="submit" id="button-addon2"><i class="fas fa-search"></i></button>
+        </div>
+      </div> 
       <% end %>
     </div>
     <table class="table table-hover table-inverse">
@@ -21,7 +27,7 @@
       <tbody>
         <% @contacts.each do |contact| %>
         <tr>
-          <td><%= contact.member.nickname %></td>
+          <td><%= link_to contact.member.nickname,admins_member_path(contact.member.id),class:"text-dark border-bottom border-dark" %></td>
           <td><%= contact.member.email %></td>
           <td><%= contact.title.truncate(10) %></td>
           <td><%= contact.created_at.strftime("%Y年%m月%d日") %></td>
@@ -30,9 +36,9 @@
               対応済み
             <% else %>
               未対応
-            <% end %>  
+            <% end %>
           </td>
-          <td><%= link_to "返信", edit_admins_contact_path(contact)  %></td>
+          <td><%= link_to "返信", edit_admins_contact_path(contact),class:"text-dark border-bottom border-dark" %></td>
         </tr>
         <% end %>
       </tbody>

@@ -52,6 +52,7 @@ Rails.application.routes.draw do
       patch :is_active_in_transaction
       patch :is_active_in_review
     end
+    get "liles/index", to: "likes#index", as: "likes_index"
     get 'requests/tagshow/:name', to: 'requests#tagshow', as: 'tagshow'
 
     resources :notifications, only: [:index]

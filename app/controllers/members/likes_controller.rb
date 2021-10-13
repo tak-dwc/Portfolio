@@ -16,7 +16,10 @@ module Members
     end
 
     def index
-      @requests = Request.where
+      member = current_member
+      likes_request = member.likes.select(:request_id)
+      @requests = Request.where(params[request_id: likes_request]).page(params[:page]).reverse_order
+      # binding.pry
     end
   end
 end

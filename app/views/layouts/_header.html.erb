@@ -46,6 +46,11 @@
                 <% end %>
             <% end %>
           </li>
+          <li class="nav-item">
+            <%= link_to likes_index_path, class: 'nav-link text-dark' do %>
+              <i class="fas fa-heart fa-2x"></i>
+            <% end %>
+          </li>
           <li class="nav-item ">
             <%= link_to destroy_member_session_path,method: :delete, class: 'nav-link text-dark' do %>
               <i class="fas fa-sign-out-alt fa-2x"></i>
