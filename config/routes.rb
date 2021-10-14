@@ -23,7 +23,6 @@ Rails.application.routes.draw do
   scope module: :members do
     root to: 'homes#top'
     get '/about', to: 'homes#about'
-    get '/guide', to: 'homes#guide'
     get '/search', to: 'searches#search'
 
     resources :members, only: %i(show edit update) do

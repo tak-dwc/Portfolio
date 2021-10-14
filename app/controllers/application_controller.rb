@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
-  before_action :authenticate_member!, except: [:top]
+  before_action :authenticate_member!, except: [:top,:about]
 
   before_action :set_tags
   # sidebar用の記述

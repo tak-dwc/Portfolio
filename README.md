@@ -1,5 +1,8 @@
 ## ShareHobby(シェアホビ)
 
+##サイトURL
+http://35.74.172.8/
+
 ## サイト概要
 このサイトは新たな趣味を見つけたい人・趣味をもっと楽しみたい人の手助けをしている「趣味特化型」のマッチングサイトです。<br>
 例えば、<br>DIYを始めてみたいけどやり方がわからない、、、<br>もっとDIYを楽しみたい!<br>
@@ -38,8 +41,8 @@
 - [機能一覧](https://docs.google.com/spreadsheets/d/1oGHsYUMvpiwiXMgiPOC4JkhVvn-rgsMJXCsyAM_NbDU/edit?usp=sharing)
 
 ## 開発環境
-<!-- - OS：Linux(CentOS)
+- OS：Linux(CentOS)
 - 言語：HTML,CSS,JavaScript,Ruby,SQL
 - フレームワーク：Ruby on Rails
 - JSライブラリ：jQuery
-- IDE：Cloud9 -->
+- IDE：Cloud9 
