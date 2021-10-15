@@ -70,14 +70,14 @@ ActiveRecord::Schema.define(version: 2021_09_16_044455) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.string "last_name", null: false
-    t.string "first_name", null: false
-    t.string "last_name_kana", null: false
-    t.string "first_name_kana", null: false
+    t.string "last_name"
+    t.string "first_name"
+    t.string "last_name_kana"
+    t.string "first_name_kana"
     t.string "nickname", null: false
     t.integer "sex", default: 0, null: false
     t.string "image_id"
-    t.string "hobby"
+    t.string "hobby", null: false
     t.string "job"
     t.text "introduction"
     t.boolean "is_deleted", default: false, null: false

@@ -4,6 +4,7 @@
     <div class="col-7 card" >
     <%= form_with model: @member, url: member_registration_path, id: 'new_member', class: 'new_member', local: true do |f| %>
       <h4 class="card-header text-center mt-1">新規アカウント作成</h4></br>
+      <small class="form-text text-danger">※全て入力必須となります</small>
       <div class=" mt-2">
         <%= f.text_field :nickname, autofocus: true,placeholder:"ユーザー名",class:"form-control border-dark"%>
       </div>
@@ -19,16 +20,7 @@
       <div class="mt-2">
         <%= f.text_field :hobby ,placeholder:"趣味",class:"form-control border-dark"%>
       </div>
-      
-      <div class=" mt-2">
-         <small class="form-text">本人確認情報</small>
-        <%= f.text_field :last_name, autofocus: true,placeholder:"姓",class:"form-control border-dark"%>
-        <%= f.text_field :first_name, autofocus: true,placeholder:"名",class:"form-control border-dark"%>
-      </div>
-      <div class=" mt-2">
-        <%= f.text_field :last_name_kana, autofocus: true , autofocus: true,placeholder:"セイ",class:"form-control border-dark"%>
-        <%= f.text_field :first_name_kana, autofocus: true , autofocus: true,placeholder:"メイ",class:"form-control border-dark "%>
-      </div>
+
       <div class="mt-2">
         <small class="form-text text-danger">※生年月日・性別は登録後の変更はできません</small>
         <div class="col-12"><%= f.label :生年月日 %></div>
