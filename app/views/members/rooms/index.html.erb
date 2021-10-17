@@ -1,6 +1,9 @@
-<div class="container mt-3">
+<div class="container mt-5">
   <% if @rooms.exists? %>
-  <div class="row mt-3">
+  <div class="row">
+    <div class="h4">取引一覧</div>
+  </div>
+  <div class="row">
     <table class="table table-hover table-inverse">
       <thead>
         <tr>
@@ -38,9 +41,7 @@
   </div>
   <% else %>
   <div class="row justify-content-center">
-    <div class="col-5 mt-3">
-      <h4>取引はありません</h4>
-    </div>
+    <div class="h3">取引はありません</div>
   </div>
   <% end %>
   <div class="row  mt-3 mb-3 justify-content-center"> <%= paginate @rooms %></div>

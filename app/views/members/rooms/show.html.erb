@@ -3,35 +3,35 @@
   <div class="row ">
     <% if e.member_id != current_member.id %>
       <div><%= attachment_image_tag e.member,:image, fallback: "noimage.jpg",size:"40x40" ,class:"rounded-circle border border-dark" %></div>
-      <div><%= link_to e.member.nickname, member_path(e.member), class:"text-dark " %>さん</div>
+      <div><%= link_to e.member.nickname, member_path(e.member), class:"text-dark " %>さんとの取引</div>
     <% end %>
   </div>
   <% end %>
-  <div class="row mt-4">
+  <div class="row mt-1 justify-content-center">
    <!--投稿者且つ取引中-->
     <% if @room.request.member_id == current_member.id  && @room.request.is_active == "in_transaction" %>
-      <div class="col-12"><%= link_to "依頼を完了し評価を始める", request_is_active_in_review_path(@room.request), method: :patch ,class:"btn btn-block btn-outline-dark" ,"data-confirm" => "依頼は完了していますか？"  %></div>
-      <small class="col-12">依頼が完了したら評価を開始してください</small>
+      <div class="col-10"><%= link_to "依頼を完了し評価を始める", request_is_active_in_review_path(@room.request), method: :patch ,class:"btn btn-block btn-outline-dark" ,"data-confirm" => "依頼は完了していますか？"  %></div>
+      <small class="col-10">依頼が完了したら評価を開始してください</small>
     <!--購入者且つ取引中-->
     <% elsif @room.request.member_id != current_member.id && @room.request.is_active == "in_transaction" %>
       <button type="button" class="btn btn-outline-dark btn-block" disabled>評価画面へ</button>
-      <small class="col-12">※投稿者が評価を開始したら評価ができるようになります</small>
+      <small class="col-10">※投稿者が評価を開始したら評価ができるようになります</small>
     <% else %>
       <div></div>
     <% end %>
   </div>
   <!--評価ページ変移ボタン-->
-   <div class="row mt-1">
+   <div class="row mt-1 justify-content-center">
     <% if @room.request.is_active == "in_review" %>
       <% if @rate.present? %>
         <% if @room.request.is_active == "in_review" && @rate.member_id == current_member.id  %>
           <h5>評価は完了しています。相手の評価をお待ちください。</h5>
         <% else %>  
           <h5 class=text-danger>相手は評価を完了しています！！</h5>
-          <div class="col-12"><%= link_to "評価画面へ", new_request_rate_path(@room.request) ,class:"btn btn-outline-danger btn-block" %></div>
+          <div class="col-10"><%= link_to "評価画面へ", new_request_rate_path(@room.request) ,class:"btn btn-outline-danger btn-block" %></div>
         <% end %>
       <% else %> 
-        <div class="col-12"><%= link_to "評価画面へ", new_request_rate_path(@room.request) ,class:"btn btn-outline-dark btn-block" %></div>
+        <div class="col-10"><%= link_to "評価画面へ", new_request_rate_path(@room.request) ,class:"btn btn-outline-dark btn-block" %></div>
       <% end %>
     <% end %>  
   </div>
@@ -63,15 +63,13 @@
     <% end %>
   <% else %>
     <div class="row mt-1 justify-content-center">
-      <div class="col-7">
-        <h6>さっそくメッセージを送ってみましょう!</h6>
-      </div>
+      <div class="h6">さっそくメッセージを送ってみましょう!</div>
     </div>
   <% end %>
 </div>
 <hr>
   <div class="row mt-3 mb-3">
-    <div class="col-10">
+    <div class="offset-1 col-10">
       <%= form_with model: @chat ,local:true do |f| %>
         <%= f.text_area :body, placeholder: "メッセージを入力して下さい" , rows:"5", class:"form-control" %>
           <%= f.hidden_field :room_id, value: @room.id %>
@@ -84,11 +82,11 @@
 </div>
 <% else %>
 <div class="container  pl-5">
-  <div class="row">
-    <h6>評価が終了し取引が完了しました。もっといろんな趣味を見つけてみませんか。</h6>
-    <div class="border-dark border-bottom text-center"><%= link_to "趣味を楽しむ",requests_path, class:"text-dark " %>
+  <div class="row justify-content-center">
+    <div class="h6">評価が終了し取引が完了しました。もっといろんな趣味を見つけてみませんか。</div>
+    <p class="border-dark border-bottom text-center"><%= link_to "投稿を探す",requests_path, class:"text-dark " %>
       <i class="fas fa-search fa-lg"></i>
-    </div>
+    </p>
   </div>
 </div>  
 <% end %>  

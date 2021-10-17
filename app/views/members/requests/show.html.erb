@@ -1,61 +1,65 @@
-<div class="container">
-  <div class="card mt-5">
-    <!--<div class="row mt-3">-->
-      <div class="card-header">
-        <div class="h3"><%= @request.title %></div>
-        <div id="like-btn_<%= @request.id %>" class="text-right">
-          <%= render 'members/likes/like-btn', request: @request %>
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col card ">
+      <!--<div class="row mt-3">-->
+        <div class="card-header">
+          <div class="h3"><%= @request.title %></div>
+          <div id="like-btn_<%= @request.id %>" class="text-right">
+            <%= render 'members/likes/like-btn', request: @request %>
+          </div>
         </div>
-      </div>
-      <div class="card-body">
-        <table class="table">
-          <tbody>
-           <tr>
-             <th><%= "予定日 " %></th>
-             <th><%= @request.schedule.strftime("%Y年%m月%d日") %></th>
-           </tr>
-           <tr>
-             <th><%= "場所" %></th>
-             <th><%= @request.location %></th>
-           </tr>
-           <tr>
-             <th><%= "詳細  " %></th>
-             <th><%= safe_join(@request.content.split("\n"),tag(:br)) unless @request.content.nil? %></th>
-           </tr>
-           <tr>
-             <th><%= "タグ" %></th>
-             <th><%= render_with_tags(@request.caption) %></th>
-           </tr>
-           <tr>
-             <th><%= "ステータス" %></th>
-             <th><%= @request.is_active_i18n %></th>
-           </tr>
-          </tbody>
-        </table>
-      <div class="card-footer bg-transparent">
-        <div class="text-right">
-        <% if @request.member_id == current_member.id  %>
-          <%= link_to "投稿編集",edit_request_path(@request) ,class:"btn btn-outline-dark" %>
-          <%= link_to "投稿削除",request_path(@request), class:"btn btn-outline-dark",method: :delete,"data-confirm" => "本当に削除しますか？" %>
-        <% else %>
-          <% if @request.is_active == "release" %>
-            <%= link_to "取引をする", request_is_active_in_transaction_path(@request), method: :patch ,class:"btn btn-outline-dark" ,"data-confirm" => "取引を開始しますか？"%>
+        <div class="card-body">
+          <table class="table">
+            <tbody>
+             <tr>
+               <th><%= "予定日 " %></th>
+               <th><%= @request.schedule.strftime("%Y年%m月%d日") %></th>
+             </tr>
+             <tr>
+               <th><%= "場所" %></th>
+               <th><%= @request.location %></th>
+             </tr>
+             <tr>
+               <th><%= "詳細  " %></th>
+               <th><%= safe_join(@request.content.split("\n"),tag(:br)) unless @request.content.nil? %></th>
+             </tr>
+             <tr>
+               <th><%= "タグ" %></th>
+               <th><%= render_with_tags(@request.caption) %></th>
+             </tr>
+             <tr>
+               <th><%= "ステータス" %></th>
+               <th><%= @request.is_active_i18n %></th>
+             </tr>
+            </tbody>
+          </table>
+        <div class="card-footer bg-transparent">
+          <div class="text-right">
+          <% if @request.member_id == current_member.id  %>
+            <%= link_to "投稿編集",edit_request_path(@request) ,class:"btn btn-outline-dark" %>
+            <%= link_to "投稿削除",request_path(@request), class:"btn btn-outline-dark",method: :delete,"data-confirm" => "本当に削除しますか？" %>
+          <% else %>
+            <% if @request.is_active == "release" %>
+              <%= link_to "取引をする", request_is_active_in_transaction_path(@request), method: :patch ,class:"btn btn-outline-dark" ,"data-confirm" => "取引を開始しますか？"%>
+            <% end %>
           <% end %>
-        <% end %>
+          </div>
         </div>
       </div>
+    </div>
   </div>
 </div>
-<div class="container mt-2">
-  <div id="comments_index">
-    <%= render 'members/comments/index',comments: @comments  %>
+<div class="container mt-3">
+  <div class="row mt-2">
+    <div id="comments_index">
+      <%= render 'members/comments/index',comments: @comments  %>
+    </div>
   </div>
-</div>
-  <div class="row mt-2 mb-3">
+</div>  
+  <div class="row mt-2 mb-3 justify-content-center">
     <% if member_signed_in? %>
       <%= render 'members/comments/form', request: @request, comment: @comment %>
     <% else %>
       <%= link_to "コメントをするにはログインをしてください", new_member_session_path %>
     <% end %>
   </div>
-</div>
