@@ -1,8 +1,6 @@
-<div class="container">
-  <div class="row">
-    <div class="col-8 mr-auto">
-      <h4 class="my-5"><%= @member.nickname %> さんの情報編集</h4>
-    </div>
+<div class="container mt-5">
+  <div class="row mb-5">
+    <div class="h4"><%= @member.nickname %> さんの情報編集</div>
   </div>
   
   <%= form_with model: @member,url: admins_member_path(@member),local: true do |f| %>

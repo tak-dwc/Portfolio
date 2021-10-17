@@ -1,6 +1,8 @@
-<div class="container">
+<div class="container mt-5">
   <div class="row">
-     <h4 class="my-3">問い合わせ一覧</h4>
+    <div class="h4">問い合わせ一覧</div>
+  </div>
+  <div class="row">
     <div class="col my-3">
       <%= form_with url: admins_contacts_path, method: :get , local: true do |f| %>
       <div class="input-group">
@@ -16,9 +18,9 @@
     <table class="table table-hover table-inverse">
       <thead>
         <tr>
+          <th>タイトル</th>
           <th>ユーザー名</th>
           <th>メールアドレス</th>
-          <th>タイトル</th>
           <th>受信日</th>
           <th>対応ステータス</th>
           <th></th>
@@ -27,9 +29,9 @@
       <tbody>
         <% @contacts.each do |contact| %>
         <tr>
+          <td><%= contact.title.truncate(10) %></td>
           <td><%= link_to contact.member.nickname,admins_member_path(contact.member.id),class:"text-dark border-bottom border-dark" %></td>
           <td><%= contact.member.email %></td>
-          <td><%= contact.title.truncate(10) %></td>
           <td><%= contact.created_at.strftime("%Y年%m月%d日") %></td>
           <td>
             <% if contact.reply_status == true %>

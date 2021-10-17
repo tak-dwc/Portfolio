@@ -21,9 +21,9 @@
           <div class="offset-1 col-3 mb-3">会員ステータス</div>
           <div class="col-8">
             <% if @member.is_deleted? %>
-              <span class="text-secondary font-weight-bold">退会</span>
+              <span class="text-danger font-weight-bold">退会</span>
             <% else %>
-              <span class="text-success font-weight-bold">有効</span>
+              <span class="text-dark font-weight-bold">有効</span>
             <% end %>
           </div>
         </div>
