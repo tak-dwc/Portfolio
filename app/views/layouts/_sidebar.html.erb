@@ -1,25 +1,20 @@
-<% if member_signed_in? %>
-<nav class="nav flex-colmun">
-  <li class="nav-item">
-    <%= link_to "新規投稿作成",new_request_path, class: 'nav-link text-dark' %>
-  </li>
-  <li class="nav-item">
-    <%= link_to "投稿一覧",requests_path, class: 'nav-link text-dark' %>
-  </li>
-  <%= render 'members/requests/tag', tags: @tags %>
-  <li class="nav-item">
-    <%= link_to "取引一覧",rooms_path, class: 'nav-link text-dark' %>
-  </li>
+<!--<%# if member_signed_in? %>-->
+<!--<nav class="nav flex-colmun">-->
+<!--  <li class="nav-item">-->
+<!--    <%#= link_to "新規投稿作成",new_request_path, class: 'nav-link text-dark' %>-->
+<!--  </li>-->
+<!--  <li class="nav-item">-->
+<!--    <%#= link_to "投稿一覧",requests_path, class: 'nav-link text-dark' %>-->
+<!--  </li>-->
+<!--  <%#= render 'members/requests/tag', tags: @tags %>-->
+<!--  <li class="nav-item">-->
+<!--    <%#= link_to "取引一覧",rooms_path, class: 'nav-link text-dark' %>-->
+<!--  </li>-->
   <!--<li class="nav-item">-->
     <!--<%#= link_to "遊び方",guide_path, class: 'nav-link text-dark' %> -->
   <!--</li>-->
-  <li class="nav-item">
-    <%= link_to "問い合わせ",new_contact_path, class: 'nav-link text-dark' %>
-  </li>
-</nav>
-<div class="row justify-content-center mt-5">
-  <i class="fab fa-twitter fa-lg mx-auto"></i>
-  <i class="fab fa-instagram fa-lg mx-auto"></i>
-  <i class="fab fa-facebook-square fa-lg mx-auto"></i>
-</div>
-<% end %>
+<!--  <li class="nav-item">-->
+<!--    <%#= link_to "問い合わせ",new_contact_path, class: 'nav-link text-dark' %>-->
+<!--  </li>-->
+<!--</nav>-->
+<!--<%# end %>-->

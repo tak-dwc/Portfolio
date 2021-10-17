@@ -8,6 +8,7 @@
 
 <% unless current_page?(member_session_path) %>
 <% unless current_page?(new_member_registration_path) %>
+<% unless current_page?(about_path) %>
 <nav class="navbar navbar-expand-lg navbar-light border-top border-bottom border-dark">
   <div class="container">
     <div class="col">
@@ -51,6 +52,24 @@
               <i class="far fa-heart fa-2x"></i>
             <% end %>
           </li>
+          <li class="nav-item mt-2">
+            <i class="fab fa-facebook-messenger fa-2x"  data-toggle="collapse" data-target="#collapseContent" aria-expanded="false" aria-controls="collapseContent">
+            </i>
+            <div class="collapse" id="collapseContent">
+              <ul>
+                <li class="nav-item">
+                  <%= link_to "新規投稿作成",new_request_path, class: 'nav-link text-dark' %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to "投稿一覧",requests_path, class: 'nav-link text-dark' %>
+                </li>
+                <%= render 'members/requests/tag', tags: @tags %>
+                <li class="nav-item">
+                  <%= link_to "取引一覧",rooms_path, class: 'nav-link text-dark' %>
+                </li>
+              </ul>
+            </div>
+          </li>
           <li class="nav-item ">
             <%= link_to destroy_member_session_path,method: :delete, class: 'nav-link text-dark' do %>
               <i class="fas fa-sign-out-alt fa-2x"></i>
@@ -78,6 +97,7 @@
     </div>
   </div>
 </nav>
+<% end %>
 <% end %>
 <% end %>
 

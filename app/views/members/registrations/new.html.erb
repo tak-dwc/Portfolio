@@ -1,7 +1,7 @@
 <div class="container px-0" >
   <%= render "members/shared/error_messages", resource: resource %>
-  <div class="row mt-2 mb-2 ml-5">
-    <div class="col-7 card" >
+  <div class="row mt-2 mb-2 justify-content-center">
+    <div class="col-sm col-lg-6  card" >
     <%= form_with model: @member, url: member_registration_path, id: 'new_member', class: 'new_member', local: true do |f| %>
       <h4 class="card-header text-center mt-1">新規アカウント作成</h4></br>
       <small class="form-text text-danger">※全て入力必須となります</small>

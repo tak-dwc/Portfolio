@@ -5,15 +5,13 @@
       <%= link_to destroy_all_notifications_path, method: :delete, class: "text-right" do %>
         <i class="fas fa-trash" style="color: black;"></i>
         <h7 class="text-dark">全削除</h7>
-      <% end %>    
+      <% end %>
       <%= render @notifications %>
     </div>
-  </div>  
+  </div>
   <% else %>
   <div class="row justify-content-center">
-    <div class="col-5 ">
-      <h4>通知はありません</h4>
-    </div>
+    <div class="h3">通知はありません</div>
   </div>
   <% end %>
     <div class=" row justify-content-center mt-3 mb-2"><%= paginate @notifications %></div>
