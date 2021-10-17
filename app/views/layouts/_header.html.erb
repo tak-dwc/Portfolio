@@ -1,8 +1,13 @@
-<div class="container pt-2 ">
+<div class="container mt-3 mb-3 ">
   <% unless member_signed_in? %>
     <h4 class="text-center"><%= link_to "sharehobby",root_path ,class:"text-dark"%></h4>
   <% else %>
-    <h4 class="text-center"><%= link_to "sharehobby",member_path(current_member) ,class:"text-dark"%></h4>
+  <div class="row">
+    <div class="h4 offset-5 col-4"><%= link_to "sharehobby",member_path(current_member) ,class:"text-dark"%></div>
+       <div class="col-3 "><%= link_to "ログアウト", destroy_member_session_path,method: :delete, class: 'btn btn-outline-danger mr-3' %>
+    <%= link_to "問い合わせ", new_contact_path, class: 'btn btn-outline-dark' %></div>
+    </div>
+  </div>  
   <% end %>
 </div>
 
@@ -69,11 +74,6 @@
                 </li>
               </ul>
             </div>
-          </li>
-          <li class="nav-item ">
-            <%= link_to destroy_member_session_path,method: :delete, class: 'nav-link text-dark' do %>
-              <i class="fas fa-sign-out-alt fa-2x"></i>
-            <% end %>
           </li>
         <% else %>
           <% unless current_page?(admin_session_path) %>

@@ -1,9 +1,12 @@
-<div class="container mt-3 px-0">
+<div class="container mt-5 ">
   <% if @active_requests.present? %>
+  <div class="row">
+    <div class="h4">投稿一覧</div>
+  </div>
   <div class="row ">
     <% @active_requests.each do |req| %>
     <!--<%# if req.is_active == "release" && req.member != current_member.id %>-->
-    <div class="col-6 mt-3">
+    <div class="col-sm col-lg-4 mt-3">
       <div class="card h-100" style="width: 20rem;">
         <div class="card-body text-center ">
           <div><%= attachment_image_tag req.member, :image, fallback: "noimage.jpg",size:"35x35" ,class:"rounded-circle border border-dark"%></div>

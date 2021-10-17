@@ -1,8 +1,15 @@
 <!--current_memberの投稿のみ-->
-<div class="container mt-3 px-0">
+<div class="container mt-5 px-0">
+  <div class="row">
+    <% if @member.id == current_member.id %>
+      <div class="h4">MY投稿</div>
+    <% else %>
+      <div class="h4"><%= @member.nickname %>の投稿</div>
+    <% end %>
+  </div>
   <div class="row">
     <% @requests.each do |req| %>
-    <div class="col-6 mt-3">
+    <div class="col-sm col-lg-4 mt-3">
       <div class="card h-100" style="width: 20rem;">
         <div class="card-header h4"><%= req.title.truncate(10) %></div>
         <div class="card-body">
