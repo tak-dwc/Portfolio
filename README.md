@@ -2,7 +2,6 @@
 
 サイトURL <br>
 http://35.74.172.8/<br>
-(接続可能時間:AM11:00~PM10:00)
 
 ## サイト概要
 このサイトは新たな趣味を見つけたい人・趣味をもっと楽しみたい人の手助けをしている<br>
@@ -50,4 +49,4 @@ DIYを始めてみたいけどやり方がわからない、、、<br>
 - 言語：HTML,CSS,JavaScript,Ruby,SQL
 - フレームワーク：Ruby on Rails
 - JSライブラリ：jQuery
-- IDE：Cloud9 
+- IDE：Cloud9
