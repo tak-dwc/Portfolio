@@ -7,4 +7,12 @@ class Notification < ApplicationRecord
 
   belongs_to :visitor, class_name: "Member"
   belongs_to :visited, class_name: "Member"
+  
+  scope :uncheck, -> { where(checked: false) }
+  
+  def self.check!
+    uncheck.each do |notification|
+      notification.update!(checked: true)
+    end
+  end
 end

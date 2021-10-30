@@ -17,6 +17,6 @@ module Members::NotificationsHelper
 
   # 通知未確認マーク用
   def unchecked_notifications
-    @notifications = current_member.come_notifications.where(checked: false)
+    current_member.come_notifications.uncheck
   end
 end
