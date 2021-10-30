@@ -81,9 +81,12 @@ class Member < ApplicationRecord
   end
 
   # 検索
-  def self.looks(search)
-    return Member.all unless search
-    Member.where("nickname LIKE(?) OR hobby LIKE(?) OR introduction LIKE(?) ", "%#{search}%","%#{search}%","%#{search}%")
+  
+  scope :exclude_member, ->(member_id) { where.not(id: member_id) }
+  
+  def self.search(value)
+    return all unless value
+    where("nickname LIKE(?) OR hobby LIKE(?) OR introduction LIKE(?) ", "%#{value}%","%#{value}%","%#{value}%")
   end
 
   # 通知：フォロー

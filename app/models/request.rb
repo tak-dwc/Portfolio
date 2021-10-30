@@ -51,9 +51,11 @@ class Request < ApplicationRecord
   end
 
   # 検索
-  def self.looks(search)
-    return Request.all unless search
-    Request.where('title LIKE(?) OR location LIKE(?) OR content LIKE(?)', "%#{search}%", "%#{search}%", "%#{search}%")
+  scope :exclude_member, ->(member_id) { where.not(member_id: member_id) }
+
+  def self.search(value)
+    return all unless value
+    where('title LIKE(?) OR location LIKE(?) OR content LIKE(?)', "%#{value}%", "%#{value}%", "%#{value}%")
   end
 
   # 通知：いいね
